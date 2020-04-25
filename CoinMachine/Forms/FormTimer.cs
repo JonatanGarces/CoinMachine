@@ -1,19 +1,13 @@
 ﻿
-using ScreenSaver;
-using slotmachine;
-using slotmachine.Librerias;
+using Library;
+using Forms;
 using System;
 using System.Collections.Generic;
-
-using System.IO.Ports;
-using System.Management;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading;
 using System.Windows.Forms;
-using tragamoneda;
 
-namespace SystemTray
+namespace Forms
 {
     public partial class FormTimer : Form
     {
@@ -31,38 +25,27 @@ namespace SystemTray
         public static extern bool ReleaseCapture();
 
         #endregion
-        Brain brain;
-        public CountDownTimer timer =  new CountDownTimer();
-
-
+        public CountDownTimer timer = new CountDownTimer();
+        List<ScreenSaverForm> screens = new List<ScreenSaverForm>();
         SerialObserver so;
-        public delegate void AddDataDelegate(String myString);
-        public AddDataDelegate myDelegate;
         public FormTimer(SerialObserver so)
         {
-                       InitializeComponent();
-            timer.TimeChanged += () => {
-                //form1.Invoke((System.Windows.Forms.MethodInvoker)delegate () { form1.lblcountdown.Text = timer.TimeLeftMsStr; });
+            InitializeComponent();
+            timer.TimeChanged += () =>
+            {
                 lblcountdown.Text = timer.TimeLeftStr;
-
-                //lblcountdown.Invoke(this.myDelegate, new Object[] { timer.TimeLeftMsStr });
-
             };
             timer.CountDownFinished += () =>
             {
                 //form.notifyIcon1.ShowBalloonTip(100000, "Inserte Moneda", "Precaucion inserte moneda tu tiempo casi se ha agotado, tu sesión se cerara y podrias perder tu información que estas trabajando", ToolTipIcon.Warning);      
-                 ShowScreenSaver();
+                ShowScreenSaver();
             };
             timer.Start();
             this.so = so;
         }
-        public void AddDataMethod(String myString)
-        {
-            lblcountdown.Text = myString;
-        }
-      
+        
 
-       
+
         private void Form1_Move(object sender, EventArgs e)
         {
             if (this.WindowState == FormWindowState.Minimized)
@@ -83,7 +66,7 @@ namespace SystemTray
         {
             Application.Exit();
         }
-      
+
 
         public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HT_CAPTION = 0x2;
@@ -98,49 +81,26 @@ namespace SystemTray
 
         private void FormTimer_Load(object sender, EventArgs e)
         {
-
-           // this.myDelegate = new AddDataDelegate(AddDataMethod);
-
-           // if (timer == null)
-          //  {
-                
-                //timer.SetTime(0, 0);
-                //timer.Start();
-          //  }
-          //  else if (timer.IsRunnign == false)
-          //  {
-               // timer.Restart();
-         //   }
-            //KeyBoardHook keyboard = new KeyBoardHook(true);
-            //keyboard.KeyUp += c_ThresholdReached;
-              so.DataReceived += ProcessData;
+            so.DataReceived += ProcessData;
 
         }
 
-      
+
         private void ProcessData(byte[] data)
         {
             string utfString = Encoding.UTF8.GetString(data, 0, data.Length);
             Console.WriteLine(utfString);
             this.Invoke((System.Windows.Forms.MethodInvoker)delegate () { HideScreenSaver(); });
 
-            //HideScreenSaver();
             if (timer.IsRunnign == false)
             {
                 this.timer.SetTime(Int32.Parse(utfString.Trim()), 0);
-                //timer.Restart();
-                // form.Invoke((System.Windows.Forms.MethodInvoker)delegate () { this.timer.Start(); HideScreenSaver(); });
             }
             else
             {
                 this.timer.AddTime(Int32.Parse(utfString.Trim()), 0);
-                //timer.Restart();
-                //timer.Start();
             }
         }
-
-
-        List<ScreenSaverForm> screens = new List<ScreenSaverForm>();
 
         public void ShowScreenSaver()
         {
@@ -156,8 +116,7 @@ namespace SystemTray
         }
         public void HideScreenSaver()
         {
-            foreach (ScreenSaverForm screensaver in screens)
-            {
+            foreach (ScreenSaverForm screensaver in screens){
                 screensaver.Close();
             }
             screens.Clear();

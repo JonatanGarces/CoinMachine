@@ -1,4 +1,4 @@
-﻿using slotmachine.Objects;
+﻿using Objects;
 using System;
 using System.Collections.Generic;
 using System.IO.Ports;
@@ -8,9 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace slotmachine.Librerias
+namespace Library
 {
-    public  class SerialObserver 
+    public class SerialObserver
     {
         public Action Changed;
         string[] serialPorts;
@@ -27,7 +27,7 @@ namespace slotmachine.Librerias
         ManagementObjectCollection ManObjReturn;
         public SerialObserver()
         {
-           // serialPorts = GetAvailableSerialPorts();
+            // serialPorts = GetAvailableSerialPorts();
 
             //MonitorDeviceChanges();
         }
@@ -37,14 +37,14 @@ namespace slotmachine.Librerias
             Removal,
         }
 
-        
-      
-        private  void MonitorDeviceChanges()
+
+
+        private void MonitorDeviceChanges()
         {
             try
             {
-                 arrival = new ManagementEventWatcher(deviceArrivalQuery);
-                 removal = new ManagementEventWatcher(deviceRemovalQuery);
+                arrival = new ManagementEventWatcher(deviceArrivalQuery);
+                removal = new ManagementEventWatcher(deviceRemovalQuery);
 
                 arrival.EventArrived += (sender, changedArgs) => RaisePortsChangedIfNecessary(EventType.Insertion, changedArgs);
                 removal.EventArrived += (sender, changedArgs) => RaisePortsChangedIfNecessary(EventType.Removal, changedArgs);
@@ -59,7 +59,7 @@ namespace slotmachine.Librerias
             }
         }
 
-        private  void RaisePortsChangedIfNecessary(EventType eventType, EventArrivedEventArgs args)
+        private void RaisePortsChangedIfNecessary(EventType eventType, EventArrivedEventArgs args)
         {
             lock (serialPorts)
             {
@@ -68,11 +68,11 @@ namespace slotmachine.Librerias
                 if (!serialPorts.SequenceEqual(availableSerialPorts))
                 {
 
-                   
-                     ManObjSearch = new ManagementObjectSearcher("Select * from Win32_SerialPort");
-                     ManObjReturn = ManObjSearch.Get();
 
-                    Console.WriteLine(String.Join(", ", args));
+                    ManObjSearch = new ManagementObjectSearcher("Select * from Win32_SerialPort");
+                    ManObjReturn = ManObjSearch.Get();
+
+                    Console.WriteLine(string.Join(", ", args));
                     serialPorts = availableSerialPorts;
 
 
@@ -80,7 +80,7 @@ namespace slotmachine.Librerias
                     {
                         if (ManObj["Name"].ToString().Contains("Arduino") && ManObj["Status"].ToString().ToLower().Trim() == "ok")
                         {
-                            String com = ManObj["DeviceID"].ToString().Trim();
+                            string com = ManObj["DeviceID"].ToString().Trim();
                             array_devices.Add(com);
                         }
                     }
@@ -88,14 +88,14 @@ namespace slotmachine.Librerias
                     {
                         Changed?.Invoke();
                     }
-                    
+
                     //PortsChanged.Raise(null, new PortsChangedArgs(eventType, _serialPorts));
                 }
             }
         }
 
 
-        public  List<Device> GetSerials()
+        public List<Device> GetSerials()
         {
             List<Device> list = new List<Device>();
 
@@ -105,7 +105,7 @@ namespace slotmachine.Librerias
             {
                 if (ManObj["Name"].ToString().Contains("Arduino") && ManObj["Status"].ToString().ToLower().Trim() == "ok")
                 {
-                    String com = ManObj["DeviceID"].ToString().Trim();
+                    string com = ManObj["DeviceID"].ToString().Trim();
                     list.Add(new Device(ManObj["Name"].ToString(), com));
                 }
             }
@@ -113,7 +113,7 @@ namespace slotmachine.Librerias
         }
 
 
-        public SerialPort Connect(String port)
+        public SerialPort Connect(string port)
         {
 
             if (!serialport.IsOpen)
@@ -141,21 +141,21 @@ namespace slotmachine.Librerias
             }
             catch (SystemException ex)
             {
-              MessageBox.Show(ex.Message, "Data Received Event");
+                MessageBox.Show(ex.Message, "Data Received Event");
             }
         }
 
-        public  string[] GetAvailableSerialPorts()
+        public string[] GetAvailableSerialPorts()
         {
             return SerialPort.GetPortNames();
         }
 
-       // public void Dispose()
-       // {
+        // public void Dispose()
+        // {
         //    throw new NotImplementedException();
-       // }
+        // }
 
-        
+
 
     }
 }

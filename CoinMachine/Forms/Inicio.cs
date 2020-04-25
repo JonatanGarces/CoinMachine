@@ -1,14 +1,13 @@
-﻿using slotmachine.Librerias;
-using slotmachine.Objects;
+﻿using Forms;
+using Library;
+using Objects;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
-using SystemTray;
 
-namespace slotmachine.Forms
+namespace Forms
 {
     public partial class Inicio : Form
     {
@@ -17,7 +16,7 @@ namespace slotmachine.Forms
         public Inicio()
         {
 
-            
+
             InitializeComponent();
             txtCoinMinute.Text = configmanager.ReadSetting("CoinMinute");
             txtNotificationMinute.Text = configmanager.ReadSetting("NotificationMinute");
@@ -25,7 +24,13 @@ namespace slotmachine.Forms
             txtBackgroundImage.Text = configmanager.ReadSetting("BackgroundImage");
             txtBackgroundMessage.Text = configmanager.ReadSetting("BackgroundMessage");
             txtBackgroundColor.Text = configmanager.ReadSetting("BackgroundColor");
-            cbxSlotPort.Text = configmanager.ReadSetting("SlotPort");
+            
+            List<Device> devices = new List<Device>();
+            devices.Add(new Device(configmanager.ReadSetting("SlotName"), configmanager.ReadSetting("SlotPort")));
+            cbxSlotPort.DataSource = devices;
+            cbxSlotPort.DisplayMember = "Name";
+            cbxSlotPort.ValueMember = "Port";
+            cbxSlotPort.DropDownStyle = ComboBoxStyle.DropDownList;
             try
             {
                 picBackgroundColor.BackColor = Color.FromArgb(int.Parse(configmanager.ReadSetting("BackgroundColor")));
@@ -44,9 +49,9 @@ namespace slotmachine.Forms
             catch (ArgumentException) { }
             catch (FileNotFoundException) { }
 
-            
+
         }
-        
+
         private void button1_Click(object sender, EventArgs e)
         {
             openFileDialog1.Filter = "Image Files(*.jpg; *.jpeg; *.gif; *.bmp)|*.jpg; *.jpeg; *.gif; *.bmp";
@@ -74,7 +79,8 @@ namespace slotmachine.Forms
             configmanager.AddUpdateAppSettings("BackgroundImage", txtBackgroundImage.Text);
             configmanager.AddUpdateAppSettings("BackgroundMessage", txtBackgroundMessage.Text);
             configmanager.AddUpdateAppSettings("BackgroundColor", txtBackgroundColor.Text);
-            configmanager.AddUpdateAppSettings("SlotPort", cbxSlotPort.Text);
+            configmanager.AddUpdateAppSettings("SlotPort", ((Device)cbxSlotPort.SelectedItem).Port);
+            configmanager.AddUpdateAppSettings("SlotPortName" , ((Device)cbxSlotPort.SelectedItem).Name);
             FormTimer f1 = new FormTimer(so);
             f1.Show();
             this.Close();
@@ -83,7 +89,7 @@ namespace slotmachine.Forms
         private void btnDetectar_Click(object sender, EventArgs e)
         {
             SerialObserver serials = new SerialObserver();
-            List<Device> devices= serials.GetSerials();
+            List<Device> devices = serials.GetSerials();
             cbxSlotPort.DataSource = devices;
             cbxSlotPort.DisplayMember = "Name";
             cbxSlotPort.ValueMember = "Port";
@@ -93,6 +99,6 @@ namespace slotmachine.Forms
         {
             so.Connect(((Device)cbxSlotPort.SelectedItem).Port);
         }
-        
+
     }
 }

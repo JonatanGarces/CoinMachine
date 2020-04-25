@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 
 
-namespace tragamoneda
+namespace Library
 {
     public class CountDownTimer : IDisposable
     {
@@ -23,7 +23,7 @@ namespace tragamoneda
         private DateTime _maxTime = new DateTime(1, 1, 1, 0, 0, 0);
         private DateTime _minTime = new DateTime(1, 1, 1, 0, 0, 0);
 
-        public DateTime TimeLeft { get;  set; }
+        public DateTime TimeLeft { get; set; }
         private long TimeLeftMs => TimeLeft.Ticks / TimeSpan.TicksPerMillisecond;
 
         public string TimeLeftStr => TimeLeft.ToString("mm:ss");
@@ -39,7 +39,7 @@ namespace tragamoneda
             }
             else
             {
-               // Stop();
+                // Stop();
                 TimeLeft = _minTime;
                 TimeChanged?.Invoke();
                 CountDownFinished?.Invoke();
@@ -62,7 +62,7 @@ namespace tragamoneda
         public void SetTime(DateTime dt)
         {
             TimeLeft = _maxTime = dt;
-         //   TimeChanged?.Invoke();
+            //   TimeChanged?.Invoke();
         }
 
         public void SetTime(int min, int sec = 0) => SetTime(new DateTime(1, 1, 1, 0, min, sec));
@@ -70,7 +70,7 @@ namespace tragamoneda
         public void AddTime(DateTime dt)
         {
             TimeLeft = _maxTime = TimeLeft.AddMinutes(dt.Minute);
-          //  TimeChanged?.Invoke();
+            //  TimeChanged?.Invoke();
         }
         public void AddTime(int min, int sec = 0) => AddTime(new DateTime(1, 1, 1, 0, min, sec));
 

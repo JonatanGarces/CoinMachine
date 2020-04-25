@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace slotmachine.Librerias
+namespace Library
 {
     class ConfigManager
     {
@@ -40,7 +36,7 @@ namespace slotmachine.Librerias
             try
             {
                 var appSettings = ConfigurationManager.AppSettings;
-                 result = appSettings[key] ?? "Not Found";
+                result = appSettings[key] ?? "Not Found";
                 Console.WriteLine(result);
             }
             catch (ConfigurationErrorsException)
@@ -65,7 +61,7 @@ namespace slotmachine.Librerias
                     settings[key].Value = value;
                 }
                 configFile.Save(ConfigurationSaveMode.Modified);
-               
+
                 ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name);
             }
             catch (ConfigurationErrorsException)

@@ -1,4 +1,4 @@
-﻿namespace ScreenSaver
+﻿namespace Forms
 {
     partial class ScreenSaverForm
     {

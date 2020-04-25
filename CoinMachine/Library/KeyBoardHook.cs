@@ -1,13 +1,9 @@
 ﻿using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace slotmachine.Librerias
+namespace Library
 {
     public class KeyBoardHook : IDisposable
     {
@@ -22,11 +18,11 @@ namespace slotmachine.Librerias
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
         public struct KBDLLHookStruct
         {
-            public Int32 vkCode;
-            public Int32 scanCode;
-            public Int32 flags;
-            public Int32 time;
-            public Int32 dwExtraInfo;
+            public int vkCode;
+            public int scanCode;
+            public int flags;
+            public int time;
+            public int dwExtraInfo;
         }
 
         [DllImport("user32", CallingConvention = CallingConvention.StdCall)]
@@ -108,7 +104,7 @@ namespace slotmachine.Librerias
             {
                 //return CallNextHookEx(HookID, Code, W, L);
                 return 1;
-             
+
             }
             try
             {
@@ -134,7 +130,7 @@ namespace slotmachine.Librerias
                 {
                     KeyEvents kEvent = (KeyEvents)W;
 
-                    Int32 vkCode = Marshal.ReadInt32((IntPtr)L); //Leser vkCode som er de første 32 bits hvor L peker.
+                    int vkCode = Marshal.ReadInt32((IntPtr)L); //Leser vkCode som er de første 32 bits hvor L peker.
 
                     if (kEvent != KeyEvents.KeyDown && kEvent != KeyEvents.KeyUp && kEvent != KeyEvents.SKeyDown && kEvent != KeyEvents.SKeyUp)
                     {
@@ -156,7 +152,7 @@ namespace slotmachine.Librerias
 
             //return CallNextHookEx(HookID, Code, W, L);
             return 1;
-            
+
         }
 
         public enum KeyEvents
@@ -168,35 +164,35 @@ namespace slotmachine.Librerias
         }
 
         [DllImport("user32.dll")]
-        static public extern short GetKeyState(System.Windows.Forms.Keys nVirtKey);
+        static public extern short GetKeyState(Keys nVirtKey);
 
         public static bool GetCapslock()
         {
-            return Convert.ToBoolean(GetKeyState(System.Windows.Forms.Keys.CapsLock)) & true;
+            return Convert.ToBoolean(GetKeyState(Keys.CapsLock)) & true;
         }
         public static bool GetNumlock()
         {
-            return Convert.ToBoolean(GetKeyState(System.Windows.Forms.Keys.NumLock)) & true;
+            return Convert.ToBoolean(GetKeyState(Keys.NumLock)) & true;
         }
         public static bool GetScrollLock()
         {
-            return Convert.ToBoolean(GetKeyState(System.Windows.Forms.Keys.Scroll)) & true;
+            return Convert.ToBoolean(GetKeyState(Keys.Scroll)) & true;
         }
         public static bool GetShiftPressed()
         {
-            int state = GetKeyState(System.Windows.Forms.Keys.ShiftKey);
+            int state = GetKeyState(Keys.ShiftKey);
             if (state > 1 || state < -1) return true;
             return false;
         }
         public static bool GetCtrlPressed()
         {
-            int state = GetKeyState(System.Windows.Forms.Keys.ControlKey);
+            int state = GetKeyState(Keys.ControlKey);
             if (state > 1 || state < -1) return true;
             return false;
         }
         public static bool GetAltPressed()
         {
-            int state = GetKeyState(System.Windows.Forms.Keys.Menu);
+            int state = GetKeyState(Keys.Menu);
             if (state > 1 || state < -1) return true;
             return false;
         }
@@ -205,7 +201,7 @@ namespace slotmachine.Librerias
 
         private void DisableTaskManager()
         {
-            RegistryKey regkey = default(RegistryKey);
+            RegistryKey regkey = default;
             string keyValueInt = "1";
             string subKey = "Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System";
             try
@@ -216,17 +212,17 @@ namespace slotmachine.Librerias
             }
             catch (Exception ex)
             {
-              // Interaction.MsgBox(ex.Message, MsgBoxStyle.Critical, "Registry Error!");
+                // Interaction.MsgBox(ex.Message, MsgBoxStyle.Critical, "Registry Error!");
             }
 
         }
 
 
 
-       
-private void EnableTaskManager()
+
+        private void EnableTaskManager()
         {
-            RegistryKey regkey = default(RegistryKey);
+            RegistryKey regkey = default;
             string keyValueInt = "0";
             //0x00000000 (0)
             string subKey = "Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System";

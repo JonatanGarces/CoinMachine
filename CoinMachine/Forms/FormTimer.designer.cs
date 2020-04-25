@@ -1,4 +1,4 @@
-﻿namespace SystemTray
+﻿namespace Forms
 {
     partial class FormTimer
     {
