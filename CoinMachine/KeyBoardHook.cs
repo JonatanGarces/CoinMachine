@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -126,7 +127,7 @@ namespace slotmachine.Librerias
                         {
                             if (KeyUp != null) KeyUp((Keys)W, GetShiftPressed(), GetCtrlPressed(), GetAltPressed());
                         }
-                        //System.Diagnostics.Debug.WriteLine("Down: " + (Keys)W);
+                        //System.Diagnostics.Debug.WriteLine("Down: " + (Keys)W);vb ttvb
                     }
                 }
                 else
@@ -198,6 +199,48 @@ namespace slotmachine.Librerias
             int state = GetKeyState(System.Windows.Forms.Keys.Menu);
             if (state > 1 || state < -1) return true;
             return false;
+        }
+
+
+
+        private void DisableTaskManager()
+        {
+            RegistryKey regkey = default(RegistryKey);
+            string keyValueInt = "1";
+            string subKey = "Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System";
+            try
+            {
+                regkey = Registry.CurrentUser.CreateSubKey(subKey);
+                regkey.SetValue("DisableTaskMgr", keyValueInt);
+                regkey.Close();
+            }
+            catch (Exception ex)
+            {
+              // Interaction.MsgBox(ex.Message, MsgBoxStyle.Critical, "Registry Error!");
+            }
+
+        }
+
+
+
+       
+private void EnableTaskManager()
+        {
+            RegistryKey regkey = default(RegistryKey);
+            string keyValueInt = "0";
+            //0x00000000 (0)
+            string subKey = "Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System";
+            try
+            {
+                regkey = Registry.CurrentUser.CreateSubKey(subKey);
+                regkey.SetValue("DisableTaskMgr", keyValueInt);
+                regkey.Close();
+            }
+            catch (Exception ex)
+            {
+                //Interaction.MsgBox(ex.Message, MsgBoxStyle.Critical, "Registry Error!");
+            }
+
         }
     }
 }

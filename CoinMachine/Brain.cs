@@ -19,12 +19,12 @@ namespace slotmachine
         
         public Brain(FormTimer form1,SerialObserver so)
         {
+            //https://github.com/crpietschmann/VirtualRouter
 
-           
         }
 
 
 
-        
+
     }
 }
