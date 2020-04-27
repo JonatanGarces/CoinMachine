@@ -3,9 +3,8 @@ using System.Configuration;
 
 namespace Library
 {
-    class ConfigManager
+    internal class ConfigManager
     {
-
         public void ReadAllSettings()
         {
             try
@@ -36,7 +35,7 @@ namespace Library
             try
             {
                 var appSettings = ConfigurationManager.AppSettings;
-                result = appSettings[key] ?? "Not Found";
+                result = appSettings[key] ?? "";
                 Console.WriteLine(result);
             }
             catch (ConfigurationErrorsException)
@@ -75,8 +74,6 @@ namespace Library
             var configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
 
             return configFile.FilePath;
-
         }
-
     }
 }

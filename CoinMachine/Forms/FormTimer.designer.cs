@@ -78,9 +78,8 @@
             this.lblcountdown.Location = new System.Drawing.Point(11, 9);
             this.lblcountdown.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblcountdown.Name = "lblcountdown";
-            this.lblcountdown.Size = new System.Drawing.Size(104, 37);
+            this.lblcountdown.Size = new System.Drawing.Size(0, 37);
             this.lblcountdown.TabIndex = 2;
-            this.lblcountdown.Text = "Timer";
             this.lblcountdown.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
             // 
             // FormTimer

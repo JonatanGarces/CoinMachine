@@ -1,15 +1,14 @@
-﻿using System;
+﻿using CoinMachine;
+using System;
 using System.Windows.Forms;
-
 
 namespace Library
 {
     public class CountDownTimer : IDisposable
     {
-
         public Action TimeChanged;
         public Action CountDownFinished;
-
+        public Action Notification;
         public bool IsRunnign => timer.Enabled;
 
         public int StepMs
@@ -24,8 +23,13 @@ namespace Library
         private DateTime _minTime = new DateTime(1, 1, 1, 0, 0, 0);
 
         public DateTime TimeLeft { get; set; }
+
+        public DateTime NotificationTime { get; set; }
+
         private long TimeLeftMs => TimeLeft.Ticks / TimeSpan.TicksPerMillisecond;
 
+        public long TimetoNotificate => NotificationTime.Ticks / TimeSpan.TicksPerMillisecond;
+        public string TimeLeftMinStr => TimeLeft.ToString("mm");
         public string TimeLeftStr => TimeLeft.ToString("mm:ss");
 
         public string TimeLeftMsStr => TimeLeft.ToString("mm:ss.fff");
@@ -34,18 +38,21 @@ namespace Library
         {
             if (TimeLeftMs > timer.Interval)
             {
+                if (TimeLeftMs < TimetoNotificate && Global.Instance.NotificationAppeared == false) { Global.Instance.NotificationAppeared = true; Notification?.Invoke(); }
+
                 TimeLeft = TimeLeft.AddMilliseconds(-timer.Interval);
                 TimeChanged?.Invoke();
             }
             else
             {
                 // Stop();
+                Global.Instance.NotificationAppeared = false;
+
                 TimeLeft = _minTime;
                 TimeChanged?.Invoke();
                 CountDownFinished?.Invoke();
             }
         }
-
 
         public CountDownTimer()
         {
@@ -65,13 +72,21 @@ namespace Library
             //   TimeChanged?.Invoke();
         }
 
+        public void SetNotificationTime(DateTime dt)
+        {
+            NotificationTime = dt;
+        }
+
         public void SetTime(int min, int sec = 0) => SetTime(new DateTime(1, 1, 1, 0, min, sec));
+
+        public void SetNotificationTime(int min, int sec = 0) => SetTime(new DateTime(1, 1, 1, 0, min, sec));
 
         public void AddTime(DateTime dt)
         {
             TimeLeft = _maxTime = TimeLeft.AddMinutes(dt.Minute);
             //  TimeChanged?.Invoke();
         }
+
         public void AddTime(int min, int sec = 0) => AddTime(new DateTime(1, 1, 1, 0, min, sec));
 
         public void Start() => timer.Start();

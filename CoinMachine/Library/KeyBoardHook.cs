@@ -7,10 +7,12 @@ namespace Library
 {
     public class KeyBoardHook : IDisposable
     {
-        bool Global = false;
+        private bool Global = false;
 
         public delegate void LocalKeyEventHandler(Keys key, bool Shift, bool Ctrl, bool Alt);
+
         public event LocalKeyEventHandler KeyDown;
+
         public event LocalKeyEventHandler KeyUp;
 
         public delegate int CallbackDelegate(int Code, int W, int L);
@@ -57,7 +59,7 @@ namespace Library
         }
 
         private int HookID = 0;
-        CallbackDelegate TheHookCB = null;
+        private CallbackDelegate TheHookCB = null;
 
         //Start hook
         public KeyBoardHook(bool Global)
@@ -78,7 +80,8 @@ namespace Library
             }
         }
 
-        bool IsFinalized = false;
+        private bool IsFinalized = false;
+
         ~KeyBoardHook()
         {
             if (!IsFinalized)
@@ -87,6 +90,7 @@ namespace Library
                 IsFinalized = true;
             }
         }
+
         public void Dispose()
         {
             if (!IsFinalized)
@@ -102,9 +106,14 @@ namespace Library
             KBDLLHookStruct LS = new KBDLLHookStruct();
             if (Code < 0)
             {
-                //return CallNextHookEx(HookID, Code, W, L);
-                return 1;
-
+                if (CoinMachine.Global.Instance.KeyEnabled)
+                {
+                    return CallNextHookEx(HookID, Code, W, L);
+                }
+                else
+                {
+                    return 1;
+                }
             }
             try
             {
@@ -150,9 +159,14 @@ namespace Library
                 //Ignore all errors...
             }
 
-            //return CallNextHookEx(HookID, Code, W, L);
-            return 1;
-
+            if (CoinMachine.Global.Instance.KeyEnabled)
+            {
+                return CallNextHookEx(HookID, Code, W, L);
+            }
+            else
+            {
+                return 1;
+            }
         }
 
         public enum KeyEvents
@@ -170,34 +184,37 @@ namespace Library
         {
             return Convert.ToBoolean(GetKeyState(Keys.CapsLock)) & true;
         }
+
         public static bool GetNumlock()
         {
             return Convert.ToBoolean(GetKeyState(Keys.NumLock)) & true;
         }
+
         public static bool GetScrollLock()
         {
             return Convert.ToBoolean(GetKeyState(Keys.Scroll)) & true;
         }
+
         public static bool GetShiftPressed()
         {
             int state = GetKeyState(Keys.ShiftKey);
             if (state > 1 || state < -1) return true;
             return false;
         }
+
         public static bool GetCtrlPressed()
         {
             int state = GetKeyState(Keys.ControlKey);
             if (state > 1 || state < -1) return true;
             return false;
         }
+
         public static bool GetAltPressed()
         {
             int state = GetKeyState(Keys.Menu);
             if (state > 1 || state < -1) return true;
             return false;
         }
-
-
 
         private void DisableTaskManager()
         {
@@ -214,11 +231,7 @@ namespace Library
             {
                 // Interaction.MsgBox(ex.Message, MsgBoxStyle.Critical, "Registry Error!");
             }
-
         }
-
-
-
 
         private void EnableTaskManager()
         {
@@ -236,7 +249,6 @@ namespace Library
             {
                 //Interaction.MsgBox(ex.Message, MsgBoxStyle.Critical, "Registry Error!");
             }
-
         }
     }
 }

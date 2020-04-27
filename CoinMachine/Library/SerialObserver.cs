@@ -13,31 +13,30 @@ namespace Library
     public class SerialObserver
     {
         public Action Changed;
-        string[] serialPorts;
-        List<string> array_devices = new List<string>();
+        private string[] serialPorts;
+        private List<string> array_devices = new List<string>();
         public Action<byte[]> DataReceived;
-
+        public List<Device> devices = new List<Device>();
         private static WqlEventQuery deviceArrivalQuery = new WqlEventQuery("SELECT * FROM Win32_DeviceChangeEvent WHERE EventType = 2");
         private static WqlEventQuery deviceRemovalQuery = new WqlEventQuery("SELECT * FROM Win32_DeviceChangeEvent WHERE EventType = 3");
-        ManagementEventWatcher arrival;
-        ManagementEventWatcher removal;
-        SerialPort serialport = new SerialPort();
+        private ManagementEventWatcher arrival;
+        private ManagementEventWatcher removal;
+        public SerialPort serialport = new SerialPort();
 
-        ManagementObjectSearcher ManObjSearch;
-        ManagementObjectCollection ManObjReturn;
+        private ManagementObjectSearcher ManObjSearch;
+        private ManagementObjectCollection ManObjReturn;
+
         public SerialObserver()
         {
-            // serialPorts = GetAvailableSerialPorts();
-
-            //MonitorDeviceChanges();
+            serialPorts = GetAvailableSerialPorts();
+            MonitorDeviceChanges();
         }
+
         public enum EventType
         {
             Insertion,
             Removal,
         }
-
-
 
         private void MonitorDeviceChanges()
         {
@@ -55,67 +54,59 @@ namespace Library
             }
             catch (ManagementException err)
             {
-
             }
         }
 
         private void RaisePortsChangedIfNecessary(EventType eventType, EventArrivedEventArgs args)
         {
+            devices = new List<Device>();
+
             lock (serialPorts)
             {
                 var availableSerialPorts = GetAvailableSerialPorts();
                 array_devices.Clear();
                 if (!serialPorts.SequenceEqual(availableSerialPorts))
                 {
-
-
                     ManObjSearch = new ManagementObjectSearcher("Select * from Win32_SerialPort");
                     ManObjReturn = ManObjSearch.Get();
-
-                    Console.WriteLine(string.Join(", ", args));
                     serialPorts = availableSerialPorts;
-
-
                     foreach (ManagementObject ManObj in ManObjReturn)
                     {
-                        if (ManObj["Name"].ToString().Contains("Arduino") && ManObj["Status"].ToString().ToLower().Trim() == "ok")
-                        {
-                            string com = ManObj["DeviceID"].ToString().Trim();
-                            array_devices.Add(com);
-                        }
+                        // if (ManObj["Name"].ToString().Contains("Arduino") && ManObj["Status"].ToString().ToLower().Trim() == "ok")
+                        //   {
+                        string com = ManObj["DeviceID"].ToString().Trim();
+                        devices.Add(new Device(ManObj["Name"].ToString(), com));
+                        array_devices.Add(com);
+                        //  }
                     }
-                    if (array_devices.Any())
-                    {
-                        Changed?.Invoke();
-                    }
+                    // if (array_devices.Any())
+                    // {
+                    Changed?.Invoke();
+                    //}
 
                     //PortsChanged.Raise(null, new PortsChangedArgs(eventType, _serialPorts));
                 }
             }
         }
 
-
         public List<Device> GetSerials()
         {
-            List<Device> list = new List<Device>();
-
+            devices = new List<Device>();
             ManObjSearch = new ManagementObjectSearcher("Select * from Win32_SerialPort");
             ManObjReturn = ManObjSearch.Get();
             foreach (ManagementObject ManObj in ManObjReturn)
             {
-                if (ManObj["Name"].ToString().Contains("Arduino") && ManObj["Status"].ToString().ToLower().Trim() == "ok")
-                {
-                    string com = ManObj["DeviceID"].ToString().Trim();
-                    list.Add(new Device(ManObj["Name"].ToString(), com));
-                }
+                // if (ManObj["Name"].ToString().Contains("Arduino") && ManObj["Status"].ToString().ToLower().Trim() == "ok")
+                // {
+                string com = ManObj["DeviceID"].ToString().Trim();
+                devices.Add(new Device(ManObj["Name"].ToString(), com));
+                //  }
             }
-            return list;
+            return devices;
         }
-
 
         public SerialPort Connect(string port)
         {
-
             if (!serialport.IsOpen)
             {
                 serialport.PortName = port;
@@ -141,7 +132,8 @@ namespace Library
             }
             catch (SystemException ex)
             {
-                MessageBox.Show(ex.Message, "Data Received Event");
+                Console.WriteLine(ex.Message);
+                //MessageBox.Show(, "Data Received Event");
             }
         }
 
@@ -154,8 +146,5 @@ namespace Library
         // {
         //    throw new NotImplementedException();
         // }
-
-
-
     }
 }

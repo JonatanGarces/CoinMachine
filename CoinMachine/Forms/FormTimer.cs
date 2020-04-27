@@ -1,6 +1,5 @@
-﻿
+﻿using CoinMachine;
 using Library;
-using Forms;
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
@@ -12,39 +11,45 @@ namespace Forms
     public partial class FormTimer : Form
     {
         #region Form Dragging API Support
+
         //The SendMessage function sends a message to a window or windows.
 
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = false)]
-
-        static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, int wParam, int lParam);
+        private static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, int wParam, int lParam);
 
         //ReleaseCapture releases a mouse capture
 
         [DllImportAttribute("user32.dll", CharSet = CharSet.Auto, SetLastError = false)]
-
         public static extern bool ReleaseCapture();
 
-        #endregion
+        #endregion Form Dragging API Support
+
         public CountDownTimer timer = new CountDownTimer();
-        List<ScreenSaverForm> screens = new List<ScreenSaverForm>();
-        SerialObserver so;
+        private List<ScreenSaverForm> screens = new List<ScreenSaverForm>();
+        private SerialObserver so;
+        private ConfigManager configmanager = new ConfigManager();
+
         public FormTimer(SerialObserver so)
         {
             InitializeComponent();
+
+            this.timer.SetNotificationTime(Int32.Parse(configmanager.ReadSetting("NotificationMinute")), 0);
+
             timer.TimeChanged += () =>
             {
                 lblcountdown.Text = timer.TimeLeftStr;
             };
             timer.CountDownFinished += () =>
             {
-                //form.notifyIcon1.ShowBalloonTip(100000, "Inserte Moneda", "Precaucion inserte moneda tu tiempo casi se ha agotado, tu sesión se cerara y podrias perder tu información que estas trabajando", ToolTipIcon.Warning);      
                 ShowScreenSaver();
+            };
+            timer.Notification += () =>
+            {
+                this.notifyIcon1.ShowBalloonTip(100000, "Inserte Moneda", "Precaucion inserte moneda tu tiempo casi se ha agotado, tu sesión se cerara y podrias perder tu información que estas trabajando", ToolTipIcon.Warning);
             };
             timer.Start();
             this.so = so;
         }
-        
-
 
         private void Form1_Move(object sender, EventArgs e)
         {
@@ -54,22 +59,25 @@ namespace Forms
                 notifyIcon1.ShowBalloonTip(1000, "Important notice", "Something Important has come up.Click this to know more", ToolTipIcon.Info);
             }
         }
+
         private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             this.Show();
         }
+
         private void showToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Show();
         }
+
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
-
         public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HT_CAPTION = 0x2;
+
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -82,9 +90,7 @@ namespace Forms
         private void FormTimer_Load(object sender, EventArgs e)
         {
             so.DataReceived += ProcessData;
-
         }
-
 
         private void ProcessData(byte[] data)
         {
@@ -114,17 +120,18 @@ namespace Forms
                 }
             }
         }
+
         public void HideScreenSaver()
         {
-            foreach (ScreenSaverForm screensaver in screens){
+            foreach (ScreenSaverForm screensaver in screens)
+            {
                 screensaver.Close();
             }
             screens.Clear();
         }
-
     }
-
 }
+
 //https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/addition-operator
 //https://www.codeproject.com/Articles/7294/Processing-Global-Mouse-and-Keyboard-Hooks-in-C
 //https://stackoverflow.com/questions/604410/global-keyboard-capture-in-c-sharp-application

@@ -5,18 +5,18 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.IO.Ports;
 using System.Windows.Forms;
 
 namespace Forms
 {
     public partial class Inicio : Form
     {
-        ConfigManager configmanager = new ConfigManager();
-        SerialObserver so = new SerialObserver();
+        private ConfigManager configmanager = new ConfigManager();
+        private SerialObserver so = new SerialObserver();
+
         public Inicio()
         {
-
-
             InitializeComponent();
             txtCoinMinute.Text = configmanager.ReadSetting("CoinMinute");
             txtNotificationMinute.Text = configmanager.ReadSetting("NotificationMinute");
@@ -24,13 +24,12 @@ namespace Forms
             txtBackgroundImage.Text = configmanager.ReadSetting("BackgroundImage");
             txtBackgroundMessage.Text = configmanager.ReadSetting("BackgroundMessage");
             txtBackgroundColor.Text = configmanager.ReadSetting("BackgroundColor");
-            
-            List<Device> devices = new List<Device>();
-            devices.Add(new Device(configmanager.ReadSetting("SlotName"), configmanager.ReadSetting("SlotPort")));
-            cbxSlotPort.DataSource = devices;
-            cbxSlotPort.DisplayMember = "Name";
-            cbxSlotPort.ValueMember = "Port";
-            cbxSlotPort.DropDownStyle = ComboBoxStyle.DropDownList;
+
+            if (File.Exists(configmanager.ReadSetting("BackgroundImage"))) { btnBackgroundImage.Text = "Cambiar"; } else { btnBackgroundImage.Text = "Seleccionar"; }
+
+            //List<Device> devices = new List<Device>();
+            // devices.Add(new Device(configmanager.ReadSetting("SlotName"), configmanager.ReadSetting("SlotPort")));
+
             try
             {
                 picBackgroundColor.BackColor = Color.FromArgb(int.Parse(configmanager.ReadSetting("BackgroundColor")));
@@ -49,7 +48,46 @@ namespace Forms
             catch (ArgumentException) { }
             catch (FileNotFoundException) { }
 
+            cbxSlotPort.DataSource = so.GetSerials();
+            cbxSlotPort.DisplayMember = "Name";
+            cbxSlotPort.ValueMember = "Port";
+            cbxSlotPort.DropDownStyle = ComboBoxStyle.DropDownList;
 
+            so.Changed += () =>
+            {
+                // after we've done all the processing,
+                this.Invoke(new MethodInvoker(delegate
+                {
+                    // load the control with the appropriate data
+                    cbxSlotPort.DataSource = so.GetSerials();
+                    cbxSlotPort.DisplayMember = "Name";
+                    cbxSlotPort.ValueMember = "Port";
+                    cbxSlotPort.DropDownStyle = ComboBoxStyle.DropDownList;
+                }));
+
+                //  cbxSlotPort.Refresh();
+            };
+        }
+
+        private void btnConectar_Click(object sender, EventArgs e)
+        {
+            SerialPort connected = so.Connect(((Device)cbxSlotPort.SelectedItem).Port);
+            if (connected.IsOpen)
+            {
+                this.picSlotOk.Image = global::CoinMachine.Properties.Resources.check;
+            }
+            else
+            {
+                this.picSlotOk.Image = global::CoinMachine.Properties.Resources.check;
+            }
+        }
+
+        private void btnDetectar_Click(object sender, EventArgs e)
+        {
+            cbxSlotPort.DataSource = so.GetSerials();
+            cbxSlotPort.DisplayMember = "Name";
+            cbxSlotPort.ValueMember = "Port";
+            cbxSlotPort.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -73,6 +111,17 @@ namespace Forms
 
         private void button5_Click(object sender, EventArgs e)
         {
+            if (txtCoinMinute.Text.Trim().Equals("")) { MessageBox.Show("Falta de llenar la primera seccion"); return; }
+            if (txtNotificationMinute.Text.Trim().Equals("")) { MessageBox.Show("Falta de llenar la segunda seccion"); return; }
+            if (txtNotificationMessage.Text.Trim().Equals("")) { MessageBox.Show("Falta de llenar la segunda seccion"); return; }
+            if (txtBackgroundImage.Text.Trim().Equals("")) { MessageBox.Show("Falta de llenar la tercera seccion"); return; }
+            if (txtBackgroundMessage.Text.Trim().Equals("")) { MessageBox.Show("Falta de llenar la tercera seccion"); return; }
+            if (txtBackgroundColor.Text.Trim().Equals("")) { MessageBox.Show("Falta de llenar la tercera seccion"); return; }
+            if (txtBackgroundColor.Text.Trim().Equals("")) { MessageBox.Show("Falta de llenar la tercera seccion"); return; }
+            if (((Device)cbxSlotPort.SelectedItem).Port.Equals("")) { MessageBox.Show("Falta de llenar la cuarta seccion"); return; }
+
+            if (!so.serialport.IsOpen) { MessageBox.Show("No ha conectado el dispositivo"); return; }
+
             configmanager.AddUpdateAppSettings("CoinMinute", txtCoinMinute.Text);
             configmanager.AddUpdateAppSettings("NotificationMinute", txtNotificationMinute.Text);
             configmanager.AddUpdateAppSettings("NotificationMessage", txtNotificationMessage.Text);
@@ -80,25 +129,16 @@ namespace Forms
             configmanager.AddUpdateAppSettings("BackgroundMessage", txtBackgroundMessage.Text);
             configmanager.AddUpdateAppSettings("BackgroundColor", txtBackgroundColor.Text);
             configmanager.AddUpdateAppSettings("SlotPort", ((Device)cbxSlotPort.SelectedItem).Port);
-            configmanager.AddUpdateAppSettings("SlotPortName" , ((Device)cbxSlotPort.SelectedItem).Name);
+            configmanager.AddUpdateAppSettings("SlotPortName", ((Device)cbxSlotPort.SelectedItem).Name);
+
             FormTimer f1 = new FormTimer(so);
             f1.Show();
             this.Close();
         }
 
-        private void btnDetectar_Click(object sender, EventArgs e)
+        private void btnClose_Click(object sender, EventArgs e)
         {
-            SerialObserver serials = new SerialObserver();
-            List<Device> devices = serials.GetSerials();
-            cbxSlotPort.DataSource = devices;
-            cbxSlotPort.DisplayMember = "Name";
-            cbxSlotPort.ValueMember = "Port";
-            cbxSlotPort.DropDownStyle = ComboBoxStyle.DropDownList;
+            Application.Exit();
         }
-        private void btnConectar_Click(object sender, EventArgs e)
-        {
-            so.Connect(((Device)cbxSlotPort.SelectedItem).Port);
-        }
-
     }
 }

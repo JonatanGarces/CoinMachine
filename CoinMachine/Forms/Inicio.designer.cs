@@ -45,23 +45,22 @@
             this.button2 = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.picBackgroundImage = new System.Windows.Forms.PictureBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnBackgroundImage = new System.Windows.Forms.Button();
             this.txtBackgroundMessage = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.txtBackgroundImage = new System.Windows.Forms.TextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.btnDetectar = new System.Windows.Forms.Button();
-            this.lblStatus = new System.Windows.Forms.Label();
+            this.picSlotOk = new System.Windows.Forms.PictureBox();
             this.btnConectar = new System.Windows.Forms.Button();
             this.cbxSlotPort = new System.Windows.Forms.ComboBox();
-            this.label9 = new System.Windows.Forms.Label();
+            this.button5 = new System.Windows.Forms.Button();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.button5 = new System.Windows.Forms.Button();
+            this.btnClose = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtCoinMinute)).BeginInit();
             this.panel2.SuspendLayout();
@@ -70,6 +69,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.picBackgroundColor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBackgroundImage)).BeginInit();
             this.panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picSlotOk)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -79,7 +79,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(11, 16);
+            this.label1.Location = new System.Drawing.Point(23, 16);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(87, 13);
             this.label1.TabIndex = 7;
@@ -88,7 +88,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(139, 16);
+            this.label2.Location = new System.Drawing.Point(164, 16);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(49, 13);
             this.label2.TabIndex = 9;
@@ -102,12 +102,12 @@
             this.panel1.Controls.Add(this.label2);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(379, 42);
+            this.panel1.Size = new System.Drawing.Size(363, 42);
             this.panel1.TabIndex = 10;
             // 
             // txtCoinMinute
             // 
-            this.txtCoinMinute.Location = new System.Drawing.Point(100, 14);
+            this.txtCoinMinute.Location = new System.Drawing.Point(125, 14);
             this.txtCoinMinute.Maximum = new decimal(new int[] {
             10,
             0,
@@ -137,12 +137,12 @@
             this.panel2.Controls.Add(this.label4);
             this.panel2.Location = new System.Drawing.Point(12, 70);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(379, 114);
+            this.panel2.Size = new System.Drawing.Size(363, 114);
             this.panel2.TabIndex = 11;
             // 
             // txtNotificationMinute
             // 
-            this.txtNotificationMinute.Location = new System.Drawing.Point(127, 13);
+            this.txtNotificationMinute.Location = new System.Drawing.Point(127, 11);
             this.txtNotificationMinute.Maximum = new decimal(new int[] {
             10,
             0,
@@ -167,13 +167,13 @@
             this.txtNotificationMessage.Location = new System.Drawing.Point(127, 42);
             this.txtNotificationMessage.Multiline = true;
             this.txtNotificationMessage.Name = "txtNotificationMessage";
-            this.txtNotificationMessage.Size = new System.Drawing.Size(219, 48);
+            this.txtNotificationMessage.Size = new System.Drawing.Size(221, 57);
             this.txtNotificationMessage.TabIndex = 11;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(44, 56);
+            this.label5.Location = new System.Drawing.Point(49, 56);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(65, 26);
             this.label5.TabIndex = 10;
@@ -183,7 +183,7 @@
             // 
             this.label3.AutoEllipsis = true;
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(4, 15);
+            this.label3.Location = new System.Drawing.Point(5, 8);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(110, 26);
             this.label3.TabIndex = 7;
@@ -193,7 +193,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(167, 26);
+            this.label4.Location = new System.Drawing.Point(167, 15);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(49, 13);
             this.label4.TabIndex = 9;
@@ -218,19 +218,19 @@
             this.panel3.Controls.Add(this.button2);
             this.panel3.Controls.Add(this.label8);
             this.panel3.Controls.Add(this.picBackgroundImage);
-            this.panel3.Controls.Add(this.button1);
+            this.panel3.Controls.Add(this.btnBackgroundImage);
             this.panel3.Controls.Add(this.txtBackgroundMessage);
             this.panel3.Controls.Add(this.label7);
             this.panel3.Controls.Add(this.label6);
             this.panel3.Controls.Add(this.txtBackgroundImage);
             this.panel3.Location = new System.Drawing.Point(12, 199);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(379, 206);
+            this.panel3.Size = new System.Drawing.Size(363, 206);
             this.panel3.TabIndex = 13;
             // 
             // txtBackgroundColor
             // 
-            this.txtBackgroundColor.Location = new System.Drawing.Point(208, 172);
+            this.txtBackgroundColor.Location = new System.Drawing.Point(244, 172);
             this.txtBackgroundColor.Name = "txtBackgroundColor";
             this.txtBackgroundColor.Size = new System.Drawing.Size(34, 20);
             this.txtBackgroundColor.TabIndex = 17;
@@ -239,7 +239,7 @@
             // picBackgroundColor
             // 
             this.picBackgroundColor.BackColor = System.Drawing.Color.Red;
-            this.picBackgroundColor.Location = new System.Drawing.Point(92, 166);
+            this.picBackgroundColor.Location = new System.Drawing.Point(128, 166);
             this.picBackgroundColor.Name = "picBackgroundColor";
             this.picBackgroundColor.Size = new System.Drawing.Size(25, 25);
             this.picBackgroundColor.TabIndex = 16;
@@ -247,7 +247,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(127, 168);
+            this.button2.Location = new System.Drawing.Point(163, 168);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 15;
@@ -266,29 +266,29 @@
             // 
             // picBackgroundImage
             // 
-            this.picBackgroundImage.Location = new System.Drawing.Point(92, 5);
+            this.picBackgroundImage.Location = new System.Drawing.Point(128, 5);
             this.picBackgroundImage.Name = "picBackgroundImage";
             this.picBackgroundImage.Size = new System.Drawing.Size(91, 89);
             this.picBackgroundImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picBackgroundImage.TabIndex = 13;
             this.picBackgroundImage.TabStop = false;
             // 
-            // button1
+            // btnBackgroundImage
             // 
-            this.button1.Location = new System.Drawing.Point(189, 31);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(77, 23);
-            this.button1.TabIndex = 12;
-            this.button1.Text = "Seleccionar";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnBackgroundImage.Location = new System.Drawing.Point(225, 31);
+            this.btnBackgroundImage.Name = "btnBackgroundImage";
+            this.btnBackgroundImage.Size = new System.Drawing.Size(77, 23);
+            this.btnBackgroundImage.TabIndex = 12;
+            this.btnBackgroundImage.Text = "Seleccionar";
+            this.btnBackgroundImage.UseVisualStyleBackColor = true;
+            this.btnBackgroundImage.Click += new System.EventHandler(this.button1_Click);
             // 
             // txtBackgroundMessage
             // 
-            this.txtBackgroundMessage.Location = new System.Drawing.Point(92, 100);
+            this.txtBackgroundMessage.Location = new System.Drawing.Point(128, 100);
             this.txtBackgroundMessage.Multiline = true;
             this.txtBackgroundMessage.Name = "txtBackgroundMessage";
-            this.txtBackgroundMessage.Size = new System.Drawing.Size(253, 48);
+            this.txtBackgroundMessage.Size = new System.Drawing.Size(220, 60);
             this.txtBackgroundMessage.TabIndex = 11;
             // 
             // label7
@@ -302,7 +302,7 @@
             // 
             // txtBackgroundImage
             // 
-            this.txtBackgroundImage.Location = new System.Drawing.Point(189, 74);
+            this.txtBackgroundImage.Location = new System.Drawing.Point(225, 74);
             this.txtBackgroundImage.Name = "txtBackgroundImage";
             this.txtBackgroundImage.Size = new System.Drawing.Size(72, 20);
             this.txtBackgroundImage.TabIndex = 6;
@@ -315,40 +315,27 @@
             // panel4
             // 
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel4.Controls.Add(this.btnDetectar);
-            this.panel4.Controls.Add(this.lblStatus);
+            this.panel4.Controls.Add(this.picSlotOk);
             this.panel4.Controls.Add(this.btnConectar);
             this.panel4.Controls.Add(this.cbxSlotPort);
-            this.panel4.Controls.Add(this.label9);
             this.panel4.Location = new System.Drawing.Point(12, 425);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(379, 42);
+            this.panel4.Size = new System.Drawing.Size(363, 42);
             this.panel4.TabIndex = 16;
             // 
-            // btnDetectar
+            // picSlotOk
             // 
-            this.btnDetectar.Location = new System.Drawing.Point(218, 9);
-            this.btnDetectar.Margin = new System.Windows.Forms.Padding(0);
-            this.btnDetectar.Name = "btnDetectar";
-            this.btnDetectar.Size = new System.Drawing.Size(56, 19);
-            this.btnDetectar.TabIndex = 4;
-            this.btnDetectar.Text = "Detectar";
-            this.btnDetectar.UseVisualStyleBackColor = true;
-            this.btnDetectar.Click += new System.EventHandler(this.btnDetectar_Click);
-            // 
-            // lblStatus
-            // 
-            this.lblStatus.AutoSize = true;
-            this.lblStatus.ForeColor = System.Drawing.Color.Red;
-            this.lblStatus.Location = new System.Drawing.Point(11, 19);
-            this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(77, 13);
-            this.lblStatus.TabIndex = 3;
-            this.lblStatus.Text = "Desconectado";
+            this.picSlotOk.Image = global::CoinMachine.Properties.Resources.cross;
+            this.picSlotOk.Location = new System.Drawing.Point(266, 9);
+            this.picSlotOk.Name = "picSlotOk";
+            this.picSlotOk.Size = new System.Drawing.Size(22, 24);
+            this.picSlotOk.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picSlotOk.TabIndex = 20;
+            this.picSlotOk.TabStop = false;
             // 
             // btnConectar
             // 
-            this.btnConectar.Location = new System.Drawing.Point(287, 9);
+            this.btnConectar.Location = new System.Drawing.Point(205, 11);
             this.btnConectar.Margin = new System.Windows.Forms.Padding(0);
             this.btnConectar.Name = "btnConectar";
             this.btnConectar.Size = new System.Drawing.Size(58, 19);
@@ -360,24 +347,25 @@
             // cbxSlotPort
             // 
             this.cbxSlotPort.FormattingEnabled = true;
-            this.cbxSlotPort.Location = new System.Drawing.Point(92, 9);
+            this.cbxSlotPort.Location = new System.Drawing.Point(12, 9);
             this.cbxSlotPort.Name = "cbxSlotPort";
-            this.cbxSlotPort.Size = new System.Drawing.Size(124, 21);
+            this.cbxSlotPort.Size = new System.Drawing.Size(190, 21);
             this.cbxSlotPort.TabIndex = 1;
             // 
-            // label9
+            // button5
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(11, 6);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(40, 13);
-            this.label9.TabIndex = 0;
-            this.label9.Text = "Status:";
+            this.button5.Location = new System.Drawing.Point(277, 473);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(98, 24);
+            this.button5.TabIndex = 19;
+            this.button5.Text = "Guardar e Iniciar";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // pictureBox6
             // 
             this.pictureBox6.Image = global::CoinMachine.Properties.Resources.coinslotter;
-            this.pictureBox6.Location = new System.Drawing.Point(366, 411);
+            this.pictureBox6.Location = new System.Drawing.Point(345, 411);
             this.pictureBox6.Name = "pictureBox6";
             this.pictureBox6.Size = new System.Drawing.Size(37, 45);
             this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -387,9 +375,9 @@
             // pictureBox3
             // 
             this.pictureBox3.Image = global::CoinMachine.Properties.Resources.iconmonstr_computer_3_240;
-            this.pictureBox3.Location = new System.Drawing.Point(366, 190);
+            this.pictureBox3.Location = new System.Drawing.Point(350, 190);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(37, 34);
+            this.pictureBox3.Size = new System.Drawing.Size(32, 34);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox3.TabIndex = 15;
             this.pictureBox3.TabStop = false;
@@ -397,9 +385,9 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = global::CoinMachine.Properties.Resources.bell_ringing;
-            this.pictureBox2.Location = new System.Drawing.Point(366, 61);
+            this.pictureBox2.Location = new System.Drawing.Point(350, 60);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(37, 34);
+            this.pictureBox2.Size = new System.Drawing.Size(32, 34);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 14;
             this.pictureBox2.TabStop = false;
@@ -407,30 +395,32 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::CoinMachine.Properties.Resources.coing;
-            this.pictureBox1.Location = new System.Drawing.Point(371, 3);
+            this.pictureBox1.Location = new System.Drawing.Point(350, 9);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(32, 33);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 4;
             this.pictureBox1.TabStop = false;
             // 
-            // button5
+            // btnClose
             // 
-            this.button5.Location = new System.Drawing.Point(157, 473);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(98, 24);
-            this.button5.TabIndex = 19;
-            this.button5.Text = "Guardar e Iniciar";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.btnClose.BackColor = System.Drawing.Color.Transparent;
+            this.btnClose.Location = new System.Drawing.Point(13, 474);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(75, 23);
+            this.btnClose.TabIndex = 20;
+            this.btnClose.Text = "Cerrar";
+            this.btnClose.UseVisualStyleBackColor = false;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // Inicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(406, 509);
+            this.ClientSize = new System.Drawing.Size(387, 501);
             this.ControlBox = false;
+            this.Controls.Add(this.btnClose);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.pictureBox6);
             this.Controls.Add(this.pictureBox3);
@@ -457,7 +447,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.picBackgroundColor)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBackgroundImage)).EndInit();
             this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picSlotOk)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
@@ -482,7 +472,7 @@
         private System.Windows.Forms.TextBox txtBackgroundMessage;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txtBackgroundImage;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnBackgroundImage;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.PictureBox picBackgroundImage;
         private System.Windows.Forms.Button button2;
@@ -493,14 +483,13 @@
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.PictureBox pictureBox6;
-        private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.Button btnConectar;
         private System.Windows.Forms.ComboBox cbxSlotPort;
-        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.TextBox txtBackgroundColor;
         private System.Windows.Forms.NumericUpDown txtCoinMinute;
         private System.Windows.Forms.NumericUpDown txtNotificationMinute;
-        private System.Windows.Forms.Button btnDetectar;
+        private System.Windows.Forms.PictureBox picSlotOk;
+        private System.Windows.Forms.Button btnClose;
     }
 }

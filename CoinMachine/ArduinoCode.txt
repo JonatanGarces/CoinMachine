@@ -1,0 +1,22 @@
+﻿const int coin = 2;
+boolean insert = false;
+volatile int pulse = 0;
+void setup() {
+  //pinMode( coin, INPUT_PULLUP );
+  Serial.begin(115200);
+  //attachInterrupt(digitalPinToInterrupt(coin), coinInterrupt,RISING);
+
+}
+void loop() {
+ // Serial.print(1);
+  delay(10000);
+ // Serial.print(1);
+ // if (insert) {
+   // insert = false;
+ 
+ // }
+}
+void coinInterrupt() {
+  //insert = true;
+   //  Serial.print(1);
+}
