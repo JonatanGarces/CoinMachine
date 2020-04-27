@@ -9,7 +9,7 @@ void setup() {
 }
 void loop() {
  // Serial.print(1);
-  delay(10000);
+  delay(10000);q|   ||||
  // Serial.print(1);
  // if (insert) {
    // insert = false;

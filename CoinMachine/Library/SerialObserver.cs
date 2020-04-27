@@ -19,6 +19,11 @@ namespace Library
         public List<Device> devices = new List<Device>();
         private static WqlEventQuery deviceArrivalQuery = new WqlEventQuery("SELECT * FROM Win32_DeviceChangeEvent WHERE EventType = 2");
         private static WqlEventQuery deviceRemovalQuery = new WqlEventQuery("SELECT * FROM Win32_DeviceChangeEvent WHERE EventType = 3");
+
+        string select = "SELECT * FROM Win32_PnPEntity WHERE Name LIKE '%COM%' AND PNPClass = 'Ports'";
+        string scope = "root\\CIMV2";
+        //MSSerial_PortName 
+        //Win32_SerialPort
         private ManagementEventWatcher arrival;
         private ManagementEventWatcher removal;
         public SerialPort serialport = new SerialPort();
@@ -67,14 +72,24 @@ namespace Library
                 array_devices.Clear();
                 if (!serialPorts.SequenceEqual(availableSerialPorts))
                 {
-                    ManObjSearch = new ManagementObjectSearcher("Select * from Win32_SerialPort");
+                    ManObjSearch = new ManagementObjectSearcher(select);
                     ManObjReturn = ManObjSearch.Get();
                     serialPorts = availableSerialPorts;
                     foreach (ManagementObject ManObj in ManObjReturn)
                     {
                         // if (ManObj["Name"].ToString().Contains("Arduino") && ManObj["Status"].ToString().ToLower().Trim() == "ok")
                         //   {
-                        string com = ManObj["DeviceID"].ToString().Trim();
+                        string com = "";
+                        if (ManObj["DeviceID"] != null && ManObj["DeviceID"].ToString().Contains("COM"))
+                        {
+                            
+                            com = ManObj["DeviceID"].ToString().Trim();
+                        }
+                        else
+                        {
+                            com = ManObj["Caption"].ToString().Split('(', ')')[1].Trim();
+                        }
+
                         devices.Add(new Device(ManObj["Name"].ToString(), com));
                         array_devices.Add(com);
                         //  }
@@ -92,13 +107,24 @@ namespace Library
         public List<Device> GetSerials()
         {
             devices = new List<Device>();
-            ManObjSearch = new ManagementObjectSearcher("Select * from Win32_SerialPort");
+            ManObjSearch = new ManagementObjectSearcher( select);
             ManObjReturn = ManObjSearch.Get();
             foreach (ManagementObject ManObj in ManObjReturn)
             {
                 // if (ManObj["Name"].ToString().Contains("Arduino") && ManObj["Status"].ToString().ToLower().Trim() == "ok")
                 // {
-                string com = ManObj["DeviceID"].ToString().Trim();
+              
+                string com = "";
+                if (ManObj["DeviceID"] != null && ManObj["DeviceID"].ToString().Contains("COM"))
+                {
+
+                    com = ManObj["DeviceID"].ToString().Trim();
+                }
+                else
+                {jj  hjtgfbv     
+                    com = ManObj["Caption"].ToString().Split('(', ')')[1].Trim();
+                }
+
                 devices.Add(new Device(ManObj["Name"].ToString(), com));
                 //  }
             }

@@ -51,6 +51,9 @@
     <StartupObject>CoinMachine.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ObjectDumping, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ObjectDumper.NET.2.5.20033.1\lib\net45\ObjectDumping.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -111,6 +114,7 @@
     <EmbeddedResource Include="Forms\ScreenSaverForm.resx">
       <DependentUpon>ScreenSaverForm.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
