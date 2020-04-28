@@ -32,8 +32,8 @@ namespace Forms
         public FormTimer(SerialObserver so)
         {
             InitializeComponent();
-
-            this.timer.SetNotificationTime(Int32.Parse(configmanager.ReadSetting("NotificationMinute")), 0);
+            int notificationminute = Int32.Parse(configmanager.ReadSetting("NotificationMinute"));
+            this.timer.SetNotificationTime(notificationminute, 0); ;
 
             timer.TimeChanged += () =>
             {
@@ -44,11 +44,20 @@ namespace Forms
                 ShowScreenSaver();
             };
             timer.Notification += () =>
-            {
-                this.notifyIcon1.ShowBalloonTip(100000, "Inserte Moneda", "Precaucion inserte moneda tu tiempo casi se ha agotado, tu sesión se cerara y podrias perder tu información que estas trabajando", ToolTipIcon.Warning);
+            {//"Precaucion inserte moneda tu tiempo casi se ha agotado, tu sesión se cerrara y podrias perder tu información que estas trabajando
+                this.notifyIcon1.ShowBalloonTip(100000, configmanager.ReadSetting("NotificationTitle"), configmanager.ReadSetting("NotificationMessage"), ToolTipIcon.Warning);
             };
             timer.Start();
             this.so = so;
+
+            if (timer.IsRunnign == false)
+            {
+                this.timer.SetTime(1, 0);
+            }
+            else
+            {
+                this.timer.AddTime(1, 0);
+            }
         }
 
         private void Form1_Move(object sender, EventArgs e)

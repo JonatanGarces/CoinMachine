@@ -25,6 +25,10 @@ namespace Forms
             txtBackgroundMessage.Text = configmanager.ReadSetting("BackgroundMessage");
             txtBackgroundColor.Text = configmanager.ReadSetting("BackgroundColor");
 
+            txtBackgroundMessageColor.Text = configmanager.ReadSetting("BackgroundMessageColor");
+
+            txtNotificationTitle.Text = configmanager.ReadSetting("NotificationTitle");
+
             if (File.Exists(configmanager.ReadSetting("BackgroundImage"))) { btnBackgroundImage.Text = "Cambiar"; } else { btnBackgroundImage.Text = "Seleccionar"; }
 
             //List<Device> devices = new List<Device>();
@@ -33,6 +37,7 @@ namespace Forms
             try
             {
                 picBackgroundColor.BackColor = Color.FromArgb(int.Parse(configmanager.ReadSetting("BackgroundColor")));
+                picBackgroundMessageColor.BackColor = Color.FromArgb(int.Parse(configmanager.ReadSetting("BackgroundMessageColor")));
             }
             catch (ArgumentNullException) { }
             catch (ArgumentOutOfRangeException) { }
@@ -109,15 +114,26 @@ namespace Forms
             txtBackgroundColor.Text = code.ToString();
         }
 
+        private void btnBackgroundMessageColor_Click(object sender, EventArgs e)
+        {
+            colorDialog2.ShowDialog();
+            picBackgroundMessageColor.BackColor = colorDialog2.Color;
+            int code = colorDialog2.Color.ToArgb();
+            configmanager.AddUpdateAppSettings("BackgroundMessageColor", code.ToString());
+            txtBackgroundMessageColor.Text = code.ToString();
+        }
+
         private void button5_Click(object sender, EventArgs e)
         {
             if (txtCoinMinute.Text.Trim().Equals("")) { MessageBox.Show("Falta de llenar la primera seccion"); return; }
             if (txtNotificationMinute.Text.Trim().Equals("")) { MessageBox.Show("Falta de llenar la segunda seccion"); return; }
             if (txtNotificationMessage.Text.Trim().Equals("")) { MessageBox.Show("Falta de llenar la segunda seccion"); return; }
+            if (txtNotificationTitle.Text.Trim().Equals("")) { MessageBox.Show("Falta de llenar la segunda seccion"); return; }
+
             if (txtBackgroundImage.Text.Trim().Equals("")) { MessageBox.Show("Falta de llenar la tercera seccion"); return; }
             if (txtBackgroundMessage.Text.Trim().Equals("")) { MessageBox.Show("Falta de llenar la tercera seccion"); return; }
             if (txtBackgroundColor.Text.Trim().Equals("")) { MessageBox.Show("Falta de llenar la tercera seccion"); return; }
-            if (txtBackgroundColor.Text.Trim().Equals("")) { MessageBox.Show("Falta de llenar la tercera seccion"); return; }
+            if (txtBackgroundMessageColor.Text.Trim().Equals("")) { MessageBox.Show("Falta de llenar la tercera seccion"); return; }
             if (((Device)cbxSlotPort.SelectedItem).Port.Equals("")) { MessageBox.Show("Falta de llenar la cuarta seccion"); return; }
 
             if (!so.serialport.IsOpen) { MessageBox.Show("No ha conectado el dispositivo"); return; }
@@ -125,9 +141,14 @@ namespace Forms
             configmanager.AddUpdateAppSettings("CoinMinute", txtCoinMinute.Text);
             configmanager.AddUpdateAppSettings("NotificationMinute", txtNotificationMinute.Text);
             configmanager.AddUpdateAppSettings("NotificationMessage", txtNotificationMessage.Text);
+            configmanager.AddUpdateAppSettings("NotificationTitle", txtNotificationTitle.Text);
+
             configmanager.AddUpdateAppSettings("BackgroundImage", txtBackgroundImage.Text);
             configmanager.AddUpdateAppSettings("BackgroundMessage", txtBackgroundMessage.Text);
             configmanager.AddUpdateAppSettings("BackgroundColor", txtBackgroundColor.Text);
+
+            configmanager.AddUpdateAppSettings("BackgroundMessageColor", txtBackgroundMessageColor.Text);
+
             configmanager.AddUpdateAppSettings("SlotPort", ((Device)cbxSlotPort.SelectedItem).Port);
             configmanager.AddUpdateAppSettings("SlotPortName", ((Device)cbxSlotPort.SelectedItem).Name);
 

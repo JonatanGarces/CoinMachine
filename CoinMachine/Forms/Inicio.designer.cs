@@ -61,6 +61,13 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnClose = new System.Windows.Forms.Button();
+            this.lblNotificationTitle = new System.Windows.Forms.Label();
+            this.txtNotificationTitle = new System.Windows.Forms.TextBox();
+            this.txtBackgroundMessageColor = new System.Windows.Forms.TextBox();
+            this.picBackgroundMessageColor = new System.Windows.Forms.PictureBox();
+            this.btnBackgroundMessageColor = new System.Windows.Forms.Button();
+            this.lblBackgroundMessageColor = new System.Windows.Forms.Label();
+            this.colorDialog2 = new System.Windows.Forms.ColorDialog();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtCoinMinute)).BeginInit();
             this.panel2.SuspendLayout();
@@ -74,6 +81,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBackgroundMessageColor)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -130,6 +138,8 @@
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.txtNotificationTitle);
+            this.panel2.Controls.Add(this.lblNotificationTitle);
             this.panel2.Controls.Add(this.txtNotificationMinute);
             this.panel2.Controls.Add(this.txtNotificationMessage);
             this.panel2.Controls.Add(this.label5);
@@ -137,12 +147,12 @@
             this.panel2.Controls.Add(this.label4);
             this.panel2.Location = new System.Drawing.Point(12, 70);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(363, 114);
+            this.panel2.Size = new System.Drawing.Size(363, 119);
             this.panel2.TabIndex = 11;
             // 
             // txtNotificationMinute
             // 
-            this.txtNotificationMinute.Location = new System.Drawing.Point(127, 11);
+            this.txtNotificationMinute.Location = new System.Drawing.Point(127, 6);
             this.txtNotificationMinute.Maximum = new decimal(new int[] {
             10,
             0,
@@ -164,7 +174,7 @@
             // 
             // txtNotificationMessage
             // 
-            this.txtNotificationMessage.Location = new System.Drawing.Point(127, 42);
+            this.txtNotificationMessage.Location = new System.Drawing.Point(127, 30);
             this.txtNotificationMessage.Multiline = true;
             this.txtNotificationMessage.Name = "txtNotificationMessage";
             this.txtNotificationMessage.Size = new System.Drawing.Size(221, 57);
@@ -173,7 +183,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(49, 56);
+            this.label5.Location = new System.Drawing.Point(49, 44);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(65, 26);
             this.label5.TabIndex = 10;
@@ -183,7 +193,7 @@
             // 
             this.label3.AutoEllipsis = true;
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(5, 8);
+            this.label3.Location = new System.Drawing.Point(5, 3);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(110, 26);
             this.label3.TabIndex = 7;
@@ -193,7 +203,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(167, 15);
+            this.label4.Location = new System.Drawing.Point(167, 10);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(49, 13);
             this.label4.TabIndex = 9;
@@ -213,6 +223,10 @@
             // panel3
             // 
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.txtBackgroundMessageColor);
+            this.panel3.Controls.Add(this.picBackgroundMessageColor);
+            this.panel3.Controls.Add(this.btnBackgroundMessageColor);
+            this.panel3.Controls.Add(this.lblBackgroundMessageColor);
             this.panel3.Controls.Add(this.txtBackgroundColor);
             this.panel3.Controls.Add(this.picBackgroundColor);
             this.panel3.Controls.Add(this.button2);
@@ -223,14 +237,14 @@
             this.panel3.Controls.Add(this.label7);
             this.panel3.Controls.Add(this.label6);
             this.panel3.Controls.Add(this.txtBackgroundImage);
-            this.panel3.Location = new System.Drawing.Point(12, 199);
+            this.panel3.Location = new System.Drawing.Point(12, 205);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(363, 206);
+            this.panel3.Size = new System.Drawing.Size(363, 234);
             this.panel3.TabIndex = 13;
             // 
             // txtBackgroundColor
             // 
-            this.txtBackgroundColor.Location = new System.Drawing.Point(244, 172);
+            this.txtBackgroundColor.Location = new System.Drawing.Point(244, 206);
             this.txtBackgroundColor.Name = "txtBackgroundColor";
             this.txtBackgroundColor.Size = new System.Drawing.Size(34, 20);
             this.txtBackgroundColor.TabIndex = 17;
@@ -239,7 +253,7 @@
             // picBackgroundColor
             // 
             this.picBackgroundColor.BackColor = System.Drawing.Color.Red;
-            this.picBackgroundColor.Location = new System.Drawing.Point(128, 166);
+            this.picBackgroundColor.Location = new System.Drawing.Point(128, 200);
             this.picBackgroundColor.Name = "picBackgroundColor";
             this.picBackgroundColor.Size = new System.Drawing.Size(25, 25);
             this.picBackgroundColor.TabIndex = 16;
@@ -247,7 +261,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(163, 168);
+            this.button2.Location = new System.Drawing.Point(163, 202);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 15;
@@ -258,7 +272,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(11, 165);
+            this.label8.Location = new System.Drawing.Point(11, 199);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(79, 26);
             this.label8.TabIndex = 14;
@@ -318,7 +332,7 @@
             this.panel4.Controls.Add(this.picSlotOk);
             this.panel4.Controls.Add(this.btnConectar);
             this.panel4.Controls.Add(this.cbxSlotPort);
-            this.panel4.Location = new System.Drawing.Point(12, 425);
+            this.panel4.Location = new System.Drawing.Point(12, 459);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(363, 42);
             this.panel4.TabIndex = 16;
@@ -354,7 +368,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(277, 473);
+            this.button5.Location = new System.Drawing.Point(277, 507);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(98, 24);
             this.button5.TabIndex = 19;
@@ -365,7 +379,7 @@
             // pictureBox6
             // 
             this.pictureBox6.Image = global::CoinMachine.Properties.Resources.coinslotter;
-            this.pictureBox6.Location = new System.Drawing.Point(345, 411);
+            this.pictureBox6.Location = new System.Drawing.Point(345, 445);
             this.pictureBox6.Name = "pictureBox6";
             this.pictureBox6.Size = new System.Drawing.Size(37, 45);
             this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -375,7 +389,7 @@
             // pictureBox3
             // 
             this.pictureBox3.Image = global::CoinMachine.Properties.Resources.iconmonstr_computer_3_240;
-            this.pictureBox3.Location = new System.Drawing.Point(350, 190);
+            this.pictureBox3.Location = new System.Drawing.Point(350, 193);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(32, 34);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -405,7 +419,7 @@
             // btnClose
             // 
             this.btnClose.BackColor = System.Drawing.Color.Transparent;
-            this.btnClose.Location = new System.Drawing.Point(13, 474);
+            this.btnClose.Location = new System.Drawing.Point(13, 508);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(75, 23);
             this.btnClose.TabIndex = 20;
@@ -413,12 +427,64 @@
             this.btnClose.UseVisualStyleBackColor = false;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
+            // lblNotificationTitle
+            // 
+            this.lblNotificationTitle.AutoSize = true;
+            this.lblNotificationTitle.Location = new System.Drawing.Point(53, 86);
+            this.lblNotificationTitle.Name = "lblNotificationTitle";
+            this.lblNotificationTitle.Size = new System.Drawing.Size(62, 26);
+            this.lblNotificationTitle.TabIndex = 13;
+            this.lblNotificationTitle.Text = "Titulo de la \r\nnotificacion";
+            // 
+            // txtNotificationTitle
+            // 
+            this.txtNotificationTitle.Location = new System.Drawing.Point(127, 92);
+            this.txtNotificationTitle.Name = "txtNotificationTitle";
+            this.txtNotificationTitle.Size = new System.Drawing.Size(100, 20);
+            this.txtNotificationTitle.TabIndex = 14;
+            // 
+            // txtBackgroundMessageColor
+            // 
+            this.txtBackgroundMessageColor.Location = new System.Drawing.Point(244, 170);
+            this.txtBackgroundMessageColor.Name = "txtBackgroundMessageColor";
+            this.txtBackgroundMessageColor.Size = new System.Drawing.Size(34, 20);
+            this.txtBackgroundMessageColor.TabIndex = 21;
+            this.txtBackgroundMessageColor.Visible = false;
+            // 
+            // picBackgroundMessageColor
+            // 
+            this.picBackgroundMessageColor.BackColor = System.Drawing.Color.Red;
+            this.picBackgroundMessageColor.Location = new System.Drawing.Point(128, 164);
+            this.picBackgroundMessageColor.Name = "picBackgroundMessageColor";
+            this.picBackgroundMessageColor.Size = new System.Drawing.Size(25, 25);
+            this.picBackgroundMessageColor.TabIndex = 20;
+            this.picBackgroundMessageColor.TabStop = false;
+            // 
+            // btnBackgroundMessageColor
+            // 
+            this.btnBackgroundMessageColor.Location = new System.Drawing.Point(163, 166);
+            this.btnBackgroundMessageColor.Name = "btnBackgroundMessageColor";
+            this.btnBackgroundMessageColor.Size = new System.Drawing.Size(75, 23);
+            this.btnBackgroundMessageColor.TabIndex = 19;
+            this.btnBackgroundMessageColor.Text = "Seleccionar";
+            this.btnBackgroundMessageColor.UseVisualStyleBackColor = true;
+            this.btnBackgroundMessageColor.Click += new System.EventHandler(this.btnBackgroundMessageColor_Click);
+            // 
+            // lblBackgroundMessageColor
+            // 
+            this.lblBackgroundMessageColor.AutoSize = true;
+            this.lblBackgroundMessageColor.Location = new System.Drawing.Point(11, 163);
+            this.lblBackgroundMessageColor.Name = "lblBackgroundMessageColor";
+            this.lblBackgroundMessageColor.Size = new System.Drawing.Size(107, 26);
+            this.lblBackgroundMessageColor.TabIndex = 18;
+            this.lblBackgroundMessageColor.Text = "Seleccionar Color\r\nde Mensaje de fondo";
+            // 
             // Inicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(387, 501);
+            this.ClientSize = new System.Drawing.Size(387, 560);
             this.ControlBox = false;
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.button5);
@@ -452,6 +518,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBackgroundMessageColor)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -491,5 +558,12 @@
         private System.Windows.Forms.NumericUpDown txtNotificationMinute;
         private System.Windows.Forms.PictureBox picSlotOk;
         private System.Windows.Forms.Button btnClose;
+        private System.Windows.Forms.TextBox txtNotificationTitle;
+        private System.Windows.Forms.Label lblNotificationTitle;
+        private System.Windows.Forms.TextBox txtBackgroundMessageColor;
+        private System.Windows.Forms.PictureBox picBackgroundMessageColor;
+        private System.Windows.Forms.Button btnBackgroundMessageColor;
+        private System.Windows.Forms.Label lblBackgroundMessageColor;
+        private System.Windows.Forms.ColorDialog colorDialog2;
     }
 }

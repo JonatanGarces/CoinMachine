@@ -22,7 +22,7 @@ namespace CoinMachine
             }
         }
 
-        public Boolean KeyEnabled { get; set; } = false;
+        public Boolean KeyEnabled { get; set; } = true;
         public Boolean NotificationAppeared { get; set; } = false;
     }
 }

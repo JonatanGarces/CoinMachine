@@ -79,7 +79,7 @@ namespace Library
 
         public void SetTime(int min, int sec = 0) => SetTime(new DateTime(1, 1, 1, 0, min, sec));
 
-        public void SetNotificationTime(int min, int sec = 0) => SetTime(new DateTime(1, 1, 1, 0, min, sec));
+        public void SetNotificationTime(int min, int sec = 0) => SetNotificationTime(new DateTime(1, 1, 1, 0, min, sec));
 
         public void AddTime(DateTime dt)
         {

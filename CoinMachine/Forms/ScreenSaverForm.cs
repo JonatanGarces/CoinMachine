@@ -44,7 +44,7 @@ namespace Forms
             this.Bounds = Bounds;
             Global.Instance.KeyEnabled = false;
             KeyBoardHook keyboard = new KeyBoardHook(true);
-            keyboard.KeyUp += c_ThresholdReached;
+            keyboard.KeyDown += c_ThresholdReached;
         }
 
         private static void c_ThresholdReached(Keys key, bool Shift, bool Ctrl, bool Alt)
@@ -52,6 +52,7 @@ namespace Forms
             Console.WriteLine("Down: " + key);
             if (Shift && Ctrl && Alt && key.ToString().Trim().ToLower() == "q")
             {
+                Console.WriteLine("keyenabled razaaa");
                 Global.Instance.KeyEnabled = true;
             }
         }
@@ -62,6 +63,8 @@ namespace Forms
             // this.BackColor =
 
             this.BackColor = Color.FromArgb(int.Parse(configmanager.ReadSetting("BackgroundColor")));
+            textLabel.ForeColor = Color.FromArgb(int.Parse(configmanager.ReadSetting("BackgroundMessageColor")));
+            textLabel.BackColor = System.Drawing.Color.Transparent;
 
             picBackgroundImage.Image = Image.FromFile(configmanager.ReadSetting("BackgroundImage"));
             textLabel.Text = configmanager.ReadSetting("BackgroundMessage");

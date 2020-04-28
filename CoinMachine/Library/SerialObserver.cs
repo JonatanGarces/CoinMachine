@@ -20,11 +20,13 @@ namespace Library
         private static WqlEventQuery deviceArrivalQuery = new WqlEventQuery("SELECT * FROM Win32_DeviceChangeEvent WHERE EventType = 2");
         private static WqlEventQuery deviceRemovalQuery = new WqlEventQuery("SELECT * FROM Win32_DeviceChangeEvent WHERE EventType = 3");
 
-        string select = "SELECT * FROM Win32_PnPEntity WHERE Name LIKE '%COM%' AND PNPClass = 'Ports'";
-        string scope = "root\\CIMV2";
-        //MSSerial_PortName 
+        private string select = "SELECT * FROM Win32_PnPEntity WHERE Name LIKE '%COM%' AND PNPClass = 'Ports'";
+        private string scope = "root\\CIMV2";
+
+        //MSSerial_PortName
         //Win32_SerialPort
         private ManagementEventWatcher arrival;
+
         private ManagementEventWatcher removal;
         public SerialPort serialport = new SerialPort();
 
@@ -82,7 +84,6 @@ namespace Library
                         string com = "";
                         if (ManObj["DeviceID"] != null && ManObj["DeviceID"].ToString().Contains("COM"))
                         {
-                            
                             com = ManObj["DeviceID"].ToString().Trim();
                         }
                         else
@@ -107,21 +108,19 @@ namespace Library
         public List<Device> GetSerials()
         {
             devices = new List<Device>();
-            ManObjSearch = new ManagementObjectSearcher( select);
+            ManObjSearch = new ManagementObjectSearcher(select);
             ManObjReturn = ManObjSearch.Get();
             foreach (ManagementObject ManObj in ManObjReturn)
             {
                 // if (ManObj["Name"].ToString().Contains("Arduino") && ManObj["Status"].ToString().ToLower().Trim() == "ok")
                 // {
-              
                 string com = "";
                 if (ManObj["DeviceID"] != null && ManObj["DeviceID"].ToString().Contains("COM"))
                 {
-
                     com = ManObj["DeviceID"].ToString().Trim();
                 }
                 else
-                {jj  hjtgfbv     
+                {
                     com = ManObj["Caption"].ToString().Split('(', ')')[1].Trim();
                 }
 
