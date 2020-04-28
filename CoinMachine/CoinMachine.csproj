@@ -52,7 +52,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AsyncTcpClient">
-      <HintPath>..\..\repos\AsyncTcpClient\AsyncTcpClient\bin\Debug\netstandard2.0\AsyncTcpClient.dll</HintPath>
+      <HintPath>..\..\repos\AsyncTcpClient\AsyncTcpClientDemo\bin\Debug\netcoreapp2.1\AsyncTcpClient.dll</HintPath>
+    </Reference>
+    <Reference Include="AsyncTcpClientDemo">
+      <HintPath>..\..\repos\AsyncTcpClient\AsyncTcpClientDemo\bin\Debug\netcoreapp2.1\AsyncTcpClientDemo.dll</HintPath>
     </Reference>
     <Reference Include="ObjectDumping, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ObjectDumper.NET.2.5.20033.1\lib\net45\ObjectDumping.dll</HintPath>
@@ -75,6 +78,7 @@
     <Compile Include="Global.cs" />
     <Compile Include="Library\ConfigManager.cs" />
     <Compile Include="Library\CountDownTimer.cs" />
+    <Compile Include="Library\TCPObserver.cs" />
     <Compile Include="Objects\Device.cs" />
     <Compile Include="Forms\FormTimer.cs">
       <SubType>Form</SubType>
