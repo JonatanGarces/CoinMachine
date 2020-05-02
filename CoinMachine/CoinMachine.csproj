@@ -73,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Global.cs" />
+    <Compile Include="Library\HttpServer.cs" />
     <Compile Include="Library\ConfigManager.cs" />
     <Compile Include="Library\CountDownTimer.cs" />
     <Compile Include="Library\TCPObserver.cs" />

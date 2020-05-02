@@ -13,6 +13,7 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using Library;
 using CoinMachine;
+using CoinMachine.Library;
 
 namespace Forms
 {
