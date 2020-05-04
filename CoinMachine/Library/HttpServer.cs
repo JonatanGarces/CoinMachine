@@ -15,14 +15,15 @@ namespace CoinMachine
         public static int pageViews = 0;
         public static int requestCount = 0;
 
-        public void HttpServer2()
+        public HttpServer()
         {
-            listener = new HttpListener();
-            listener.Prefixes.Add(url);
-            listener.Start();
-            Task listenTask = HandleIncomingConnections();
-            listenTask.GetAwaiter().GetResult();
-            listener.Close();
+            _ = HandleIncomingConnections();
+        }
+
+        public void RunAsync()
+        {
+            // Task listenTask = HandleIncomingConnections();
+            //listenTask.GetAwaiter().GetResult();
         }
 
         public static string pageData =
@@ -39,8 +40,11 @@ namespace CoinMachine
           "</body>" +
           "</html>";
 
-        public static async Task HandleIncomingConnections()
+        public async Task HandleIncomingConnections()
         {
+            listener = new HttpListener();
+            listener.Prefixes.Add(url);
+            listener.Start();
             bool runServer = true;
             // While a user hasn't visited the `shutdown` url, keep on handling requests
             while (runServer)
@@ -76,6 +80,7 @@ namespace CoinMachine
                 await resp.OutputStream.WriteAsync(data, 0, data.Length);
                 resp.Close();
             }
+            listener.Close();
         }
     }
 }

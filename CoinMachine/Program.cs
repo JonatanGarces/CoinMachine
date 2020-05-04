@@ -15,6 +15,8 @@ namespace CoinMachine
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            new HttpServer();
             new Inicio().Show();
             Application.Run();
         }
