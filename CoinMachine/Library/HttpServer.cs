@@ -14,18 +14,15 @@ namespace CoinMachine
         public static string url = "http://+:4200/";
         public static int pageViews = 0;
         public static int requestCount = 0;
+        public Action Override;
 
         public HttpServer()
         {
             _ = HandleIncomingConnections();
         }
 
-        public void RunAsync()
-        {
-            // Task listenTask = HandleIncomingConnections();
-            //listenTask.GetAwaiter().GetResult();
-        }
-
+        // Task listenTask = HandleIncomingConnections();
+        //listenTask.GetAwaiter().GetResult();
         public static string pageData =
           "<!DOCTYPE>" +
           "<html>" +
@@ -64,6 +61,8 @@ namespace CoinMachine
                 // If `shutdown` url requested w/ POST, then shutdown the server after serving the page
                 if ((req.HttpMethod == "POST") && (req.Url.AbsolutePath == "/shutdown"))
                 {
+                    Override?.Invoke();
+
                     Console.WriteLine("Shutdown requested");
                     runServer = false;
                 }

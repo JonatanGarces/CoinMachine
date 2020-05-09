@@ -13,7 +13,6 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using Library;
 using CoinMachine;
-using CoinMachine.Library;
 
 namespace Forms
 {
@@ -42,34 +41,34 @@ namespace Forms
         public ScreenSaverForm(Rectangle Bounds)
         {
             InitializeComponent();
+            //textLabel.Parent = pictureBox1;
+            //// textLabel.BackColor = Color.Transparent;
+            // textLabel.BringToFront();
             this.Bounds = Bounds;
             Global.Instance.KeyEnabled = false;
             KeyBoardHook keyboard = new KeyBoardHook(true);
             keyboard.KeyDown += c_ThresholdReached;
+            this.BackColor = Color.FromArgb(int.Parse(configmanager.ReadSetting("BackgroundColor")));
+            picBackgroundImage.Image = Image.FromFile(configmanager.ReadSetting("BackgroundImage"));
+
+            picBackgroundImage.Controls.Add(pictureBox1);
+            Font font = new Font("Microsoft Sans Serif", 48.0f, FontStyle.Bold);
+            Color col = Color.FromArgb(int.Parse(configmanager.ReadSetting("BackgroundMessageColor")));
+            Image imagen = DrawText(configmanager.ReadSetting("BackgroundMessage"), font, col, Color.Transparent);
+            pictureBox1.Image = imagen;
         }
 
         private static void c_ThresholdReached(Keys key, bool Shift, bool Ctrl, bool Alt)
         {
-            Console.WriteLine("Down: " + key);
-            if (Shift && Ctrl && Alt && key.ToString().Trim().ToLower() == "q")
-            {
-                Console.WriteLine("keyenabled razaaa");
-                Global.Instance.KeyEnabled = true;
-            }
         }
 
         private void ScreenSaverForm_Load(object sender, EventArgs e)
         {
-            //picBackgroundImage.Image.
-            // this.BackColor =
-
-            this.BackColor = Color.FromArgb(int.Parse(configmanager.ReadSetting("BackgroundColor")));
-            textLabel.ForeColor = Color.FromArgb(int.Parse(configmanager.ReadSetting("BackgroundMessageColor")));
-            textLabel.BackColor = System.Drawing.Color.Transparent;
-
-            picBackgroundImage.Image = Image.FromFile(configmanager.ReadSetting("BackgroundImage"));
-            textLabel.Text = configmanager.ReadSetting("BackgroundMessage");
             Cursor.Hide();
+            /// textLabel.ForeColor = );
+
+            //textLabel.BackColor = System.Drawing.Color.Transparent;
+            //textLabel.Text = configmanager.ReadSetting("BackgroundMessage");
             TopMost = true;
             moveTimer.Interval = 1000;
             moveTimer.Tick += new EventHandler(moveTimer_Tick);
@@ -78,14 +77,48 @@ namespace Forms
 
         private void moveTimer_Tick(object sender, System.EventArgs e)
         {
-            textLabel.Left = rand.Next(Math.Max(1, Bounds.Width - textLabel.Width));
-            textLabel.Top = rand.Next(Math.Max(1, Bounds.Height - textLabel.Height));
+            pictureBox1.Left = rand.Next(Math.Max(1, Bounds.Width - pictureBox1.Width));
+            pictureBox1.Top = rand.Next(Math.Max(1, Bounds.Height - pictureBox1.Height));
         }
 
         private void ScreenSaverForm_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!previewMode)
                 Application.Exit();
+        }
+
+        private Image DrawText(String text, Font font, Color textColor, Color backColor)
+        {
+            //first, create a dummy bitmap just to get a graphics object
+            Image img = new Bitmap(1, 1);
+            Graphics drawing = Graphics.FromImage(img);
+
+            //measure the string to see how big the image needs to be
+            SizeF textSize = drawing.MeasureString(text, font);
+
+            //free up the dummy image and old graphics object
+            img.Dispose();
+            drawing.Dispose();
+
+            //create a new image of the right size
+            img = new Bitmap((int)textSize.Width, (int)textSize.Height);
+
+            drawing = Graphics.FromImage(img);
+
+            //paint the background
+            drawing.Clear(backColor);
+
+            //create a brush for the text
+            Brush textBrush = new SolidBrush(textColor);
+
+            drawing.DrawString(text, font, textBrush, 0, 0);
+
+            drawing.Save();
+
+            textBrush.Dispose();
+            drawing.Dispose();
+
+            return img;
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using CoinMachine.Library;
-using Forms;
+﻿using Forms;
 using Library;
 using Objects;
 using System;
@@ -74,11 +73,11 @@ namespace Forms
                 //  cbxSlotPort.Refresh();
             };
 
-            TCPObserver tcp = new TCPObserver();
-            tcp.TcpOverride += () =>
-            {
-                Console.WriteLine("lo lograste puta ");
-            };
+            // TCPObserver tcp = new TCPObserver();
+            // tcp.TcpOverride += () =>
+            // {
+            //     Console.WriteLine("lo lograste puta ");
+            //  };
         }
 
         private void btnConectar_Click(object sender, EventArgs e)

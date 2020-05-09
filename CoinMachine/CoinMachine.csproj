@@ -76,7 +76,6 @@
     <Compile Include="Library\HttpServer.cs" />
     <Compile Include="Library\ConfigManager.cs" />
     <Compile Include="Library\CountDownTimer.cs" />
-    <Compile Include="Library\TCPObserver.cs" />
     <Compile Include="Objects\Device.cs" />
     <Compile Include="Forms\FormTimer.cs">
       <SubType>Form</SubType>
