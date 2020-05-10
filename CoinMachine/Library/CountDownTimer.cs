@@ -18,36 +18,25 @@ namespace Library
         }
 
         private Timer timer = new Timer();
-
         private DateTime _maxTime = new DateTime(1, 1, 1, 0, 0, 0);
         private DateTime _minTime = new DateTime(1, 1, 1, 0, 0, 0);
-
         public DateTime TimeLeft { get; set; }
-
         public DateTime NotificationTime { get; set; }
-
         private long TimeLeftMs => TimeLeft.Ticks / TimeSpan.TicksPerMillisecond;
-
         public long TimetoNotificate => NotificationTime.Ticks / TimeSpan.TicksPerMillisecond;
-        public string TimeLeftMinStr => TimeLeft.ToString("mm");
         public string TimeLeftStr => TimeLeft.ToString("mm:ss");
-
-        public string TimeLeftMsStr => TimeLeft.ToString("mm:ss.fff");
 
         private void TimerTick(object sender, EventArgs e)
         {
             if (TimeLeftMs > timer.Interval)
             {
                 if (TimeLeftMs < TimetoNotificate && Global.Instance.NotificationAppeared == false) { Global.Instance.NotificationAppeared = true; Notification?.Invoke(); }
-
                 TimeLeft = TimeLeft.AddMilliseconds(-timer.Interval);
                 TimeChanged?.Invoke();
             }
             else
             {
-                // Stop();
                 Global.Instance.NotificationAppeared = false;
-
                 TimeLeft = _minTime;
                 TimeChanged?.Invoke();
                 CountDownFinished?.Invoke();

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Library;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,12 @@ namespace CoinMachine.Library
         private float money;
         public Action Spent;
         public Action Earned;
+        private CountDownTimer cdt;
+
+        public Money(CountDownTimer cdt)
+        {
+            this.cdt = cdt;
+        }
 
         public float Wallet
         {
