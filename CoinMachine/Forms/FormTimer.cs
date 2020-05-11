@@ -58,30 +58,12 @@ namespace Forms
             {
                 this.timer.AddTime(1, 0);
             }
-        }
-
-        private void Form1_Move(object sender, EventArgs e)
-        {
-            if (this.WindowState == FormWindowState.Minimized)
-            {
-                this.Hide();
-                notifyIcon1.ShowBalloonTip(1000, "Important notice", "Something Important has come up.Click this to know more", ToolTipIcon.Info);
-            }
+            lblcountdown.Cursor = Cursors.SizeAll;
         }
 
         private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             this.Show();
-        }
-
-        private void showToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.Show();
-        }
-
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
         }
 
         public const int WM_NCLBUTTONDOWN = 0xA1;
@@ -95,7 +77,6 @@ namespace Forms
                 SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
             }
         }
-
         private void FormTimer_Load(object sender, EventArgs e)
         {
             so.DataReceived += ProcessData;
