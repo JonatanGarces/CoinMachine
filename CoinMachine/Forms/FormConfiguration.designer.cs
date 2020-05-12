@@ -33,6 +33,8 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.txtCoinMinute = new System.Windows.Forms.NumericUpDown();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.txtNotificationTitle = new System.Windows.Forms.TextBox();
+            this.lblNotificationTitle = new System.Windows.Forms.Label();
             this.txtNotificationMinute = new System.Windows.Forms.NumericUpDown();
             this.txtNotificationMessage = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -40,6 +42,10 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.txtBackgroundMessageColor = new System.Windows.Forms.TextBox();
+            this.picBackgroundMessageColor = new System.Windows.Forms.PictureBox();
+            this.btnBackgroundMessageColor = new System.Windows.Forms.Button();
+            this.lblBackgroundMessageColor = new System.Windows.Forms.Label();
             this.txtBackgroundColor = new System.Windows.Forms.TextBox();
             this.picBackgroundColor = new System.Windows.Forms.PictureBox();
             this.button2 = new System.Windows.Forms.Button();
@@ -61,18 +67,13 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnClose = new System.Windows.Forms.Button();
-            this.lblNotificationTitle = new System.Windows.Forms.Label();
-            this.txtNotificationTitle = new System.Windows.Forms.TextBox();
-            this.txtBackgroundMessageColor = new System.Windows.Forms.TextBox();
-            this.picBackgroundMessageColor = new System.Windows.Forms.PictureBox();
-            this.btnBackgroundMessageColor = new System.Windows.Forms.Button();
-            this.lblBackgroundMessageColor = new System.Windows.Forms.Label();
             this.colorDialog2 = new System.Windows.Forms.ColorDialog();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtCoinMinute)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtNotificationMinute)).BeginInit();
             this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picBackgroundMessageColor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBackgroundColor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBackgroundImage)).BeginInit();
             this.panel4.SuspendLayout();
@@ -81,7 +82,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picBackgroundMessageColor)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -149,6 +149,22 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(363, 119);
             this.panel2.TabIndex = 11;
+            // 
+            // txtNotificationTitle
+            // 
+            this.txtNotificationTitle.Location = new System.Drawing.Point(127, 92);
+            this.txtNotificationTitle.Name = "txtNotificationTitle";
+            this.txtNotificationTitle.Size = new System.Drawing.Size(100, 20);
+            this.txtNotificationTitle.TabIndex = 14;
+            // 
+            // lblNotificationTitle
+            // 
+            this.lblNotificationTitle.AutoSize = true;
+            this.lblNotificationTitle.Location = new System.Drawing.Point(53, 86);
+            this.lblNotificationTitle.Name = "lblNotificationTitle";
+            this.lblNotificationTitle.Size = new System.Drawing.Size(62, 26);
+            this.lblNotificationTitle.TabIndex = 13;
+            this.lblNotificationTitle.Text = "Titulo de la \r\nnotificacion";
             // 
             // txtNotificationMinute
             // 
@@ -241,6 +257,42 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(363, 234);
             this.panel3.TabIndex = 13;
+            // 
+            // txtBackgroundMessageColor
+            // 
+            this.txtBackgroundMessageColor.Location = new System.Drawing.Point(244, 170);
+            this.txtBackgroundMessageColor.Name = "txtBackgroundMessageColor";
+            this.txtBackgroundMessageColor.Size = new System.Drawing.Size(34, 20);
+            this.txtBackgroundMessageColor.TabIndex = 21;
+            this.txtBackgroundMessageColor.Visible = false;
+            // 
+            // picBackgroundMessageColor
+            // 
+            this.picBackgroundMessageColor.BackColor = System.Drawing.Color.Red;
+            this.picBackgroundMessageColor.Location = new System.Drawing.Point(128, 164);
+            this.picBackgroundMessageColor.Name = "picBackgroundMessageColor";
+            this.picBackgroundMessageColor.Size = new System.Drawing.Size(25, 25);
+            this.picBackgroundMessageColor.TabIndex = 20;
+            this.picBackgroundMessageColor.TabStop = false;
+            // 
+            // btnBackgroundMessageColor
+            // 
+            this.btnBackgroundMessageColor.Location = new System.Drawing.Point(163, 166);
+            this.btnBackgroundMessageColor.Name = "btnBackgroundMessageColor";
+            this.btnBackgroundMessageColor.Size = new System.Drawing.Size(75, 23);
+            this.btnBackgroundMessageColor.TabIndex = 19;
+            this.btnBackgroundMessageColor.Text = "Seleccionar";
+            this.btnBackgroundMessageColor.UseVisualStyleBackColor = true;
+            this.btnBackgroundMessageColor.Click += new System.EventHandler(this.btnBackgroundMessageColor_Click);
+            // 
+            // lblBackgroundMessageColor
+            // 
+            this.lblBackgroundMessageColor.AutoSize = true;
+            this.lblBackgroundMessageColor.Location = new System.Drawing.Point(11, 163);
+            this.lblBackgroundMessageColor.Name = "lblBackgroundMessageColor";
+            this.lblBackgroundMessageColor.Size = new System.Drawing.Size(107, 26);
+            this.lblBackgroundMessageColor.TabIndex = 18;
+            this.lblBackgroundMessageColor.Text = "Seleccionar Color\r\nde Mensaje de fondo";
             // 
             // txtBackgroundColor
             // 
@@ -427,64 +479,12 @@
             this.btnClose.UseVisualStyleBackColor = false;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
-            // lblNotificationTitle
-            // 
-            this.lblNotificationTitle.AutoSize = true;
-            this.lblNotificationTitle.Location = new System.Drawing.Point(53, 86);
-            this.lblNotificationTitle.Name = "lblNotificationTitle";
-            this.lblNotificationTitle.Size = new System.Drawing.Size(62, 26);
-            this.lblNotificationTitle.TabIndex = 13;
-            this.lblNotificationTitle.Text = "Titulo de la \r\nnotificacion";
-            // 
-            // txtNotificationTitle
-            // 
-            this.txtNotificationTitle.Location = new System.Drawing.Point(127, 92);
-            this.txtNotificationTitle.Name = "txtNotificationTitle";
-            this.txtNotificationTitle.Size = new System.Drawing.Size(100, 20);
-            this.txtNotificationTitle.TabIndex = 14;
-            // 
-            // txtBackgroundMessageColor
-            // 
-            this.txtBackgroundMessageColor.Location = new System.Drawing.Point(244, 170);
-            this.txtBackgroundMessageColor.Name = "txtBackgroundMessageColor";
-            this.txtBackgroundMessageColor.Size = new System.Drawing.Size(34, 20);
-            this.txtBackgroundMessageColor.TabIndex = 21;
-            this.txtBackgroundMessageColor.Visible = false;
-            // 
-            // picBackgroundMessageColor
-            // 
-            this.picBackgroundMessageColor.BackColor = System.Drawing.Color.Red;
-            this.picBackgroundMessageColor.Location = new System.Drawing.Point(128, 164);
-            this.picBackgroundMessageColor.Name = "picBackgroundMessageColor";
-            this.picBackgroundMessageColor.Size = new System.Drawing.Size(25, 25);
-            this.picBackgroundMessageColor.TabIndex = 20;
-            this.picBackgroundMessageColor.TabStop = false;
-            // 
-            // btnBackgroundMessageColor
-            // 
-            this.btnBackgroundMessageColor.Location = new System.Drawing.Point(163, 166);
-            this.btnBackgroundMessageColor.Name = "btnBackgroundMessageColor";
-            this.btnBackgroundMessageColor.Size = new System.Drawing.Size(75, 23);
-            this.btnBackgroundMessageColor.TabIndex = 19;
-            this.btnBackgroundMessageColor.Text = "Seleccionar";
-            this.btnBackgroundMessageColor.UseVisualStyleBackColor = true;
-            this.btnBackgroundMessageColor.Click += new System.EventHandler(this.btnBackgroundMessageColor_Click);
-            // 
-            // lblBackgroundMessageColor
-            // 
-            this.lblBackgroundMessageColor.AutoSize = true;
-            this.lblBackgroundMessageColor.Location = new System.Drawing.Point(11, 163);
-            this.lblBackgroundMessageColor.Name = "lblBackgroundMessageColor";
-            this.lblBackgroundMessageColor.Size = new System.Drawing.Size(107, 26);
-            this.lblBackgroundMessageColor.TabIndex = 18;
-            this.lblBackgroundMessageColor.Text = "Seleccionar Color\r\nde Mensaje de fondo";
-            // 
             // Inicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(387, 560);
+            this.ClientSize = new System.Drawing.Size(387, 538);
             this.ControlBox = false;
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.button5);
@@ -510,6 +510,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtNotificationMinute)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picBackgroundMessageColor)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBackgroundColor)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBackgroundImage)).EndInit();
             this.panel4.ResumeLayout(false);
@@ -518,7 +519,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picBackgroundMessageColor)).EndInit();
             this.ResumeLayout(false);
 
         }

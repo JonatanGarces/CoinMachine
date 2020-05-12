@@ -7,34 +7,28 @@ using System.Threading.Tasks;
 
 namespace CoinMachine.Library
 {
-    internal class Money
+    public class Wallet
     {
-        private float money;
-        public Action Spent;
+        public Action Spend;
         public Action Earned;
         private CountDownTimer cdt;
 
-        public Money(CountDownTimer cdt)
+        public Wallet()
         {
-            this.cdt = cdt;
         }
 
-        public float Wallet
-        {
-            get { return money; }
-            set { money = value; }
-        }
+        public float Debit { get; set; }
 
         public void EarnMoney(float value)
         {
-            money = money + value;
+            Debit = Debit + value;
             Earned?.Invoke();
         }
 
         public void SpendMoney(float value)
         {
-            money = money + value;
-            Spent.Invoke();
+            Debit = Debit + value;
+            Spend.Invoke();
         }
     }
 }

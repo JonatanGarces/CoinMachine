@@ -1,4 +1,5 @@
 ﻿using CoinMachine;
+using CoinMachine.Library;
 using Library;
 using System;
 using System.Collections.Generic;
@@ -26,10 +27,10 @@ namespace Forms
 
         public CountDownTimer timer = new CountDownTimer();
         private List<ScreenSaverForm> screens = new List<ScreenSaverForm>();
-        private SerialObserver so;
+        private Serial so;
         private ConfigManager configmanager = new ConfigManager();
 
-        public FormTimer(SerialObserver so)
+        public FormTimer(Serial so)
         {
             InitializeComponent();
             int notificationminute = Int32.Parse(configmanager.ReadSetting("NotificationMinute"));
@@ -44,7 +45,7 @@ namespace Forms
                 ShowScreenSaver();
             };
             timer.Notification += () =>
-            {//"Precaucion inserte moneda tu tiempo casi se ha agotado, tu sesión se cerrara y podrias perder tu información que estas trabajando
+            {
                 this.notifyIcon1.ShowBalloonTip(100000, configmanager.ReadSetting("NotificationTitle"), configmanager.ReadSetting("NotificationMessage"), ToolTipIcon.Warning);
             };
             timer.Start();
@@ -77,6 +78,7 @@ namespace Forms
                 SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
             }
         }
+
         private void FormTimer_Load(object sender, EventArgs e)
         {
             so.DataReceived += ProcessData;

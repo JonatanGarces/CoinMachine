@@ -15,7 +15,6 @@ namespace Library
         public Action Changed;
         private string[] serialPorts;
         private List<string> array_devices = new List<string>();
-        public Action<byte[]> DataReceived;
         public List<Device> devices = new List<Device>();
         private static WqlEventQuery deviceArrivalQuery = new WqlEventQuery("SELECT * FROM Win32_DeviceChangeEvent WHERE EventType = 2");
         private static WqlEventQuery deviceRemovalQuery = new WqlEventQuery("SELECT * FROM Win32_DeviceChangeEvent WHERE EventType = 3");
@@ -28,8 +27,6 @@ namespace Library
         private ManagementEventWatcher arrival;
 
         private ManagementEventWatcher removal;
-        public SerialPort serialport = new SerialPort();
-
         private ManagementObjectSearcher ManObjSearch;
         private ManagementObjectCollection ManObjReturn;
 
@@ -128,38 +125,6 @@ namespace Library
                 //  }
             }
             return devices;
-        }
-
-        public SerialPort Connect(string port)
-        {
-            if (!serialport.IsOpen)
-            {
-                serialport.PortName = port;
-                serialport.BaudRate = 115200;
-                serialport.DataReceived += mySerialPort_DataReceived;
-                serialport.Open();
-            }
-            return serialport;
-        }
-
-        public void mySerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
-        {
-            try
-            {
-                //no. of data at the port
-                int ByteToRead = serialport.BytesToRead;
-                //create array to store buffer data
-                byte[] inputData = new byte[ByteToRead];
-                //read the data and store
-                serialport.Read(inputData, 0, ByteToRead);
-                var copy = DataReceived;
-                if (copy != null) copy(inputData);
-            }
-            catch (SystemException ex)
-            {
-                Console.WriteLine(ex.Message);
-                //MessageBox.Show(, "Data Received Event");
-            }
         }
 
         public string[] GetAvailableSerialPorts()

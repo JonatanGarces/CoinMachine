@@ -73,10 +73,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Global.cs" />
+    <Compile Include="Library\CoinSlot.cs" />
     <Compile Include="Library\HttpServer.cs" />
     <Compile Include="Library\ConfigManager.cs" />
     <Compile Include="Library\CountDownTimer.cs" />
-    <Compile Include="Library\Money.cs" />
+    <Compile Include="Library\Serial.cs" />
+    <Compile Include="Library\Wallet.cs" />
     <Compile Include="Objects\Device.cs" />
     <Compile Include="Forms\FormTimer.cs">
       <SubType>Form</SubType>

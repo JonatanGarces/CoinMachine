@@ -1,4 +1,5 @@
-﻿using Forms;
+﻿using CoinMachine.Library;
+using Forms;
 using Library;
 using Objects;
 using System;
@@ -13,7 +14,8 @@ namespace Forms
     public partial class Inicio : Form
     {
         private ConfigManager configmanager = new ConfigManager();
-        private SerialObserver so = new SerialObserver();
+        private Serial so = new Serial();
+        private SerialObserver SerialObserver = new SerialObserver();
 
         public Inicio()
         {
@@ -24,16 +26,9 @@ namespace Forms
             txtBackgroundImage.Text = configmanager.ReadSetting("BackgroundImage");
             txtBackgroundMessage.Text = configmanager.ReadSetting("BackgroundMessage");
             txtBackgroundColor.Text = configmanager.ReadSetting("BackgroundColor");
-
             txtBackgroundMessageColor.Text = configmanager.ReadSetting("BackgroundMessageColor");
-
             txtNotificationTitle.Text = configmanager.ReadSetting("NotificationTitle");
-
             if (File.Exists(configmanager.ReadSetting("BackgroundImage"))) { btnBackgroundImage.Text = "Cambiar"; } else { btnBackgroundImage.Text = "Seleccionar"; }
-
-            //List<Device> devices = new List<Device>();
-            // devices.Add(new Device(configmanager.ReadSetting("SlotName"), configmanager.ReadSetting("SlotPort")));
-
             try
             {
                 picBackgroundColor.BackColor = Color.FromArgb(int.Parse(configmanager.ReadSetting("BackgroundColor")));
@@ -53,31 +48,23 @@ namespace Forms
             catch (ArgumentException) { }
             catch (FileNotFoundException) { }
 
-            cbxSlotPort.DataSource = so.GetSerials();
+            cbxSlotPort.DataSource = SerialObserver.GetSerials();
             cbxSlotPort.DisplayMember = "Name";
             cbxSlotPort.ValueMember = "Port";
             cbxSlotPort.DropDownStyle = ComboBoxStyle.DropDownList;
 
-            so.Changed += () =>
+            SerialObserver.Changed += () =>
             {
-                // after we've done all the processing,
                 this.Invoke(new MethodInvoker(delegate
                 {
-                    // load the control with the appropriate data
-                    cbxSlotPort.DataSource = so.GetSerials();
+                    cbxSlotPort.DataSource = SerialObserver.GetSerials();
                     cbxSlotPort.DisplayMember = "Name";
                     cbxSlotPort.ValueMember = "Port";
                     cbxSlotPort.DropDownStyle = ComboBoxStyle.DropDownList;
                 }));
-
-                //  cbxSlotPort.Refresh();
+ 
             };
 
-            // TCPObserver tcp = new TCPObserver();
-            // tcp.TcpOverride += () =>
-            // {
-            //     Console.WriteLine("lo lograste puta ");
-            //  };
         }
 
         private void btnConectar_Click(object sender, EventArgs e)
@@ -95,7 +82,7 @@ namespace Forms
 
         private void btnDetectar_Click(object sender, EventArgs e)
         {
-            cbxSlotPort.DataSource = so.GetSerials();
+            cbxSlotPort.DataSource = SerialObserver.GetSerials();
             cbxSlotPort.DisplayMember = "Name";
             cbxSlotPort.ValueMember = "Port";
             cbxSlotPort.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -135,7 +122,6 @@ namespace Forms
             if (txtNotificationMinute.Text.Trim().Equals("")) { MessageBox.Show("Falta de llenar la segunda seccion"); return; }
             if (txtNotificationMessage.Text.Trim().Equals("")) { MessageBox.Show("Falta de llenar la segunda seccion"); return; }
             if (txtNotificationTitle.Text.Trim().Equals("")) { MessageBox.Show("Falta de llenar la segunda seccion"); return; }
-
             if (txtBackgroundImage.Text.Trim().Equals("")) { MessageBox.Show("Falta de llenar la tercera seccion"); return; }
             if (txtBackgroundMessage.Text.Trim().Equals("")) { MessageBox.Show("Falta de llenar la tercera seccion"); return; }
             if (txtBackgroundColor.Text.Trim().Equals("")) { MessageBox.Show("Falta de llenar la tercera seccion"); return; }
@@ -148,13 +134,10 @@ namespace Forms
             configmanager.AddUpdateAppSettings("NotificationMinute", txtNotificationMinute.Text);
             configmanager.AddUpdateAppSettings("NotificationMessage", txtNotificationMessage.Text);
             configmanager.AddUpdateAppSettings("NotificationTitle", txtNotificationTitle.Text);
-
             configmanager.AddUpdateAppSettings("BackgroundImage", txtBackgroundImage.Text);
             configmanager.AddUpdateAppSettings("BackgroundMessage", txtBackgroundMessage.Text);
             configmanager.AddUpdateAppSettings("BackgroundColor", txtBackgroundColor.Text);
-
             configmanager.AddUpdateAppSettings("BackgroundMessageColor", txtBackgroundMessageColor.Text);
-
             configmanager.AddUpdateAppSettings("SlotPort", ((Device)cbxSlotPort.SelectedItem).Port);
             configmanager.AddUpdateAppSettings("SlotPortName", ((Device)cbxSlotPort.SelectedItem).Name);
 
