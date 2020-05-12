@@ -72,8 +72,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\FormCountDownTimer1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormCountDownTimer1.designer.cs">
+      <DependentUpon>FormCountDownTimer1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Global.cs" />
     <Compile Include="Library\CoinSlot.cs" />
+    <Compile Include="Library\Conversion.cs" />
     <Compile Include="Library\HttpServer.cs" />
     <Compile Include="Library\ConfigManager.cs" />
     <Compile Include="Library\CountDownTimer.cs" />
@@ -102,6 +109,9 @@
       <DependentUpon>ScreenSaverForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Library\SerialObserver.cs" />
+    <EmbeddedResource Include="Forms\FormCountDownTimer1.resx">
+      <DependentUpon>FormCountDownTimer1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormTimer.resx">
       <DependentUpon>FormTimer.cs</DependentUpon>
     </EmbeddedResource>

@@ -9,6 +9,8 @@ namespace Library
         public Action TimeChanged;
         public Action CountDownFinished;
         public Action Notification;
+        public Action Started;
+
         public bool IsRunnign => timer.Enabled;
 
         public int StepMs
@@ -58,7 +60,7 @@ namespace Library
         public void SetTime(DateTime dt)
         {
             TimeLeft = _maxTime = dt;
-            //   TimeChanged?.Invoke();
+               TimeChanged?.Invoke();
         }
 
         public void SetNotificationTime(DateTime dt)
@@ -72,8 +74,16 @@ namespace Library
 
         public void AddTime(DateTime dt)
         {
-            TimeLeft = _maxTime = TimeLeft.AddMinutes(dt.Minute);
-            //  TimeChanged?.Invoke();
+            if (this.IsRunnign ==false) {
+                TimeLeft = _maxTime = dt;
+                Started?.Invoke();
+            }
+            else {
+
+                TimeLeft = _maxTime = TimeLeft.AddMinutes(dt.Minute);
+            };
+              TimeChanged?.Invoke();
+           
         }
 
         public void AddTime(int min, int sec = 0) => AddTime(new DateTime(1, 1, 1, 0, min, sec));

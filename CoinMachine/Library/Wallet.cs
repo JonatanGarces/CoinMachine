@@ -9,8 +9,8 @@ namespace CoinMachine.Library
 {
     public class Wallet
     {
-        public Action Spend;
-        public Action Earned;
+        public Action<float> Spend;
+        public Action<float> Earned;
         private CountDownTimer cdt;
 
         public Wallet()
@@ -22,13 +22,13 @@ namespace CoinMachine.Library
         public void EarnMoney(float value)
         {
             Debit = Debit + value;
-            Earned?.Invoke();
+            Earned(Debit);
         }
 
         public void SpendMoney(float value)
         {
-            Debit = Debit + value;
-            Spend.Invoke();
+            Debit = Debit - value;
+            Spend(Debit);
         }
     }
 }

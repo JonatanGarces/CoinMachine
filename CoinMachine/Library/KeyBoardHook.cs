@@ -62,9 +62,10 @@ namespace Library
         private CallbackDelegate TheHookCB = null;
 
         //Start hook
-        public KeyBoardHook(bool Global)
+
+
+            public void Start()
         {
-            this.Global = Global;
             TheHookCB = new CallbackDelegate(KeybHookProc);
             if (Global)
             {
@@ -78,6 +79,11 @@ namespace Library
                     0, //0 for local hook. or hwnd to user32 for global
                     GetCurrentThreadId()); //0 for global hook. or thread for the hook
             }
+        }
+        public KeyBoardHook(bool Global)
+        {
+            this.Global = Global;
+            
         }
 
         private bool IsFinalized = false;
@@ -233,7 +239,7 @@ namespace Library
             }
         }
 
-        private void EnableTaskManager()
+        public void EnableTaskManager()
         {
             RegistryKey regkey = default;
             string keyValueInt = "0";

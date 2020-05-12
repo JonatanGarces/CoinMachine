@@ -13,6 +13,7 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using Library;
 using CoinMachine;
+using System.Collections.Generic;
 
 namespace Forms
 {
@@ -120,5 +121,7 @@ namespace Forms
 
             return img;
         }
+
+        
     }
 }
