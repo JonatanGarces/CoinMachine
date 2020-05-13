@@ -36,7 +36,7 @@ namespace Library
             {
                 var appSettings = ConfigurationManager.AppSettings;
                 result = appSettings[key] ?? "";
-                Console.WriteLine(result);
+                //Console.WriteLine(result);
             }
             catch (ConfigurationErrorsException)
             {

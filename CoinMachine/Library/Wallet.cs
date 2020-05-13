@@ -17,7 +17,8 @@ namespace CoinMachine.Library
         {
         }
 
-        public float Debit { get; set; }
+        public float Debit { get; set; } = 0;
+
 
         public void EarnMoney(float value)
         {

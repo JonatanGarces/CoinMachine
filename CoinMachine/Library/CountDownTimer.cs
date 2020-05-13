@@ -28,9 +28,12 @@ namespace Library
         private long TimeLeftMs => TimeLeft.Ticks / TimeSpan.TicksPerMillisecond;
         public long TimetoNotificate => NotificationTime.Ticks / TimeSpan.TicksPerMillisecond;
         public string TimeLeftStr => TimeLeft.ToString("mm:ss");
+        public double MinutesLeft => new TimeSpan(TimeLeft.Ticks).TotalMinutes;
+
 
         private void TimerTick(object sender, EventArgs e)
         {
+
             TimeChanged?.Invoke();
 
             if (TimeLeftMs > timer.Interval)

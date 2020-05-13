@@ -10,17 +10,26 @@ namespace CoinMachine.Library
 {
     class Conversion
     {
-        ConfigManager configmanager =new ConfigManager();
-        float money = 0;
+        ConfigManager configmanager = new ConfigManager();
+        
         int seconds = 0;
         int minutes = 0;
 
-        public int getSeconds(float money)
+        public int getMinutes(float money)
         {
+           
             //1 peso es igual a _____ minuto
-            money = money * float.Parse(configmanager.ReadSetting("CoinMinute"), CultureInfo.InvariantCulture.NumberFormat)*60;
-            int seconds = (int)Math.Ceiling(money);
-            return seconds;
+            money = money * float.Parse(configmanager.ReadSetting("CoinMinute"), CultureInfo.InvariantCulture.NumberFormat);
+            int minutes = (int)Math.Ceiling(money);
+            return minutes;
+        }
+        public float getMoney( double minutes)
+        {
+
+            float   money = Convert.ToSingle(minutes / Convert.ToDouble(configmanager.ReadSetting("CoinMinute")));
+            
+
+            return money;
         }
 
     }

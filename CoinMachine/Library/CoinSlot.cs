@@ -27,40 +27,51 @@ namespace CoinMachine.Library
             countdowntimer.Started += Started;
             countdowntimer.TimeChanged += TimeChanged;
             countdowntimer.CountDownFinished += CountDownFinished;
+           // int notificationminute = Int32.Parse(configmanager.ReadSetting("NotificationMinute"));
+            //countdowntimer.SetNotificationTime(1, 0);
+           // countdowntimer.Notification += Notification;
+            countdowntimer.Start();
         }
 
         private void DataReceived(byte[] serial)
         {
             //this.Invoke((System.Windows.Forms.MethodInvoker)delegate () { HideScreenSaver(); });
+            string utfString = Encoding.UTF8.GetString(serial, 0, serial.Length);
             wallet.EarnMoney(float.Parse(Encoding.UTF8.GetString(serial, 0, serial.Length).Trim(), CultureInfo.InvariantCulture.NumberFormat));
         }
 
         private void Earned(float debit)
         {
-            countdowntimer.AddTime(conversion.getSeconds(debit));
+            Console.WriteLine(conversion.getMinutes(debit));
+            countdowntimer.AddTime(conversion.getMinutes(debit));
         }
 
         private void Spend(float debit)
         {
-            countdowntimer.SetTime(conversion.getSeconds(debit));
+            countdowntimer.SetTime(conversion.getMinutes(debit));
         }
 
         private void Started()
         {
             HideScreenSaver();
-            keyboard.EnableTaskManager();
+            //keyboard.EnableTaskManager();
             keyboard.Dispose();
-            formcountdowntimer = new FormCountDownTimer1();
+            if (formcountdowntimer == null) { formcountdowntimer = new FormCountDownTimer1(); };
             formcountdowntimer.Show();
         }
 
         private void TimeChanged()
         {
             //time changed it means it decreased decrease
+            if (formcountdowntimer == null) { formcountdowntimer = new FormCountDownTimer1(); };
             formcountdowntimer.lblcountdown.Text = countdowntimer.TimeLeftStr;
 
+            formcountdowntimer.label1.Text = conversion.getMoney(countdowntimer.MinutesLeft).ToString();
             //remove money from wallet
             //doo time to money conversion and update wallet or.. call  substract the conversion of 1 second to the wallet
+
+
+
         }
 
         private void CountDownFinished()

@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormCountDownTimer1));
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.lblcountdown = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // notifyIcon1
@@ -54,13 +55,26 @@
             this.lblcountdown.TabIndex = 2;
             this.lblcountdown.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(11, 55);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(0, 37);
+            this.label1.TabIndex = 3;
+            // 
             // FormCountDownTimer1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.LimeGreen;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(124, 64);
+            this.ClientSize = new System.Drawing.Size(124, 101);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.lblcountdown);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.Transparent;
@@ -84,6 +98,7 @@
         #endregion
         public System.Windows.Forms.Label lblcountdown;
         public System.Windows.Forms.NotifyIcon notifyIcon1;
+        public System.Windows.Forms.Label label1;
     }
 }
 

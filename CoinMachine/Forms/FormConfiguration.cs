@@ -141,8 +141,9 @@ namespace Forms
             configmanager.AddUpdateAppSettings("SlotPort", ((Device)cbxSlotPort.SelectedItem).Port);
             configmanager.AddUpdateAppSettings("SlotPortName", ((Device)cbxSlotPort.SelectedItem).Name);
 
-            FormTimer f1 = new FormTimer(so);
-            f1.Show();
+            // FormTimer f1 = new FormTimer(so);
+            //f1.Show();
+            new CoinSlot(so);
             this.Close();
         }
 
