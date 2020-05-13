@@ -38,7 +38,7 @@ namespace Forms
 
             timer.TimeChanged += () =>
             {
-                lblcountdown.Text = timer.TimeLeftStr;
+                this.Invoke((System.Windows.Forms.MethodInvoker)delegate () { lblcountdown.Text = timer.TimeLeftStr; });
             };
             timer.CountDownFinished += () =>
             {
@@ -51,14 +51,14 @@ namespace Forms
             timer.Start();
             this.so = so;
 
-            if (timer.IsRunnign == false)
-            {
-                this.timer.SetTime(1, 0);
-            }
-            else
-            {
-                this.timer.AddTime(1, 0);
-            }
+            //  if (timer.IsRunnign == false)
+            // {
+            //    this.timer.SetTime(1, 0);
+            //  }
+            // else
+            // {
+            this.timer.AddTime(1, 0);
+            // }
             lblcountdown.Cursor = Cursors.SizeAll;
         }
 

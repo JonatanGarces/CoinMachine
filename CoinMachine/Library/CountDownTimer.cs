@@ -1,6 +1,6 @@
 ﻿using CoinMachine;
 using System;
-using System.Windows.Forms;
+using System.Timers;
 
 namespace Library
 {
@@ -13,9 +13,10 @@ namespace Library
 
         public bool IsRunnign => timer.Enabled;
 
-        public int StepMs
+        public double StepMs
         {
             get => timer.Interval;
+
             set => timer.Interval = value;
         }
 
@@ -30,17 +31,17 @@ namespace Library
 
         private void TimerTick(object sender, EventArgs e)
         {
+            TimeChanged?.Invoke();
+
             if (TimeLeftMs > timer.Interval)
             {
                 if (TimeLeftMs < TimetoNotificate && Global.Instance.NotificationAppeared == false) { Global.Instance.NotificationAppeared = true; Notification?.Invoke(); }
                 TimeLeft = TimeLeft.AddMilliseconds(-timer.Interval);
-                TimeChanged?.Invoke();
             }
             else
             {
                 Global.Instance.NotificationAppeared = false;
                 TimeLeft = _minTime;
-                TimeChanged?.Invoke();
                 CountDownFinished?.Invoke();
             }
         }
@@ -54,13 +55,12 @@ namespace Library
         {
             TimeLeft = _maxTime;
             StepMs = 1000;
-            timer.Tick += new EventHandler(TimerTick);
+            timer.Elapsed += TimerTick;
         }
 
         public void SetTime(DateTime dt)
         {
             TimeLeft = _maxTime = dt;
-               TimeChanged?.Invoke();
         }
 
         public void SetNotificationTime(DateTime dt)
@@ -74,16 +74,15 @@ namespace Library
 
         public void AddTime(DateTime dt)
         {
-            if (this.IsRunnign ==false) {
+            if (this.IsRunnign == false)
+            {
                 TimeLeft = _maxTime = dt;
                 Started?.Invoke();
             }
-            else {
-
+            else
+            {
                 TimeLeft = _maxTime = TimeLeft.AddMinutes(dt.Minute);
             };
-              TimeChanged?.Invoke();
-           
         }
 
         public void AddTime(int min, int sec = 0) => AddTime(new DateTime(1, 1, 1, 0, min, sec));

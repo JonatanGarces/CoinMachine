@@ -15,10 +15,10 @@ namespace CoinMachine.Library
         private Wallet wallet = new Wallet();
         private CountDownTimer countdowntimer = new CountDownTimer();
         private Conversion conversion = new Conversion();
-        KeyBoardHook keyboard = new KeyBoardHook(true);
+        private KeyBoardHook keyboard = new KeyBoardHook(true);
         private List<ScreenSaverForm> screens = new List<ScreenSaverForm>();
-        FormCountDownTimer1 formcountdowntimer ;
-        
+        private FormCountDownTimer1 formcountdowntimer;
+
         public CoinSlot(Serial serial)
         {
             serial.DataReceived += DataReceived;
@@ -32,16 +32,19 @@ namespace CoinMachine.Library
         private void DataReceived(byte[] serial)
         {
             //this.Invoke((System.Windows.Forms.MethodInvoker)delegate () { HideScreenSaver(); });
-                wallet.EarnMoney(float.Parse(Encoding.UTF8.GetString(serial, 0, serial.Length).Trim(), CultureInfo.InvariantCulture.NumberFormat));
+            wallet.EarnMoney(float.Parse(Encoding.UTF8.GetString(serial, 0, serial.Length).Trim(), CultureInfo.InvariantCulture.NumberFormat));
         }
+
         private void Earned(float debit)
         {
             countdowntimer.AddTime(conversion.getSeconds(debit));
         }
+
         private void Spend(float debit)
         {
             countdowntimer.SetTime(conversion.getSeconds(debit));
         }
+
         private void Started()
         {
             HideScreenSaver();
@@ -53,8 +56,11 @@ namespace CoinMachine.Library
 
         private void TimeChanged()
         {
+            //time changed it means it decreased decrease
             formcountdowntimer.lblcountdown.Text = countdowntimer.TimeLeftStr;
 
+            //remove money from wallet
+            //doo time to money conversion and update wallet or.. call  substract the conversion of 1 second to the wallet
         }
 
         private void CountDownFinished()
@@ -62,6 +68,7 @@ namespace CoinMachine.Library
             ShowScreenSaver();
             formcountdowntimer.Close();
         }
+
         public void HideScreenSaver()
         {
             foreach (ScreenSaverForm screensaver in screens)
@@ -70,6 +77,7 @@ namespace CoinMachine.Library
             }
             screens.Clear();
         }
+
         public void ShowScreenSaver()
         {
             if (!(screens.Count > 0))
@@ -82,6 +90,5 @@ namespace CoinMachine.Library
                 }
             }
         }
-
     }
 }
