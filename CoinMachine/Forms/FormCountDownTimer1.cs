@@ -25,12 +25,16 @@ namespace Forms
 
         #endregion Form Dragging API Support
 
-
-
         public FormCountDownTimer1()
         {
-            InitializeComponent();            
+            InitializeComponent();
             lblcountdown.Cursor = Cursors.SizeAll;
+        }
+
+        public void setlblcountdown(String TimeLeftStr)
+        {
+            lblcountdown.Text = TimeLeftStr;
+            //lblcountdown.Refresh();
         }
 
         private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -53,10 +57,6 @@ namespace Forms
         private void FormTimer_Load(object sender, EventArgs e)
         {
         }
-
-    
-
-       
     }
 }
 

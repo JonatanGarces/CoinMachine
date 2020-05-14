@@ -11,6 +11,7 @@ namespace Library
         public Action Notification;
         public Action Started;
 
+        public ConfigManager configmanager = new ConfigManager();
         public bool IsRunnign => timer.Enabled;
 
         public double StepMs
@@ -20,31 +21,27 @@ namespace Library
             set => timer.Interval = value;
         }
 
-        private Timer timer = new Timer();
-        private DateTime _maxTime = new DateTime(1, 1, 1, 0, 0, 0);
-        private DateTime _minTime = new DateTime(1, 1, 1, 0, 0, 0);
-        public DateTime TimeLeft { get; set; }
-        public DateTime NotificationTime { get; set; }
-        private long TimeLeftMs => TimeLeft.Ticks / TimeSpan.TicksPerMillisecond;
-        public long TimetoNotificate => NotificationTime.Ticks / TimeSpan.TicksPerMillisecond;
-        public string TimeLeftStr => TimeLeft.ToString("mm:ss");
-        public double MinutesLeft => new TimeSpan(TimeLeft.Ticks).TotalMinutes;
-
+        public Timer timer = new Timer();
+        public TimeSpan TimeLeft { get; set; }
+        public TimeSpan NotificationTime { get; set; }
+        public string TimeLeftStr => TimeLeft.ToString("mm\\:ss");
+        public double MinutesLeft => TimeLeft.TotalMinutes;
 
         private void TimerTick(object sender, EventArgs e)
         {
+            // TimeLeft.Ticks / TimeSpan.TicksPerMillisecond;
 
-            TimeChanged?.Invoke();
-
-            if (TimeLeftMs > timer.Interval)
+            if ((TimeLeft.Ticks / TimeSpan.TicksPerMillisecond) > timer.Interval)
             {
-                if (TimeLeftMs < TimetoNotificate && Global.Instance.NotificationAppeared == false) { Global.Instance.NotificationAppeared = true; Notification?.Invoke(); }
-                TimeLeft = TimeLeft.AddMilliseconds(-timer.Interval);
+                if (TimeLeft.TotalMilliseconds < NotificationTime.TotalMilliseconds && Global.Instance.NotificationAppeared == false) { Global.Instance.NotificationAppeared = true; Notification?.Invoke(); }
+                TimeLeft = TimeLeft - TimeSpan.FromMilliseconds(timer.Interval);
+                TimeChanged?.Invoke();
             }
             else
             {
                 Global.Instance.NotificationAppeared = false;
-                TimeLeft = _minTime;
+                TimeLeft = TimeSpan.Zero;
+                timer.Stop();
                 CountDownFinished?.Invoke();
             }
         }
@@ -56,60 +53,28 @@ namespace Library
 
         private void Init()
         {
-            TimeLeft = _maxTime;
             StepMs = 1000;
+            SetNotificationTime();
+            timer.AutoReset = true;
             timer.Elapsed += TimerTick;
         }
 
-        public void SetTime(DateTime dt)
+        public void SetTime(float minutes)
         {
-            TimeLeft = _maxTime = dt;
-        }
-
-        public void SetNotificationTime(DateTime dt)
-        {
-            NotificationTime = dt;
-        }
-
-        public void SetTime(int min, int sec = 0) => SetTime(new DateTime(1, 1, 1, 0, min, sec));
-
-        public void SetNotificationTime(int min, int sec = 0) => SetNotificationTime(new DateTime(1, 1, 1, 0, min, sec));
-
-        public void AddTime(DateTime dt)
-        {
-            if (this.IsRunnign == false)
+            TimeLeft = TimeSpan.FromMinutes(minutes);
+            if (timer.Enabled == false)
             {
-                TimeLeft = _maxTime = dt;
+                this.Start();
                 Started?.Invoke();
             }
-            else
-            {
-                TimeLeft = _maxTime = TimeLeft.AddMinutes(dt.Minute);
-            };
         }
 
-        public void AddTime(int min, int sec = 0) => AddTime(new DateTime(1, 1, 1, 0, min, sec));
+        public void SetNotificationTime()
+        {
+            NotificationTime += (TimeSpan.FromMinutes(Int32.Parse(configmanager.ReadSetting("NotificationMinute"))));
+        }
 
         public void Start() => timer.Start();
-
-        public void Pause() => timer.Stop();
-
-        public void Stop()
-        {
-            Pause();
-            Reset();
-        }
-
-        public void Reset()
-        {
-            TimeLeft = _maxTime;
-        }
-
-        public void Restart()
-        {
-            Reset();
-            Start();
-        }
 
         public void Dispose() => timer.Dispose();
     }

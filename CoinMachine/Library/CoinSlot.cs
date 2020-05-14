@@ -17,67 +17,81 @@ namespace CoinMachine.Library
         private Conversion conversion = new Conversion();
         private KeyBoardHook keyboard = new KeyBoardHook(true);
         private List<ScreenSaverForm> screens = new List<ScreenSaverForm>();
-        private FormCountDownTimer1 formcountdowntimer;
+        private FormCountDownTimer1 formcountdowntimer = new FormCountDownTimer1();
+        public ConfigManager configmanager = new ConfigManager();
 
         public CoinSlot(Serial serial)
         {
             serial.DataReceived += DataReceived;
             wallet.Earned += Earned;
-            wallet.Spend += Spend;
+            // wallet.Spend += Spend;
             countdowntimer.Started += Started;
             countdowntimer.TimeChanged += TimeChanged;
             countdowntimer.CountDownFinished += CountDownFinished;
-           // int notificationminute = Int32.Parse(configmanager.ReadSetting("NotificationMinute"));
-            //countdowntimer.SetNotificationTime(1, 0);
-           // countdowntimer.Notification += Notification;
+            countdowntimer.Notification += Notification;
             countdowntimer.Start();
         }
 
         private void DataReceived(byte[] serial)
         {
-            //this.Invoke((System.Windows.Forms.MethodInvoker)delegate () { HideScreenSaver(); });
+            //Console.WriteLine("DataReceived");
             string utfString = Encoding.UTF8.GetString(serial, 0, serial.Length);
             wallet.EarnMoney(float.Parse(Encoding.UTF8.GetString(serial, 0, serial.Length).Trim(), CultureInfo.InvariantCulture.NumberFormat));
         }
 
         private void Earned(float debit)
         {
-            Console.WriteLine(conversion.getMinutes(debit));
-            countdowntimer.AddTime(conversion.getMinutes(debit));
-        }
-
-        private void Spend(float debit)
-        {
+            Console.WriteLine("Earned");
             countdowntimer.SetTime(conversion.getMinutes(debit));
         }
 
+        //private void Spend(float debit)
+        //{
+        //   countdowntimer.SetTime(conversion.getMinutes(debit));
+        // }
+
         private void Started()
         {
-            HideScreenSaver();
+            Console.WriteLine("Started");
+
+            //HideScreenSaver();
             //keyboard.EnableTaskManager();
-            keyboard.Dispose();
-            if (formcountdowntimer == null) { formcountdowntimer = new FormCountDownTimer1(); };
+            //keyboard.Dispose();
+
             formcountdowntimer.Show();
+            formcountdowntimer.Refresh();
         }
 
         private void TimeChanged()
         {
-            //time changed it means it decreased decrease
-            if (formcountdowntimer == null) { formcountdowntimer = new FormCountDownTimer1(); };
-            formcountdowntimer.lblcountdown.Text = countdowntimer.TimeLeftStr;
+            Console.WriteLine("TimeChanged");
 
-            formcountdowntimer.label1.Text = conversion.getMoney(countdowntimer.MinutesLeft).ToString();
-            //remove money from wallet
-            //doo time to money conversion and update wallet or.. call  substract the conversion of 1 second to the wallet
+            wallet.Debit = conversion.getMoney(countdowntimer.MinutesLeft);
+            formcountdowntimer.Invoke((System.Windows.Forms.MethodInvoker)delegate ()
+            {
+                formcountdowntimer.setlblcountdown(countdowntimer.TimeLeftStr);
+            });
 
+            //  ShowFormCountDownTimer().lblcountdown.Refresh();
 
-
+            //Console.WriteLine(conversion.getMoney(countdowntimer.MinutesLeft));
+            // formcountdowntimer.label1.Text = conversion.getMoney(countdowntimer.MinutesLeft).ToString("F1");
+            //formcountdowntimer.label1.Refresh();
         }
 
         private void CountDownFinished()
         {
-            ShowScreenSaver();
-            formcountdowntimer.Close();
+            Console.WriteLine("CountDownFinished");
+            formcountdowntimer.Hide();
+            Console.WriteLine("formcountdowntimer.Hide");
+
+            // ShowScreenSaver();
+        }
+
+        private void Notification()
+        {
+            //Console.WriteLine("Notification");
+            formcountdowntimer.notifyIcon1.ShowBalloonTip(100000, configmanager.ReadSetting("NotificationTitle"), configmanager.ReadSetting("NotificationMessage"), ToolTipIcon.Warning);
         }
 
         public void HideScreenSaver()
@@ -101,5 +115,23 @@ namespace CoinMachine.Library
                 }
             }
         }
+
+        /*
+        public FormCountDownTimer1 ShowFormCountDownTimer()
+        {
+            if (formcountdowntimer == null)
+            {
+                formcountdowntimer = new FormCountDownTimer1();
+                Console.WriteLine("formcountdowntimer.null");
+            }
+            else if (formcountdowntimer.IsDisposed)
+            {
+                formcountdowntimer = new FormCountDownTimer1();
+                Console.WriteLine("formcountdowntimer.IsDisposed");
+            }
+
+            return formcountdowntimer;
+        }
+        */
     }
 }

@@ -34,11 +34,11 @@ namespace Forms
         {
             InitializeComponent();
             int notificationminute = Int32.Parse(configmanager.ReadSetting("NotificationMinute"));
-            this.timer.SetNotificationTime(notificationminute, 0); ;
+            // this.timer.SetNotificationTime(notificationminute, 0); ;
 
             timer.TimeChanged += () =>
             {
-                this.Invoke((System.Windows.Forms.MethodInvoker)delegate () { lblcountdown.Text = timer.TimeLeftStr; });
+                // this.Invoke((System.Windows.Forms.MethodInvoker)delegate () { lblcountdown.Text = timer.TimeLeftStr; });
             };
             timer.CountDownFinished += () =>
             {
@@ -57,7 +57,7 @@ namespace Forms
             //  }
             // else
             // {
-            this.timer.AddTime(1, 0);
+            //this.timer.AddTime(1, 0);
             // }
             lblcountdown.Cursor = Cursors.SizeAll;
         }
@@ -92,11 +92,11 @@ namespace Forms
 
             if (timer.IsRunnign == false)
             {
-                this.timer.SetTime(Int32.Parse(utfString.Trim()), 0);
+                //    this.timer.SetTime(Int32.Parse(utfString.Trim()), 0);
             }
             else
             {
-                this.timer.AddTime(Int32.Parse(utfString.Trim()), 0);
+                //this.timer.AddTime(Int32.Parse(utfString.Trim()), 0);
             }
         }
 

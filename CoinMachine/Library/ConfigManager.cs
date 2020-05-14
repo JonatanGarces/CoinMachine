@@ -3,7 +3,7 @@ using System.Configuration;
 
 namespace Library
 {
-    internal class ConfigManager
+    public class ConfigManager
     {
         public void ReadAllSettings()
         {

@@ -11,14 +11,12 @@ namespace CoinMachine.Library
     {
         public Action<float> Spend;
         public Action<float> Earned;
-        private CountDownTimer cdt;
 
         public Wallet()
         {
         }
 
         public float Debit { get; set; } = 0;
-
 
         public void EarnMoney(float value)
         {
