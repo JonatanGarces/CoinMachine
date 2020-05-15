@@ -6,14 +6,12 @@
  * Feel free to modify this code.
  */
 
+using CoinMachine;
+using Library;
 using System;
 using System.Drawing;
-
-using System.Windows.Forms;
 using System.Runtime.InteropServices;
-using Library;
-using CoinMachine;
-using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace Forms
 {
@@ -121,7 +119,5 @@ namespace Forms
 
             return img;
         }
-
-        
     }
 }

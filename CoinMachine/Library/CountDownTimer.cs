@@ -30,12 +30,12 @@ namespace Library
         private void TimerTick(object sender, EventArgs e)
         {
             // TimeLeft.Ticks / TimeSpan.TicksPerMillisecond;
+            TimeChanged?.Invoke();
 
-            if ((TimeLeft.Ticks / TimeSpan.TicksPerMillisecond) > timer.Interval)
+            if ((TimeLeft.Ticks / TimeSpan.TicksPerMillisecond) >= timer.Interval)
             {
                 if (TimeLeft.TotalMilliseconds < NotificationTime.TotalMilliseconds && Global.Instance.NotificationAppeared == false) { Global.Instance.NotificationAppeared = true; Notification?.Invoke(); }
                 TimeLeft = TimeLeft - TimeSpan.FromMilliseconds(timer.Interval);
-                TimeChanged?.Invoke();
             }
             else
             {

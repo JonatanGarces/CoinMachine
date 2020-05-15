@@ -1,9 +1,7 @@
 ﻿using CoinMachine.Library;
-using Forms;
 using Library;
 using Objects;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.IO.Ports;
@@ -62,9 +60,7 @@ namespace Forms
                     cbxSlotPort.ValueMember = "Port";
                     cbxSlotPort.DropDownStyle = ComboBoxStyle.DropDownList;
                 }));
- 
             };
-
         }
 
         private void btnConectar_Click(object sender, EventArgs e)
@@ -141,9 +137,7 @@ namespace Forms
             configmanager.AddUpdateAppSettings("SlotPort", ((Device)cbxSlotPort.SelectedItem).Port);
             configmanager.AddUpdateAppSettings("SlotPortName", ((Device)cbxSlotPort.SelectedItem).Name);
 
-            // FormTimer f1 = new FormTimer(so);
-            //f1.Show();
-            new CoinSlot(so);
+            new FormCountDownTimer1(so).Show();
             this.Close();
         }
 

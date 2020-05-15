@@ -1,5 +1,4 @@
-﻿using CoinMachine;
-using CoinMachine.Library;
+﻿using CoinMachine.Library;
 using Library;
 using System;
 using System.Collections.Generic;
