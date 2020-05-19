@@ -19,6 +19,7 @@ namespace Printer
         private JOBSTATUS _jobStatus = new JOBSTATUS();
         private PrintSystemJobInfo _jobInfo = null;
         private int _jobSize = 0;
+        private int _pages = 0;
 
         #endregion private variables
 
@@ -29,8 +30,9 @@ namespace Printer
         public JOBSTATUS JobStatus { get { return _jobStatus; } }
         public PrintSystemJobInfo JobInfo { get { return _jobInfo; } }
         public int JobSize { get { return _jobSize; } }
+        public int Pages { get { return _pages; } }
 
-        public PrintJobChangeEventArgs(int intJobID, string strPrintName, string strDriveName, string strJobName, JOBSTATUS jStatus, PrintSystemJobInfo objJobInfo, int intJobSize)
+        public PrintJobChangeEventArgs(int intJobID, string strPrintName, string strDriveName, string strJobName, JOBSTATUS jStatus, PrintSystemJobInfo objJobInfo, int intJobSize, int intPages)
             : base()
         {
             _jobID = intJobID;
@@ -40,6 +42,7 @@ namespace Printer
             _jobStatus = jStatus;
             _jobInfo = objJobInfo;
             _jobSize = intJobSize;
+            _pages = intPages;
         }
     }
 
@@ -141,7 +144,9 @@ namespace Printer
                 //We got a valid Printer handle.  Let us register for change notification....
                 _changeHandle = FindFirstPrinterChangeNotification(_printerHandle, (int)PRINTER_CHANGES.PRINTER_CHANGE_JOB, 0, _notifyOptions);
                 // We have successfully registered for change notification.  Let us capture the handle...
+#pragma warning disable CS0618 // 'WaitHandle.Handle' está obsoleto: 'Use the SafeWaitHandle property instead.'
                 _mrEvent.Handle = _changeHandle;
+#pragma warning restore CS0618 // 'WaitHandle.Handle' está obsoleto: 'Use the SafeWaitHandle property instead.'
                 //Now, let us wait for change notification from the printer queue....
                 _waitHandle = ThreadPool.RegisterWaitForSingleObject(_mrEvent, new WaitOrTimerCallback(PrinterNotifyWaitCallback), _mrEvent, -1, true);
             }
@@ -218,36 +223,43 @@ namespace Printer
                     )
                     {
                         JOBSTATUS jStatus = (JOBSTATUS)Enum.Parse(typeof(JOBSTATUS), data[i].NotifyData.Data.cbBuf.ToString());
+
                         int intJobID = (int)data[i].Id;
                         string strJobName = "";
                         PrintSystemJobInfo pji = null;
                         string strDriveName = "";
                         int intJobSize = 0;
                         int pages = 0;
-                        try
-                        {
-                            _spooler = new PrintQueue(new PrintServer(), _spoolerName);
-                            pji = _spooler.GetJob(intJobID);
-                            if (!objJobDict.ContainsKey(intJobID))
-                                objJobDict[intJobID] = pji.Name;
-                            strJobName = pji.Name;
-                            strDriveName = pji.HostingPrintQueue.QueueDriver.Name;
-                            intJobSize = pji.JobSize;
-                            // pages = pji.NumberOfPages;
-                        }
-                        catch (Exception exception)
-                        {
-                            pji = null;
-                            objJobDict.TryGetValue(intJobID, out strJobName);
-                            if (strJobName == null) strJobName = "";
-                            Console.WriteLine(exception.ToString());
-                            //NetLog.Error("【打印监听回调方法(JobInfo)错误】", exception.ToString());
-                        }
 
-                        if (OnJobStatusChange != null)
+                        _spooler = new PrintQueue(new PrintServer(), _spoolerName);
+                        pji = _spooler.GetJob(intJobID);
+
+                        if ((jStatus & JOBSTATUS.JOB_STATUS_SPOOLING) == JOBSTATUS.JOB_STATUS_SPOOLING
+              && pji != null)
                         {
-                            //Let us raise the event
-                            OnJobStatusChange(this, new PrintJobChangeEventArgs(intJobID, _spoolerName, strDriveName, strJobName, jStatus, pji, intJobSize));
+                            try
+                            {
+                                if (!objJobDict.ContainsKey(intJobID))
+                                    objJobDict[intJobID] = pji.Name;
+                                strJobName = pji.Name;
+                                strDriveName = pji.HostingPrintQueue.QueueDriver.Name;
+                                intJobSize = pji.JobSize;
+                                pages = pji.NumberOfPages;
+                            }
+                            catch (Exception exception)
+                            {
+                                pji = null;
+                                objJobDict.TryGetValue(intJobID, out strJobName);
+                                if (strJobName == null) strJobName = "";
+                                Console.WriteLine(exception.ToString());
+                                //NetLog.Error("【打印监听回调方法(JobInfo)错误】", exception.ToString());
+                            }
+
+                            if (OnJobStatusChange != null)
+                            {
+                                //Let us raise the event
+                                OnJobStatusChange(this, new PrintJobChangeEventArgs(intJobID, _spoolerName, strDriveName, strJobName, jStatus, pji, intJobSize, pages));
+                            }
                         }
                     }
                 }

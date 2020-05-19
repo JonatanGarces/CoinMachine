@@ -1,47 +1,40 @@
-﻿using EventHook;
-using MaSoft.Code;
+﻿using Printer;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Printing.IndexedProperties;
+using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
-namespace Printer
+namespace Testing
 {
-    internal static class Program
+    internal class Program
     {
-        /// <summary>
-        /// Punto de entrada principal para la aplicación.
-        /// </summary>
-        [STAThread]
-        private static void Main()
+        private static void Main(string[] args)
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-
+            /*
             var eventHookFactory = new EventHookFactory();
             var printWatcher = eventHookFactory.GetPrintWatcher();
             printWatcher.Start();
             printWatcher.OnPrintEvent += (s, e) =>
             {
-                Console.WriteLine("Printer '{0}' currently printing {1} pages ", e.EventData.PrinterName,
-                    e.EventData.Pages);
+                Console.WriteLine("Printer '{0}' currently printing {1} pages {2} ", e.EventData.PrinterName,
+                    e.EventData.Pages, e.EventData.JobId);
+                    w
+                var devMode = PrinterHelper.GetPrinterDevMode(e.EventData.PrinterName);
+                string sTRING = String.Format("{0} : {1} x {2} . {3} . {4} . {5} . {6}", (PrinterHelper.PaperSize)devMode.dmPaperSize, devMode.dmPaperWidth, devMode.dmPaperLength, (PrinterHelper.PageColor)devMode.dmColor, devMode.dmCopies, (PrinterHelper.PageDuplex)devMode.dmDuplex, (PrinterHelper.PageDisplayFlags)devMode.dmDisplayFlags);
+                Console.WriteLine(sTRING);
             };
-            Application.Run(new Form1());
 
             Console.Read();
 
             printWatcher.Stop();
 
             eventHookFactory.Dispose();
+        */
 
-            //PrintQueueMonitor pm = new PrintQueueMonitor("Microsoft Print to PDF");
-            //pm.OnJobStatusChange += OnJobStatusChange;
+            PrintQueueMonitor pm = new PrintQueueMonitor("Microsoft Print to PDF");
+            pm.OnJobStatusChange += OnJobStatusChange;
         }
-
-        //                            OnJobStatusChange(this, new PrintJobChangeEventArgs(intJobID, _spoolerName, strDriveName, strJobName, jStatus, pji, intJobSize));
 
         public static void OnJobStatusChange(object Sender, PrintJobChangeEventArgs e)
         {
@@ -62,7 +55,7 @@ namespace Printer
             //  }
             //  }
 
-            var devMode = PrinterHelper.GetPrinterDevMode(e.PrintName);
+            var devMode = PrinterHelper.GetPrinterDevMode("Microsoft Print To PDF");
             string s = String.Format("{0} : {1} x {2} . {3} . {4} . {5} . {6}", (PrinterHelper.PaperSize)devMode.dmPaperSize, devMode.dmPaperWidth, devMode.dmPaperLength, (PrinterHelper.PageColor)devMode.dmColor, devMode.dmCopies, (PrinterHelper.PageDuplex)devMode.dmDuplex, (PrinterHelper.PageDisplayFlags)devMode.dmDisplayFlags);
             Console.WriteLine(s);
 
@@ -70,23 +63,23 @@ namespace Printer
             //   e.JobInfo.NumberOfPages,
             //   jobInfo.Copyes,
             //  jobInfo.Orientation
-            if (e.JobStatus == JOBSTATUS.JOB_STATUS_SPOOLING && e.JobStatus != JOBSTATUS.JOB_STATUS_PAUSED)
-            {
-                try
-                {
-                    var pDefault = new PrinterApi.PRINTER_DEFAULTS();
-                    IntPtr phPrinter;
-                    if (PrinterApi.OpenPrinter(e.PrintName, out phPrinter, pDefault))
-                    {
-                        PrinterApi.SetJob(phPrinter, e.JobID, 0, IntPtr.Zero, PrinterApi.PrintJobControlCommands.JOB_CONTROL_PAUSE);
-                        PrinterApi.ClosePrinter(phPrinter);
-                    }
-                }
-                catch (Exception exception)
-                {
-                    Console.WriteLine(exception);
-                }
-            }
+            /* if (e.JobStatus == JOBSTATUS.JOB_STATUS_SPOOLING && e.JobStatus != JOBSTATUS.JOB_STATUS_PAUSED)
+             {
+                 try
+                 {
+                     var pDefault = new PrinterApi.PRINTER_DEFAULTS();
+                     IntPtr phPrinter;
+                     if (PrinterApi.OpenPrinter(e.PrintName, out phPrinter, pDefault))
+                     {
+                         PrinterApi.SetJob(phPrinter, e.JobID, 0, IntPtr.Zero, PrinterApi.PrintJobControlCommands.JOB_CONTROL_PAUSE);
+                         PrinterApi.ClosePrinter(phPrinter);
+                     }
+                 }
+                 catch (Exception exception)
+                 {
+                     Console.WriteLine(exception);
+                 }
+             }*/
         }
 
         public enum PrintJobControlCommands

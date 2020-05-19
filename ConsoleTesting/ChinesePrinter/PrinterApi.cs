@@ -101,6 +101,7 @@ namespace MaSoft.Code
         {
             public IntPtr lpDataType;
             public IntPtr lpDevMode;
+
             [MarshalAs(UnmanagedType.U4)]
             public PrinterAccessRights DesiredAccess;
         }
@@ -130,6 +131,9 @@ namespace MaSoft.Code
             JOB_CONTROL_LAST_PAGE_EJECTED
         }
 
+        [DllImport("winspool.Drv", CallingConvention = CallingConvention.StdCall, CharSet = CharSet.Unicode, SetLastError = true)]
+        public static extern bool GetPrinter([In] string pPrinterName, out IntPtr phPrinter, [In] [MarshalAs(UnmanagedType.LPStruct)] PRINTER_DEFAULTS pDefault);
+
         //打开打印机
         [DllImport("winspool.Drv", CallingConvention = CallingConvention.StdCall, CharSet = CharSet.Unicode, SetLastError = true)]
         public static extern bool OpenPrinter([In] string pPrinterName, out IntPtr phPrinter, [In] [MarshalAs(UnmanagedType.LPStruct)] PRINTER_DEFAULTS pDefault);
@@ -141,7 +145,5 @@ namespace MaSoft.Code
         //修改打印作业设置
         [DllImport("winspool.Drv", CallingConvention = CallingConvention.StdCall, CharSet = CharSet.Unicode, SetLastError = true)]
         public static extern bool SetJob([In] IntPtr hPrinter, [In] int dwJobId, [In] int Level, [In] IntPtr lpJob, [In] [MarshalAs(UnmanagedType.U4)] PrintJobControlCommands dwCommand);
-
     }
-    
 }

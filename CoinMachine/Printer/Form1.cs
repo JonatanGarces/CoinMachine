@@ -10,7 +10,6 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 
-
 namespace virtualPrinter
 {
     public partial class Form1 : Form
@@ -47,7 +46,6 @@ namespace virtualPrinter
                 }
                 catch (Exception)
                 {
-
                     throw;
                 }
             }
@@ -59,17 +57,13 @@ namespace virtualPrinter
                 }
                 catch (Exception)
                 {
-
                     throw;
                 }
-
             }
-
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-           
             if (Environment.Is64BitOperatingSystem)
             {
                 try
@@ -78,7 +72,6 @@ namespace virtualPrinter
                 }
                 catch (Exception)
                 {
-
                     throw;
                 }
             }
@@ -90,15 +83,9 @@ namespace virtualPrinter
                 }
                 catch (Exception)
                 {
-
                     throw;
                 }
-
             }
-
-
         }
     }
-
 }
-
