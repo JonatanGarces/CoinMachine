@@ -1,4 +1,6 @@
-﻿using Printer;
+﻿using EventHook;
+using MaSoft.Code;
+using Printer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,18 +13,46 @@ namespace Testing
     {
         private static void Main(string[] args)
         {
-            /*
+            
             var eventHookFactory = new EventHookFactory();
             var printWatcher = eventHookFactory.GetPrintWatcher();
             printWatcher.Start();
             printWatcher.OnPrintEvent += (s, e) =>
             {
                 Console.WriteLine("Printer '{0}' currently printing {1} pages {2} ", e.EventData.PrinterName,
-                    e.EventData.Pages, e.EventData.JobId);
-                    w
+                    e.EventData.Pages, e.EventData.JobInfo.JobIdentifier);
+
                 var devMode = PrinterHelper.GetPrinterDevMode(e.EventData.PrinterName);
                 string sTRING = String.Format("{0} : {1} x {2} . {3} . {4} . {5} . {6}", (PrinterHelper.PaperSize)devMode.dmPaperSize, devMode.dmPaperWidth, devMode.dmPaperLength, (PrinterHelper.PageColor)devMode.dmColor, devMode.dmCopies, (PrinterHelper.PageDuplex)devMode.dmDuplex, (PrinterHelper.PageDisplayFlags)devMode.dmDisplayFlags);
                 Console.WriteLine(sTRING);
+
+                if ((JOBSTATUS)e.EventData.JobInfo.JobStatus == JOBSTATUS.JOB_STATUS_SPOOLING && (JOBSTATUS)e.EventData.JobInfo.JobStatus != JOBSTATUS.JOB_STATUS_PAUSED)
+                {
+                    try
+                    {
+                        var pDefault = new PrinterApi.PRINTER_DEFAULTS();
+                        IntPtr phPrinter;
+                        if (PrinterApi.OpenPrinter(e.EventData.PrinterName, out phPrinter, pDefault))
+                        {
+                            PrinterApi.SetJob(phPrinter, e.EventData.JobInfo.JobIdentifier, 0, IntPtr.Zero, PrinterApi.PrintJobControlCommands.JOB_CONTROL_PAUSE);
+                            PrinterApi.ClosePrinter(phPrinter);
+                        }
+
+
+
+
+                    }
+                    catch (Exception exception)
+                    {
+                        Console.WriteLine(exception);
+                    }
+
+                    
+
+
+                    // PrintQueueMonitor pm = new PrintQueueMonitor("Microsoft Print to PDF");
+                    // pm.OnJobStatusChange += OnJobStatusChange;
+                }
             };
 
             Console.Read();
@@ -30,10 +60,6 @@ namespace Testing
             printWatcher.Stop();
 
             eventHookFactory.Dispose();
-        */
-
-            PrintQueueMonitor pm = new PrintQueueMonitor("Microsoft Print to PDF");
-            pm.OnJobStatusChange += OnJobStatusChange;
         }
 
         public static void OnJobStatusChange(object Sender, PrintJobChangeEventArgs e)
