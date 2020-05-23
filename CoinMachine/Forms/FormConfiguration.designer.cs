@@ -43,11 +43,14 @@
             this.label6 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.txtBackgroundMessageColor = new System.Windows.Forms.TextBox();
+            this.picBackgroundMessageColor = new System.Windows.Forms.PictureBox();
             this.btnBackgroundMessageColor = new System.Windows.Forms.Button();
             this.lblBackgroundMessageColor = new System.Windows.Forms.Label();
             this.txtBackgroundColor = new System.Windows.Forms.TextBox();
+            this.picBackgroundColor = new System.Windows.Forms.PictureBox();
             this.button2 = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
+            this.picBackgroundImage = new System.Windows.Forms.PictureBox();
             this.btnBackgroundImage = new System.Windows.Forms.Button();
             this.txtBackgroundMessage = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -55,12 +58,14 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.picSlotOk = new System.Windows.Forms.PictureBox();
             this.btnConectar = new System.Windows.Forms.Button();
             this.cbxSlotPort = new System.Windows.Forms.ComboBox();
             this.button5 = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.colorDialog2 = new System.Windows.Forms.ColorDialog();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.label15 = new System.Windows.Forms.Label();
             this.listPrintersSaved = new System.Windows.Forms.ListBox();
             this.label14 = new System.Windows.Forms.Label();
@@ -76,19 +81,19 @@
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.picBackgroundMessageColor = new System.Windows.Forms.PictureBox();
-            this.picBackgroundColor = new System.Windows.Forms.PictureBox();
-            this.picBackgroundImage = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.picSlotOk = new System.Windows.Forms.PictureBox();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtCoinMinute)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtNotificationMinute)).BeginInit();
             this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picBackgroundMessageColor)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBackgroundColor)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBackgroundImage)).BeginInit();
             this.panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picSlotOk)).BeginInit();
             this.panel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPrinterColorCent)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPrinterGreyScaleCent)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPrinterColorCoin)).BeginInit();
@@ -96,12 +101,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picBackgroundMessageColor)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picBackgroundColor)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picBackgroundImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picSlotOk)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -286,6 +286,15 @@
             this.txtBackgroundMessageColor.TabIndex = 21;
             this.txtBackgroundMessageColor.Visible = false;
             // 
+            // picBackgroundMessageColor
+            // 
+            this.picBackgroundMessageColor.BackColor = System.Drawing.Color.Red;
+            this.picBackgroundMessageColor.Location = new System.Drawing.Point(128, 164);
+            this.picBackgroundMessageColor.Name = "picBackgroundMessageColor";
+            this.picBackgroundMessageColor.Size = new System.Drawing.Size(25, 25);
+            this.picBackgroundMessageColor.TabIndex = 20;
+            this.picBackgroundMessageColor.TabStop = false;
+            // 
             // btnBackgroundMessageColor
             // 
             this.btnBackgroundMessageColor.Location = new System.Drawing.Point(163, 166);
@@ -313,6 +322,15 @@
             this.txtBackgroundColor.TabIndex = 17;
             this.txtBackgroundColor.Visible = false;
             // 
+            // picBackgroundColor
+            // 
+            this.picBackgroundColor.BackColor = System.Drawing.Color.Red;
+            this.picBackgroundColor.Location = new System.Drawing.Point(128, 200);
+            this.picBackgroundColor.Name = "picBackgroundColor";
+            this.picBackgroundColor.Size = new System.Drawing.Size(25, 25);
+            this.picBackgroundColor.TabIndex = 16;
+            this.picBackgroundColor.TabStop = false;
+            // 
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(163, 202);
@@ -331,6 +349,15 @@
             this.label8.Size = new System.Drawing.Size(79, 26);
             this.label8.TabIndex = 14;
             this.label8.Text = "Seleccionar \r\nColor de Fondo";
+            // 
+            // picBackgroundImage
+            // 
+            this.picBackgroundImage.Location = new System.Drawing.Point(128, 5);
+            this.picBackgroundImage.Name = "picBackgroundImage";
+            this.picBackgroundImage.Size = new System.Drawing.Size(91, 89);
+            this.picBackgroundImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picBackgroundImage.TabIndex = 13;
+            this.picBackgroundImage.TabStop = false;
             // 
             // btnBackgroundImage
             // 
@@ -382,6 +409,16 @@
             this.panel4.Size = new System.Drawing.Size(363, 42);
             this.panel4.TabIndex = 16;
             // 
+            // picSlotOk
+            // 
+            this.picSlotOk.Image = global::CoinMachine.Properties.Resources.cross;
+            this.picSlotOk.Location = new System.Drawing.Point(266, 9);
+            this.picSlotOk.Name = "picSlotOk";
+            this.picSlotOk.Size = new System.Drawing.Size(22, 24);
+            this.picSlotOk.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picSlotOk.TabIndex = 20;
+            this.picSlotOk.TabStop = false;
+            // 
             // btnConectar
             // 
             this.btnConectar.Location = new System.Drawing.Point(205, 11);
@@ -425,7 +462,6 @@
             // panel5
             // 
             this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel5.Controls.Add(this.pictureBox4);
             this.panel5.Controls.Add(this.label15);
             this.panel5.Controls.Add(this.listPrintersSaved);
             this.panel5.Controls.Add(this.label14);
@@ -438,10 +474,20 @@
             this.panel5.Controls.Add(this.label11);
             this.panel5.Controls.Add(this.txtPrinterGreyScaleCoin);
             this.panel5.Controls.Add(this.label9);
-            this.panel5.Location = new System.Drawing.Point(12, 515);
+            this.panel5.Location = new System.Drawing.Point(12, 521);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(363, 162);
             this.panel5.TabIndex = 21;
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Image = global::CoinMachine.Properties.Resources.printer;
+            this.pictureBox4.Location = new System.Drawing.Point(350, 507);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(32, 34);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox4.TabIndex = 25;
+            this.pictureBox4.TabStop = false;
             // 
             // label15
             // 
@@ -525,12 +571,7 @@
             // 
             this.txtPrinterColorCoin.Location = new System.Drawing.Point(148, 56);
             this.txtPrinterColorCoin.Maximum = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.txtPrinterColorCoin.Minimum = new decimal(new int[] {
-            1,
+            99,
             0,
             0,
             0});
@@ -565,12 +606,7 @@
             // 
             this.txtPrinterGreyScaleCoin.Location = new System.Drawing.Point(148, 12);
             this.txtPrinterGreyScaleCoin.Maximum = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.txtPrinterGreyScaleCoin.Minimum = new decimal(new int[] {
-            1,
+            99,
             0,
             0,
             0});
@@ -622,33 +658,6 @@
             this.pictureBox2.TabIndex = 14;
             this.pictureBox2.TabStop = false;
             // 
-            // picBackgroundMessageColor
-            // 
-            this.picBackgroundMessageColor.BackColor = System.Drawing.Color.Red;
-            this.picBackgroundMessageColor.Location = new System.Drawing.Point(128, 164);
-            this.picBackgroundMessageColor.Name = "picBackgroundMessageColor";
-            this.picBackgroundMessageColor.Size = new System.Drawing.Size(25, 25);
-            this.picBackgroundMessageColor.TabIndex = 20;
-            this.picBackgroundMessageColor.TabStop = false;
-            // 
-            // picBackgroundColor
-            // 
-            this.picBackgroundColor.BackColor = System.Drawing.Color.Red;
-            this.picBackgroundColor.Location = new System.Drawing.Point(128, 200);
-            this.picBackgroundColor.Name = "picBackgroundColor";
-            this.picBackgroundColor.Size = new System.Drawing.Size(25, 25);
-            this.picBackgroundColor.TabIndex = 16;
-            this.picBackgroundColor.TabStop = false;
-            // 
-            // picBackgroundImage
-            // 
-            this.picBackgroundImage.Location = new System.Drawing.Point(128, 5);
-            this.picBackgroundImage.Name = "picBackgroundImage";
-            this.picBackgroundImage.Size = new System.Drawing.Size(91, 89);
-            this.picBackgroundImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picBackgroundImage.TabIndex = 13;
-            this.picBackgroundImage.TabStop = false;
-            // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::CoinMachine.Properties.Resources.coing;
@@ -659,26 +668,6 @@
             this.pictureBox1.TabIndex = 4;
             this.pictureBox1.TabStop = false;
             // 
-            // picSlotOk
-            // 
-            this.picSlotOk.Image = global::CoinMachine.Properties.Resources.cross;
-            this.picSlotOk.Location = new System.Drawing.Point(266, 9);
-            this.picSlotOk.Name = "picSlotOk";
-            this.picSlotOk.Size = new System.Drawing.Size(22, 24);
-            this.picSlotOk.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picSlotOk.TabIndex = 20;
-            this.picSlotOk.TabStop = false;
-            // 
-            // pictureBox4
-            // 
-            this.pictureBox4.Image = global::CoinMachine.Properties.Resources.printer;
-            this.pictureBox4.Location = new System.Drawing.Point(332, -9);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(32, 34);
-            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox4.TabIndex = 25;
-            this.pictureBox4.TabStop = false;
-            // 
             // Inicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -686,6 +675,7 @@
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(387, 732);
             this.ControlBox = false;
+            this.Controls.Add(this.pictureBox4);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.pictureBox6);
@@ -711,9 +701,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtNotificationMinute)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picBackgroundMessageColor)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBackgroundColor)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBackgroundImage)).EndInit();
             this.panel4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picSlotOk)).EndInit();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPrinterColorCent)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPrinterGreyScaleCent)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPrinterColorCoin)).EndInit();
@@ -721,12 +716,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picBackgroundMessageColor)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picBackgroundColor)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picBackgroundImage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picSlotOk)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.ResumeLayout(false);
 
         }

@@ -172,6 +172,12 @@ namespace Forms
             configmanager.AddUpdateAppSettings("SlotPort", ((Device)cbxSlotPort.SelectedItem).Port);
             configmanager.AddUpdateAppSettings("SlotPortName", ((Device)cbxSlotPort.SelectedItem).Name);
 
+            configmanager.AddUpdateAppSettings("PrinterGreyScaleCoin", txtPrinterGreyScaleCoin.Text);
+            configmanager.AddUpdateAppSettings("PrinterGreyScaleCent", txtPrinterGreyScaleCent.Text);
+            configmanager.AddUpdateAppSettings("PrinterColorCoin", txtPrinterColorCoin.Text);
+            configmanager.AddUpdateAppSettings("PrinterColorCent", txtPrinterColorCent.Text);
+
+
             if (listPrintersSaved.SelectedItems.Count <= 0) { MessageBox.Show("No ha seleccionado imrpesoram"); return; }
 
             string StringPrintersInstalled = JsonConvert.SerializeObject(listPrintersSaved.SelectedItems);
