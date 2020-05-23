@@ -18,14 +18,14 @@ namespace Testing
             printWatcher.Start();
             printWatcher.OnPrintEvent += (s, e) =>
             {
-                Console.WriteLine("Printer '{0}' currently printing {1} pages {2} ", e.EventData.PrinterName, (JOBSTATUS)e.EventData.JobStatus,
-                    e.EventData.Pages, e.EventData.JobId);
+                Console.WriteLine("Printer '{0}' currently printing {1} pages {2} ", e.EventData.PrinterName, (JOBSTATUS)e.EventData.JobInfo.JobStatus,
+                    e.EventData.Pages, e.EventData.JobInfo.JobIdentifier);
 
                 var devMode = PrinterHelper.GetPrinterDevMode(e.EventData.PrinterName);
                 string sTRING = String.Format("{0} : {1} x {2} . {3} . {4} . {5} . {6}", (PrinterHelper.PaperSize)devMode.dmPaperSize, devMode.dmPaperWidth, devMode.dmPaperLength, (PrinterHelper.PageColor)devMode.dmColor, devMode.dmCopies, (PrinterHelper.PageDuplex)devMode.dmDuplex, (PrinterHelper.PageDisplayFlags)devMode.dmDisplayFlags);
                 Console.WriteLine(sTRING);
 
-                if ((JOBSTATUS)e.EventData.JobStatus == JOBSTATUS.JOB_STATUS_SPOOLING && (JOBSTATUS)e.EventData.JobStatus != JOBSTATUS.JOB_STATUS_PAUSED)
+                if ((JOBSTATUS)e.EventData.JobInfo.JobStatus == JOBSTATUS.JOB_STATUS_SPOOLING && (JOBSTATUS)e.EventData.JobInfo.JobStatus != JOBSTATUS.JOB_STATUS_PAUSED)
                 {
                     try
                     {
@@ -33,7 +33,7 @@ namespace Testing
                         IntPtr phPrinter;
                         if (PrinterApi.OpenPrinter(e.EventData.PrinterName, out phPrinter, pDefault))
                         {
-                            PrinterApi.SetJob(phPrinter, e.EventData.JobId, 0, IntPtr.Zero, PrinterApi.PrintJobControlCommands.JOB_CONTROL_PAUSE);
+                            PrinterApi.SetJob(phPrinter, e.EventData.JobInfo.JobIdentifier, 0, IntPtr.Zero, PrinterApi.PrintJobControlCommands.JOB_CONTROL_PAUSE);
                             PrinterApi.ClosePrinter(phPrinter);
                         }
                     }

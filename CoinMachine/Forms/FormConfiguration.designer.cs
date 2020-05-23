@@ -65,7 +65,6 @@
             this.btnClose = new System.Windows.Forms.Button();
             this.colorDialog2 = new System.Windows.Forms.ColorDialog();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.label15 = new System.Windows.Forms.Label();
             this.listPrintersSaved = new System.Windows.Forms.ListBox();
             this.label14 = new System.Windows.Forms.Label();
@@ -78,6 +77,7 @@
             this.label11 = new System.Windows.Forms.Label();
             this.txtPrinterGreyScaleCoin = new System.Windows.Forms.NumericUpDown();
             this.label9 = new System.Windows.Forms.Label();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
@@ -93,11 +93,11 @@
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picSlotOk)).BeginInit();
             this.panel5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPrinterColorCent)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPrinterGreyScaleCent)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPrinterColorCoin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPrinterGreyScaleCoin)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -479,16 +479,6 @@
             this.panel5.Size = new System.Drawing.Size(363, 162);
             this.panel5.TabIndex = 21;
             // 
-            // pictureBox4
-            // 
-            this.pictureBox4.Image = global::CoinMachine.Properties.Resources.printer;
-            this.pictureBox4.Location = new System.Drawing.Point(350, 507);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(32, 34);
-            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox4.TabIndex = 25;
-            this.pictureBox4.TabStop = false;
-            // 
             // label15
             // 
             this.label15.AutoSize = true;
@@ -509,7 +499,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(263, 63);
+            this.label14.Location = new System.Drawing.Point(260, 63);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(51, 13);
             this.label14.TabIndex = 18;
@@ -518,7 +508,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(263, 19);
+            this.label13.Location = new System.Drawing.Point(261, 19);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(51, 13);
             this.label13.TabIndex = 17;
@@ -628,6 +618,16 @@
             this.label9.TabIndex = 7;
             this.label9.Text = "1 impresion a 1 cara\r\na blanco y negro cuesta:";
             // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Image = global::CoinMachine.Properties.Resources.printer;
+            this.pictureBox4.Location = new System.Drawing.Point(350, 507);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(32, 34);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox4.TabIndex = 25;
+            this.pictureBox4.TabStop = false;
+            // 
             // pictureBox6
             // 
             this.pictureBox6.Image = global::CoinMachine.Properties.Resources.coinslotter;
@@ -708,11 +708,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.picSlotOk)).EndInit();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPrinterColorCent)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPrinterGreyScaleCent)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPrinterColorCoin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPrinterGreyScaleCoin)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();

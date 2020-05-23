@@ -184,8 +184,7 @@ namespace Forms
             configmanager.AddUpdateAppSettings("PrintersSaved", StringPrintersInstalled);
 
             //Console.WriteLine(StringPrintersInstalled);
-
-            // new FormCountDownTimer1(so).Show();
+            //new FormCountDownTimer1(so).Show();
             //this.Close();
         }
 
