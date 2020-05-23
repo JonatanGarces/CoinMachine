@@ -43,14 +43,11 @@
             this.label6 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.txtBackgroundMessageColor = new System.Windows.Forms.TextBox();
-            this.picBackgroundMessageColor = new System.Windows.Forms.PictureBox();
             this.btnBackgroundMessageColor = new System.Windows.Forms.Button();
             this.lblBackgroundMessageColor = new System.Windows.Forms.Label();
             this.txtBackgroundColor = new System.Windows.Forms.TextBox();
-            this.picBackgroundColor = new System.Windows.Forms.PictureBox();
             this.button2 = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
-            this.picBackgroundImage = new System.Windows.Forms.PictureBox();
             this.btnBackgroundImage = new System.Windows.Forms.Button();
             this.txtBackgroundMessage = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -58,48 +55,53 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.picSlotOk = new System.Windows.Forms.PictureBox();
             this.btnConectar = new System.Windows.Forms.Button();
             this.cbxSlotPort = new System.Windows.Forms.ComboBox();
             this.button5 = new System.Windows.Forms.Button();
-            this.pictureBox6 = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnClose = new System.Windows.Forms.Button();
             this.colorDialog2 = new System.Windows.Forms.ColorDialog();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
-            this.label12 = new System.Windows.Forms.Label();
-            this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.listBox1 = new System.Windows.Forms.ListBox();
             this.label15 = new System.Windows.Forms.Label();
+            this.listPrintersSaved = new System.Windows.Forms.ListBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.txtPrinterColorCent = new System.Windows.Forms.NumericUpDown();
+            this.txtPrinterGreyScaleCent = new System.Windows.Forms.NumericUpDown();
+            this.label12 = new System.Windows.Forms.Label();
+            this.txtPrinterColorCoin = new System.Windows.Forms.NumericUpDown();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.txtPrinterGreyScaleCoin = new System.Windows.Forms.NumericUpDown();
+            this.label9 = new System.Windows.Forms.Label();
+            this.pictureBox6 = new System.Windows.Forms.PictureBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.picBackgroundMessageColor = new System.Windows.Forms.PictureBox();
+            this.picBackgroundColor = new System.Windows.Forms.PictureBox();
+            this.picBackgroundImage = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.picSlotOk = new System.Windows.Forms.PictureBox();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtCoinMinute)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtNotificationMinute)).BeginInit();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picBackgroundMessageColor)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picBackgroundColor)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picBackgroundImage)).BeginInit();
             this.panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picSlotOk)).BeginInit();
+            this.panel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPrinterColorCent)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPrinterGreyScaleCent)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPrinterColorCoin)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPrinterGreyScaleCoin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBackgroundMessageColor)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBackgroundColor)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBackgroundImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.panel5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picSlotOk)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -284,15 +286,6 @@
             this.txtBackgroundMessageColor.TabIndex = 21;
             this.txtBackgroundMessageColor.Visible = false;
             // 
-            // picBackgroundMessageColor
-            // 
-            this.picBackgroundMessageColor.BackColor = System.Drawing.Color.Red;
-            this.picBackgroundMessageColor.Location = new System.Drawing.Point(128, 164);
-            this.picBackgroundMessageColor.Name = "picBackgroundMessageColor";
-            this.picBackgroundMessageColor.Size = new System.Drawing.Size(25, 25);
-            this.picBackgroundMessageColor.TabIndex = 20;
-            this.picBackgroundMessageColor.TabStop = false;
-            // 
             // btnBackgroundMessageColor
             // 
             this.btnBackgroundMessageColor.Location = new System.Drawing.Point(163, 166);
@@ -320,15 +313,6 @@
             this.txtBackgroundColor.TabIndex = 17;
             this.txtBackgroundColor.Visible = false;
             // 
-            // picBackgroundColor
-            // 
-            this.picBackgroundColor.BackColor = System.Drawing.Color.Red;
-            this.picBackgroundColor.Location = new System.Drawing.Point(128, 200);
-            this.picBackgroundColor.Name = "picBackgroundColor";
-            this.picBackgroundColor.Size = new System.Drawing.Size(25, 25);
-            this.picBackgroundColor.TabIndex = 16;
-            this.picBackgroundColor.TabStop = false;
-            // 
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(163, 202);
@@ -347,15 +331,6 @@
             this.label8.Size = new System.Drawing.Size(79, 26);
             this.label8.TabIndex = 14;
             this.label8.Text = "Seleccionar \r\nColor de Fondo";
-            // 
-            // picBackgroundImage
-            // 
-            this.picBackgroundImage.Location = new System.Drawing.Point(128, 5);
-            this.picBackgroundImage.Name = "picBackgroundImage";
-            this.picBackgroundImage.Size = new System.Drawing.Size(91, 89);
-            this.picBackgroundImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picBackgroundImage.TabIndex = 13;
-            this.picBackgroundImage.TabStop = false;
             // 
             // btnBackgroundImage
             // 
@@ -407,16 +382,6 @@
             this.panel4.Size = new System.Drawing.Size(363, 42);
             this.panel4.TabIndex = 16;
             // 
-            // picSlotOk
-            // 
-            this.picSlotOk.Image = global::CoinMachine.Properties.Resources.cross;
-            this.picSlotOk.Location = new System.Drawing.Point(266, 9);
-            this.picSlotOk.Name = "picSlotOk";
-            this.picSlotOk.Size = new System.Drawing.Size(22, 24);
-            this.picSlotOk.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picSlotOk.TabIndex = 20;
-            this.picSlotOk.TabStop = false;
-            // 
             // btnConectar
             // 
             this.btnConectar.Location = new System.Drawing.Point(205, 11);
@@ -445,6 +410,187 @@
             this.button5.Text = "Guardar e Iniciar";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // btnClose
+            // 
+            this.btnClose.BackColor = System.Drawing.Color.Transparent;
+            this.btnClose.Location = new System.Drawing.Point(12, 701);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(75, 23);
+            this.btnClose.TabIndex = 20;
+            this.btnClose.Text = "Cerrar";
+            this.btnClose.UseVisualStyleBackColor = false;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
+            // panel5
+            // 
+            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel5.Controls.Add(this.pictureBox4);
+            this.panel5.Controls.Add(this.label15);
+            this.panel5.Controls.Add(this.listPrintersSaved);
+            this.panel5.Controls.Add(this.label14);
+            this.panel5.Controls.Add(this.label13);
+            this.panel5.Controls.Add(this.txtPrinterColorCent);
+            this.panel5.Controls.Add(this.txtPrinterGreyScaleCent);
+            this.panel5.Controls.Add(this.label12);
+            this.panel5.Controls.Add(this.txtPrinterColorCoin);
+            this.panel5.Controls.Add(this.label10);
+            this.panel5.Controls.Add(this.label11);
+            this.panel5.Controls.Add(this.txtPrinterGreyScaleCoin);
+            this.panel5.Controls.Add(this.label9);
+            this.panel5.Location = new System.Drawing.Point(12, 515);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(363, 162);
+            this.panel5.TabIndex = 21;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(13, 88);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(132, 26);
+            this.label15.TabIndex = 20;
+            this.label15.Text = "Elige la(s) impresora(s) que\r\ntendran costo";
+            // 
+            // listPrintersSaved
+            // 
+            this.listPrintersSaved.FormattingEnabled = true;
+            this.listPrintersSaved.Location = new System.Drawing.Point(145, 88);
+            this.listPrintersSaved.Name = "listPrintersSaved";
+            this.listPrintersSaved.Size = new System.Drawing.Size(213, 69);
+            this.listPrintersSaved.TabIndex = 19;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(263, 63);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(51, 13);
+            this.label14.TabIndex = 18;
+            this.label14.Text = "centavos";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(263, 19);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(51, 13);
+            this.label13.TabIndex = 17;
+            this.label13.Text = "centavos";
+            // 
+            // txtPrinterColorCent
+            // 
+            this.txtPrinterColorCent.Location = new System.Drawing.Point(225, 56);
+            this.txtPrinterColorCent.Maximum = new decimal(new int[] {
+            99,
+            0,
+            0,
+            0});
+            this.txtPrinterColorCent.Name = "txtPrinterColorCent";
+            this.txtPrinterColorCent.Size = new System.Drawing.Size(33, 20);
+            this.txtPrinterColorCent.TabIndex = 16;
+            this.txtPrinterColorCent.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // txtPrinterGreyScaleCent
+            // 
+            this.txtPrinterGreyScaleCent.Location = new System.Drawing.Point(225, 12);
+            this.txtPrinterGreyScaleCent.Maximum = new decimal(new int[] {
+            99,
+            0,
+            0,
+            0});
+            this.txtPrinterGreyScaleCent.Name = "txtPrinterGreyScaleCent";
+            this.txtPrinterGreyScaleCent.Size = new System.Drawing.Size(33, 20);
+            this.txtPrinterGreyScaleCent.TabIndex = 15;
+            this.txtPrinterGreyScaleCent.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(184, 63);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(35, 13);
+            this.label12.TabIndex = 14;
+            this.label12.Text = "pesos";
+            // 
+            // txtPrinterColorCoin
+            // 
+            this.txtPrinterColorCoin.Location = new System.Drawing.Point(148, 56);
+            this.txtPrinterColorCoin.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.txtPrinterColorCoin.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.txtPrinterColorCoin.Name = "txtPrinterColorCoin";
+            this.txtPrinterColorCoin.Size = new System.Drawing.Size(33, 20);
+            this.txtPrinterColorCoin.TabIndex = 13;
+            this.txtPrinterColorCoin.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(13, 50);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(102, 26);
+            this.label10.TabIndex = 12;
+            this.label10.Text = "1 impresion a 1 cara\r\na color cuesta:";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(183, 19);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(35, 13);
+            this.label11.TabIndex = 11;
+            this.label11.Text = "pesos";
+            // 
+            // txtPrinterGreyScaleCoin
+            // 
+            this.txtPrinterGreyScaleCoin.Location = new System.Drawing.Point(148, 12);
+            this.txtPrinterGreyScaleCoin.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.txtPrinterGreyScaleCoin.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.txtPrinterGreyScaleCoin.Name = "txtPrinterGreyScaleCoin";
+            this.txtPrinterGreyScaleCoin.Size = new System.Drawing.Size(33, 20);
+            this.txtPrinterGreyScaleCoin.TabIndex = 10;
+            this.txtPrinterGreyScaleCoin.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(13, 6);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(124, 26);
+            this.label9.TabIndex = 7;
+            this.label9.Text = "1 impresion a 1 cara\r\na blanco y negro cuesta:";
             // 
             // pictureBox6
             // 
@@ -476,6 +622,33 @@
             this.pictureBox2.TabIndex = 14;
             this.pictureBox2.TabStop = false;
             // 
+            // picBackgroundMessageColor
+            // 
+            this.picBackgroundMessageColor.BackColor = System.Drawing.Color.Red;
+            this.picBackgroundMessageColor.Location = new System.Drawing.Point(128, 164);
+            this.picBackgroundMessageColor.Name = "picBackgroundMessageColor";
+            this.picBackgroundMessageColor.Size = new System.Drawing.Size(25, 25);
+            this.picBackgroundMessageColor.TabIndex = 20;
+            this.picBackgroundMessageColor.TabStop = false;
+            // 
+            // picBackgroundColor
+            // 
+            this.picBackgroundColor.BackColor = System.Drawing.Color.Red;
+            this.picBackgroundColor.Location = new System.Drawing.Point(128, 200);
+            this.picBackgroundColor.Name = "picBackgroundColor";
+            this.picBackgroundColor.Size = new System.Drawing.Size(25, 25);
+            this.picBackgroundColor.TabIndex = 16;
+            this.picBackgroundColor.TabStop = false;
+            // 
+            // picBackgroundImage
+            // 
+            this.picBackgroundImage.Location = new System.Drawing.Point(128, 5);
+            this.picBackgroundImage.Name = "picBackgroundImage";
+            this.picBackgroundImage.Size = new System.Drawing.Size(91, 89);
+            this.picBackgroundImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picBackgroundImage.TabIndex = 13;
+            this.picBackgroundImage.TabStop = false;
+            // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::CoinMachine.Properties.Resources.coing;
@@ -486,195 +659,25 @@
             this.pictureBox1.TabIndex = 4;
             this.pictureBox1.TabStop = false;
             // 
-            // btnClose
+            // picSlotOk
             // 
-            this.btnClose.BackColor = System.Drawing.Color.Transparent;
-            this.btnClose.Location = new System.Drawing.Point(12, 701);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(75, 23);
-            this.btnClose.TabIndex = 20;
-            this.btnClose.Text = "Cerrar";
-            this.btnClose.UseVisualStyleBackColor = false;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            this.picSlotOk.Image = global::CoinMachine.Properties.Resources.cross;
+            this.picSlotOk.Location = new System.Drawing.Point(266, 9);
+            this.picSlotOk.Name = "picSlotOk";
+            this.picSlotOk.Size = new System.Drawing.Size(22, 24);
+            this.picSlotOk.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picSlotOk.TabIndex = 20;
+            this.picSlotOk.TabStop = false;
             // 
-            // panel5
+            // pictureBox4
             // 
-            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel5.Controls.Add(this.label15);
-            this.panel5.Controls.Add(this.listBox1);
-            this.panel5.Controls.Add(this.label14);
-            this.panel5.Controls.Add(this.label13);
-            this.panel5.Controls.Add(this.numericUpDown4);
-            this.panel5.Controls.Add(this.numericUpDown3);
-            this.panel5.Controls.Add(this.label12);
-            this.panel5.Controls.Add(this.numericUpDown2);
-            this.panel5.Controls.Add(this.label10);
-            this.panel5.Controls.Add(this.label11);
-            this.panel5.Controls.Add(this.numericUpDown1);
-            this.panel5.Controls.Add(this.label9);
-            this.panel5.Location = new System.Drawing.Point(12, 515);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(363, 162);
-            this.panel5.TabIndex = 21;
-            // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.Location = new System.Drawing.Point(148, 12);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(33, 20);
-            this.numericUpDown1.TabIndex = 10;
-            this.numericUpDown1.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(13, 6);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(124, 26);
-            this.label9.TabIndex = 7;
-            this.label9.Text = "1 impresion a 1 cara\r\na blanco y negro cuesta:";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(183, 19);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(35, 13);
-            this.label11.TabIndex = 11;
-            this.label11.Text = "pesos";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(13, 50);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(102, 26);
-            this.label10.TabIndex = 12;
-            this.label10.Text = "1 impresion a 1 cara\r\na color cuesta:";
-            // 
-            // numericUpDown2
-            // 
-            this.numericUpDown2.Location = new System.Drawing.Point(148, 56);
-            this.numericUpDown2.Maximum = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.numericUpDown2.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(33, 20);
-            this.numericUpDown2.TabIndex = 13;
-            this.numericUpDown2.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(184, 63);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(35, 13);
-            this.label12.TabIndex = 14;
-            this.label12.Text = "pesos";
-            // 
-            // numericUpDown3
-            // 
-            this.numericUpDown3.Location = new System.Drawing.Point(225, 12);
-            this.numericUpDown3.Maximum = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.numericUpDown3.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDown3.Name = "numericUpDown3";
-            this.numericUpDown3.Size = new System.Drawing.Size(33, 20);
-            this.numericUpDown3.TabIndex = 15;
-            this.numericUpDown3.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // numericUpDown4
-            // 
-            this.numericUpDown4.Location = new System.Drawing.Point(225, 56);
-            this.numericUpDown4.Maximum = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.numericUpDown4.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDown4.Name = "numericUpDown4";
-            this.numericUpDown4.Size = new System.Drawing.Size(33, 20);
-            this.numericUpDown4.TabIndex = 16;
-            this.numericUpDown4.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(263, 19);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(51, 13);
-            this.label13.TabIndex = 17;
-            this.label13.Text = "centavos";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(263, 63);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(51, 13);
-            this.label14.TabIndex = 18;
-            this.label14.Text = "centavos";
-            // 
-            // listBox1
-            // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(145, 88);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(213, 69);
-            this.listBox1.TabIndex = 19;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(13, 88);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(132, 26);
-            this.label15.TabIndex = 20;
-            this.label15.Text = "Elige la(s) impresora(s) que\r\ntendran costo";
+            this.pictureBox4.Image = global::CoinMachine.Properties.Resources.printer;
+            this.pictureBox4.Location = new System.Drawing.Point(332, -9);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(32, 34);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox4.TabIndex = 25;
+            this.pictureBox4.TabStop = false;
             // 
             // Inicio
             // 
@@ -683,7 +686,6 @@
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(387, 732);
             this.ControlBox = false;
-            this.Controls.Add(this.panel5);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.pictureBox6);
@@ -694,6 +696,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel4);
+            this.Controls.Add(this.panel5);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
             this.Name = "Inicio";
@@ -708,21 +711,22 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtNotificationMinute)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picBackgroundMessageColor)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picBackgroundColor)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picBackgroundImage)).EndInit();
             this.panel4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.picSlotOk)).EndInit();
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPrinterColorCent)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPrinterGreyScaleCent)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPrinterColorCoin)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPrinterGreyScaleCoin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBackgroundMessageColor)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBackgroundColor)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBackgroundImage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.panel5.ResumeLayout(false);
-            this.panel5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picSlotOk)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -770,17 +774,18 @@
         private System.Windows.Forms.Label lblBackgroundMessageColor;
         private System.Windows.Forms.ColorDialog colorDialog2;
         private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown txtPrinterGreyScaleCoin;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox listPrintersSaved;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.NumericUpDown numericUpDown4;
-        private System.Windows.Forms.NumericUpDown numericUpDown3;
+        private System.Windows.Forms.NumericUpDown txtPrinterColorCent;
+        private System.Windows.Forms.NumericUpDown txtPrinterGreyScaleCent;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
+        private System.Windows.Forms.NumericUpDown txtPrinterColorCoin;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.PictureBox pictureBox4;
     }
 }

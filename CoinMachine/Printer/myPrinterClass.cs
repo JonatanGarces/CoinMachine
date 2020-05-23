@@ -20,12 +20,15 @@ namespace virtualPrinter
 
     internal class myPrinterClass
     {
-        public static void getPrinterNames()
+        public static List<string> getPrinterNames()
         {
+            var list = new List<string>();
+
             foreach (string printer in System.Drawing.Printing.PrinterSettings.InstalledPrinters)
             {
-                MessageBox.Show(printer);
+                list.Add(printer);
             }
+            return list;
         }
 
         public static void installPrinter(string printerName) //works on win 7,8,8.1,10 on both x84 and x64

@@ -33,7 +33,7 @@ namespace virtualPrinter
 
         private void button2_Click(object sender, EventArgs e)
         {
-            myPrinterClass.getPrinterNames();
+            //myPrinterClass.getPrinterNames();
         }
 
         private void button3_Click(object sender, EventArgs e)

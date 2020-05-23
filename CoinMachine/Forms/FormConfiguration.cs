@@ -1,11 +1,14 @@
 ﻿using CoinMachine.Library;
 using Library;
+using Newtonsoft.Json;
 using Objects;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.IO.Ports;
 using System.Windows.Forms;
+using virtualPrinter;
 
 namespace Forms
 {
@@ -15,6 +18,7 @@ namespace Forms
         private Serial so = new Serial();
         private SerialObserver SerialObserver = new SerialObserver();
 
+        //private myPrinterClass getPrinters = new myPrinterClass();
         public Inicio()
         {
             InitializeComponent();
@@ -26,6 +30,37 @@ namespace Forms
             txtBackgroundColor.Text = configmanager.ReadSetting("BackgroundColor");
             txtBackgroundMessageColor.Text = configmanager.ReadSetting("BackgroundMessageColor");
             txtNotificationTitle.Text = configmanager.ReadSetting("NotificationTitle");
+
+            //txtPrinterColorCoin
+            //  txtPrinterGreyScaleCoin
+
+            //listPrinterPrinters.Text = configmanager.ReadSetting("PrinterPrinters");
+            string StringPrintersSaved = configmanager.ReadSetting("PrintersSaved");
+            string StringPrintersInstalled = JsonConvert.SerializeObject(myPrinterClass.getPrinterNames());
+            Console.WriteLine(StringPrintersInstalled);
+
+            List<string> ListPrintersSaved = JsonConvert.DeserializeObject<List<string>>(StringPrintersSaved);
+            List<string> ListPrintersInstalled = JsonConvert.DeserializeObject<List<string>>(StringPrintersInstalled);
+
+            listPrintersSaved.ClearSelected();
+            listPrintersSaved.SelectionMode = SelectionMode.MultiExtended;
+            int i = 0;
+            foreach (String item in ListPrintersInstalled)
+            {
+                listPrintersSaved.Items.Add(item);
+                if (ListPrintersSaved != null)
+                {
+                    if (ListPrintersSaved.Contains(item))
+                    {
+                        listPrintersSaved.SetSelected(i, true);
+                    }
+                }
+
+                i++;
+            }
+
+            ///txtPrinterPrinters.Text = configmanager.ReadSetting("PrinterPrinters");
+
             if (File.Exists(configmanager.ReadSetting("BackgroundImage"))) { btnBackgroundImage.Text = "Cambiar"; } else { btnBackgroundImage.Text = "Seleccionar"; }
             try
             {
@@ -137,8 +172,15 @@ namespace Forms
             configmanager.AddUpdateAppSettings("SlotPort", ((Device)cbxSlotPort.SelectedItem).Port);
             configmanager.AddUpdateAppSettings("SlotPortName", ((Device)cbxSlotPort.SelectedItem).Name);
 
-            new FormCountDownTimer1(so).Show();
-            this.Close();
+            if (listPrintersSaved.SelectedItems.Count <= 0) { MessageBox.Show("No ha seleccionado imrpesoram"); return; }
+
+            string StringPrintersInstalled = JsonConvert.SerializeObject(listPrintersSaved.SelectedItems);
+            configmanager.AddUpdateAppSettings("PrintersSaved", StringPrintersInstalled);
+
+            //Console.WriteLine(StringPrintersInstalled);
+
+            // new FormCountDownTimer1(so).Show();
+            //this.Close();
         }
 
         private void btnClose_Click(object sender, EventArgs e)

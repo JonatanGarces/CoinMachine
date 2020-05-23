@@ -54,6 +54,9 @@
     <Reference Include="AsyncTcpClient">
       <HintPath>..\..\AsyncTcpClient\AsyncTcpClient\bin\Debug\netstandard2.0\AsyncTcpClient.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="ObjectDumping, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ObjectDumper.NET.2.5.20033.1\lib\net45\ObjectDumping.dll</HintPath>
     </Reference>
@@ -109,6 +112,7 @@
     </Compile>
     <Compile Include="Printer\myPrinterClass.cs" />
     <Compile Include="Printer\PrinterApi.cs" />
+    <Compile Include="Printer\PrinterHelper.cs" />
     <Compile Include="Printer\PrintQueueMonitor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -187,6 +191,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ArduinoCode.txt" />
+    <None Include="Resources\printer.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
