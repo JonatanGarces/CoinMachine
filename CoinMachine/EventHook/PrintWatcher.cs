@@ -20,7 +20,7 @@ namespace EventHook
         public int? Pages { get; set; }
         public int? JobSize { get; set; }
 
-        public JOBSTATUS JobStatus { get; set; }
+        public PrintJobStatus JobStatus { get; set; }
         public int JobId { get; set; }
 
         // public PrintSystemJobInfo JobInfo { get; set; }
@@ -134,6 +134,7 @@ namespace EventHook
         private void pqm_OnJobStatusChange(object sender, PrintJobChangeEventArgs e)
         {
             if ((e.JobStatus & JOBSTATUS.JOB_STATUS_SPOOLING) == JOBSTATUS.JOB_STATUS_SPOOLING
+                && e.JobInfo != null || (e.JobStatus & JOBSTATUS.JOB_STATUS_PAUSED) == JOBSTATUS.JOB_STATUS_PAUSED
                 && e.JobInfo != null)
             {
                 var hWnd = WindowHelper.GetActiveWindowHandle();
@@ -142,14 +143,14 @@ namespace EventHook
 
                 var printEvent = new PrintEventData
                 {
-                    JobStatus = (JOBSTATUS)e.JobInfo.JobStatus,
+                    JobStatus = e.JobInfo.JobStatus,
                     JobId = e.JobId,
                     // JobInfo = e.JobInfo,
                     JobName = e.JobInfo.JobName,
                     JobSize = e.JobInfo.JobSize,
                     EventDateTime = DateTime.Now,
                     Pages = e.JobInfo.NumberOfPages,
-                    PrinterName = ((PrintQueueHook)sender).SpoolerName
+                    PrinterName = ((PrintQueueHook)sender).SpoolerName,
                 };
 
                 Task.Run(() => OnPrintEvent?.Invoke(null, new PrintEventArgs { EventData = printEvent }));

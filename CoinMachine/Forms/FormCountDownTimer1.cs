@@ -56,6 +56,7 @@ namespace Forms
             {
                 PrintWatcher printWatcher = eventHookFactory.GetPrintWatcher();
                 printWatcher.OnPrintEvent += PrinterWatcher;
+
                 printWatcher.Start();
             }
         }
@@ -64,11 +65,10 @@ namespace Forms
         {
             string StringPrintersSaved = configmanager.ReadSetting("PrintersSaved");
             List<string> ListPrintersSaved = JsonConvert.DeserializeObject<List<string>>(StringPrintersSaved);
-            PrinterHelper.DEVMODE devMode = PrinterHelper.GetPrinterDevMode(e.EventData.PrinterName);
             if (ListPrintersSaved.Contains(e.EventData.PrinterName))
             {
-                //PrintQueue pq = new PrintQueue(new PrintServer(), e.EventData.PrinterName);
-                // pq.Pause();
+                //Console.WriteLine(PrintJobStatus.GetValues(e.EventData.JobStatus));
+
                 if ((JOBSTATUS)e.EventData.JobStatus == JOBSTATUS.JOB_STATUS_SPOOLING && (JOBSTATUS)e.EventData.JobStatus != JOBSTATUS.JOB_STATUS_PAUSED)
                 {
                     try
@@ -76,7 +76,8 @@ namespace Forms
                         Console.WriteLine("ImpresoraActiva");
 
                         // Console.WriteLine("Printer '{0}' currently printing {1} pages {2} {3} ", e.EventData.PrinterName, (JOBSTATUS)e.EventData.JobInfo.JobStatus, e.EventData.Pages, e.EventData.JobInfo.JobIdentifier);
-                        //Console.WriteLine("Printer '{0}' currently printing {1} pages {2}", e.EventData.PrinterName, e.EventData.Pages, e.EventData.JobId);
+                        Console.WriteLine("Printer '{0}' currently printing {1} pages {2}", e.EventData.PrinterName, e.EventData.Pages, e.EventData.JobId);
+                        //PrintQueue pq = new PrintQueue(new PrintServer(), e.EventData.PrinterName);
 
                         //PrintJobInfoCollection jobs = pq.GetPrintJobInfoCollection();
 
@@ -84,8 +85,7 @@ namespace Forms
                         //{
                         //    objJobDict[psi.JobIdentifier] = psi.Name;
                         //}
-
-                        var pDefault = new PrinterApi.PRINTER_DEFAULTS();
+                        PrinterApi.PRINTER_DEFAULTS pDefault = new PrinterApi.PRINTER_DEFAULTS();
                         IntPtr phPrinter;
                         if (PrinterApi.OpenPrinter(e.EventData.PrinterName, out phPrinter, pDefault))
                         {
@@ -96,6 +96,28 @@ namespace Forms
                     catch (Exception exception)
                     {
                         Console.WriteLine(exception.Message);
+                    }
+                }
+                if ((JOBSTATUS)e.EventData.JobStatus == JOBSTATUS.JOB_STATUS_PAUSED && (JOBSTATUS)e.EventData.JobStatus != JOBSTATUS.JOB_STATUS_SPOOLING)
+                {
+                    /// var jobInfo = new PrinterApi.JOB();
+
+                    PrinterHelper.DEVMODE devMode = PrinterHelper.GetPrinterDevMode(e.EventData.PrinterName);
+
+                    Boolean enoughMoney = wallet.EnoughMoney(
+                        (PrinterHelper.PageColor)devMode.dmColor,
+                        (PrinterHelper.PageDisplayFlags)devMode.dmDisplayFlags,
+                        e.EventData.Pages,
+                        0, 0);
+                    if (enoughMoney)
+                    {
+                        PrinterApi.PRINTER_DEFAULTS pDefault = new PrinterApi.PRINTER_DEFAULTS();
+                        IntPtr phPrinter;
+                        if (PrinterApi.OpenPrinter(e.EventData.PrinterName, out phPrinter, pDefault))
+                        {
+                            PrinterApi.SetJob(phPrinter, e.EventData.JobId, 0, IntPtr.Zero, PrinterApi.PrintJobControlCommands.JOB_CONTROL_RESUME);
+                            PrinterApi.ClosePrinter(phPrinter);
+                        }
                     }
                 }
             }

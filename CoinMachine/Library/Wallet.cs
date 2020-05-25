@@ -1,4 +1,5 @@
 ﻿using Library;
+using Printer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,14 @@ namespace CoinMachine.Library
         {
             Debit = Debit + value;
             Earned(Debit);
+        }
+
+        // type : greyscale or color
+        // pages : quantity of pages
+
+        public Boolean EnoughMoney(PrinterHelper.PageColor PageColor, PrinterHelper.PageDisplayFlags PageDisplayFlags, int? pages, float greyscale_cost, float color_cost)
+        {
+            return true;
         }
 
         public void SpendMoney(float value)

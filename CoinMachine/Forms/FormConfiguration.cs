@@ -88,6 +88,11 @@ namespace Forms
 
             chkPrinterModuleEnabled.Checked = configmanager.ReadSetting("PrinterModuleEnabled") == "true" ? true : false;
 
+            txtPrinterGreyScaleCoin.Text = configmanager.ReadSetting("PrinterGreyScaleCoin");
+            txtPrinterGreyScaleCent.Text = configmanager.ReadSetting("PrinterGreyScaleCent");
+            txtPrinterColorCoin.Text = configmanager.ReadSetting("PrinterColorCoin");
+            txtPrinterColorCent.Text = configmanager.ReadSetting("PrinterColorCent");
+
             SerialObserver.Changed += () =>
             {
                 this.Invoke(new MethodInvoker(delegate
