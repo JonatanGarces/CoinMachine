@@ -82,6 +82,7 @@
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.chkPrinterModuleEnabled = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtCoinMinute)).BeginInit();
             this.panel2.SuspendLayout();
@@ -440,7 +441,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(277, 701);
+            this.button5.Location = new System.Drawing.Point(277, 724);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(98, 24);
             this.button5.TabIndex = 19;
@@ -451,7 +452,7 @@
             // btnClose
             // 
             this.btnClose.BackColor = System.Drawing.Color.Transparent;
-            this.btnClose.Location = new System.Drawing.Point(12, 701);
+            this.btnClose.Location = new System.Drawing.Point(12, 725);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(75, 23);
             this.btnClose.TabIndex = 20;
@@ -462,6 +463,7 @@
             // panel5
             // 
             this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel5.Controls.Add(this.chkPrinterModuleEnabled);
             this.panel5.Controls.Add(this.label15);
             this.panel5.Controls.Add(this.listPrintersSaved);
             this.panel5.Controls.Add(this.label14);
@@ -476,13 +478,13 @@
             this.panel5.Controls.Add(this.label9);
             this.panel5.Location = new System.Drawing.Point(12, 521);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(363, 162);
+            this.panel5.Size = new System.Drawing.Size(363, 198);
             this.panel5.TabIndex = 21;
             // 
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(13, 88);
+            this.label15.Location = new System.Drawing.Point(13, 123);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(132, 26);
             this.label15.TabIndex = 20;
@@ -491,7 +493,7 @@
             // listPrintersSaved
             // 
             this.listPrintersSaved.FormattingEnabled = true;
-            this.listPrintersSaved.Location = new System.Drawing.Point(145, 88);
+            this.listPrintersSaved.Location = new System.Drawing.Point(145, 123);
             this.listPrintersSaved.Name = "listPrintersSaved";
             this.listPrintersSaved.Size = new System.Drawing.Size(213, 69);
             this.listPrintersSaved.TabIndex = 19;
@@ -499,7 +501,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(260, 63);
+            this.label14.Location = new System.Drawing.Point(260, 98);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(51, 13);
             this.label14.TabIndex = 18;
@@ -508,7 +510,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(261, 19);
+            this.label13.Location = new System.Drawing.Point(261, 54);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(51, 13);
             this.label13.TabIndex = 17;
@@ -516,7 +518,7 @@
             // 
             // txtPrinterColorCent
             // 
-            this.txtPrinterColorCent.Location = new System.Drawing.Point(225, 56);
+            this.txtPrinterColorCent.Location = new System.Drawing.Point(225, 91);
             this.txtPrinterColorCent.Maximum = new decimal(new int[] {
             99,
             0,
@@ -533,7 +535,7 @@
             // 
             // txtPrinterGreyScaleCent
             // 
-            this.txtPrinterGreyScaleCent.Location = new System.Drawing.Point(225, 12);
+            this.txtPrinterGreyScaleCent.Location = new System.Drawing.Point(225, 47);
             this.txtPrinterGreyScaleCent.Maximum = new decimal(new int[] {
             99,
             0,
@@ -551,7 +553,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(184, 63);
+            this.label12.Location = new System.Drawing.Point(184, 98);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(35, 13);
             this.label12.TabIndex = 14;
@@ -559,7 +561,7 @@
             // 
             // txtPrinterColorCoin
             // 
-            this.txtPrinterColorCoin.Location = new System.Drawing.Point(148, 56);
+            this.txtPrinterColorCoin.Location = new System.Drawing.Point(148, 91);
             this.txtPrinterColorCoin.Maximum = new decimal(new int[] {
             99,
             0,
@@ -577,7 +579,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(13, 50);
+            this.label10.Location = new System.Drawing.Point(13, 85);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(102, 26);
             this.label10.TabIndex = 12;
@@ -586,7 +588,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(183, 19);
+            this.label11.Location = new System.Drawing.Point(183, 54);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(35, 13);
             this.label11.TabIndex = 11;
@@ -594,7 +596,7 @@
             // 
             // txtPrinterGreyScaleCoin
             // 
-            this.txtPrinterGreyScaleCoin.Location = new System.Drawing.Point(148, 12);
+            this.txtPrinterGreyScaleCoin.Location = new System.Drawing.Point(148, 47);
             this.txtPrinterGreyScaleCoin.Maximum = new decimal(new int[] {
             99,
             0,
@@ -612,7 +614,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(13, 6);
+            this.label9.Location = new System.Drawing.Point(13, 41);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(124, 26);
             this.label9.TabIndex = 7;
@@ -668,12 +670,23 @@
             this.pictureBox1.TabIndex = 4;
             this.pictureBox1.TabStop = false;
             // 
+            // chkPrinterModuleEnabled
+            // 
+            this.chkPrinterModuleEnabled.AutoSize = true;
+            this.chkPrinterModuleEnabled.Location = new System.Drawing.Point(16, 12);
+            this.chkPrinterModuleEnabled.Name = "chkPrinterModuleEnabled";
+            this.chkPrinterModuleEnabled.Size = new System.Drawing.Size(130, 17);
+            this.chkPrinterModuleEnabled.TabIndex = 22;
+            this.chkPrinterModuleEnabled.Text = "Enable Printer Module";
+            this.chkPrinterModuleEnabled.UseVisualStyleBackColor = true;
+            this.chkPrinterModuleEnabled.CheckedChanged += new System.EventHandler(this.chkPrinterModuleEnabled_CheckedChanged);
+            // 
             // Inicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(387, 732);
+            this.ClientSize = new System.Drawing.Size(387, 760);
             this.ControlBox = false;
             this.Controls.Add(this.pictureBox4);
             this.Controls.Add(this.btnClose);
@@ -777,5 +790,6 @@
         private System.Windows.Forms.NumericUpDown txtPrinterColorCoin;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.PictureBox pictureBox4;
+        private System.Windows.Forms.CheckBox chkPrinterModuleEnabled;
     }
 }

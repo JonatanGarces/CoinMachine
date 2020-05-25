@@ -86,6 +86,8 @@ namespace Forms
             cbxSlotPort.ValueMember = "Port";
             cbxSlotPort.DropDownStyle = ComboBoxStyle.DropDownList;
 
+            chkPrinterModuleEnabled.Checked = configmanager.ReadSetting("PrinterModuleEnabled") == "true" ? true : false;
+
             SerialObserver.Changed += () =>
             {
                 this.Invoke(new MethodInvoker(delegate
@@ -177,6 +179,7 @@ namespace Forms
             configmanager.AddUpdateAppSettings("PrinterColorCoin", txtPrinterColorCoin.Text);
             configmanager.AddUpdateAppSettings("PrinterColorCent", txtPrinterColorCent.Text);
 
+            configmanager.AddUpdateAppSettings("PrinterModuleEnabled", chkPrinterModuleEnabled.Checked ? "true" : "false");
 
             if (listPrintersSaved.SelectedItems.Count <= 0) { MessageBox.Show("No ha seleccionado imrpesoram"); return; }
 
@@ -184,13 +187,20 @@ namespace Forms
             configmanager.AddUpdateAppSettings("PrintersSaved", StringPrintersInstalled);
 
             //Console.WriteLine(StringPrintersInstalled);
-            //new FormCountDownTimer1(so).Show();
-            //this.Close();
+            new FormCountDownTimer1(so).Show();
+            this.Close();
         }
 
         private void btnClose_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void chkPrinterModuleEnabled_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkPrinterModuleEnabled.Checked == true)
+            {
+            }
         }
     }
 }

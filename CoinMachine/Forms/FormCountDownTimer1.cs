@@ -1,9 +1,14 @@
 ﻿using CoinMachine;
 using CoinMachine.Library;
+using EventHook;
 using Library;
+using MaSoft.Code;
+using Newtonsoft.Json;
+using Printer;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Printing;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
@@ -32,20 +37,72 @@ namespace Forms
         private KeyBoardHook keyboard = new KeyBoardHook(true);
         private List<ScreenSaverForm> screens = new List<ScreenSaverForm>();
         public ConfigManager configmanager = new ConfigManager();
+        private EventHookFactory eventHookFactory = new EventHookFactory();
 
         public FormCountDownTimer1(Serial serial)
         {
             InitializeComponent();
             lblcountdown.Cursor = Cursors.SizeAll;
-            serial.DataReceived += DataReceived;
-            wallet.Earned += Earned;
+            //serial.DataReceived += DataReceived;
+            //wallet.Earned += Earned;
             // wallet.Spend += Spend;
-            countdowntimer.Started += Started;
-            countdowntimer.TimeChanged += TimeChanged;
-            countdowntimer.CountDownFinished += CountDownFinished;
-            countdowntimer.Notification += Notification;
-            countdowntimer.Start();
+            //countdowntimer.Started += Started;
+            //countdowntimer.TimeChanged += TimeChanged;
+            //countdowntimer.CountDownFinished += CountDownFinished;
+            //countdowntimer.Notification += Notification;
+            // countdowntimer.Start();
+
+            if (configmanager.ReadSetting("PrinterModuleEnabled") == "true")
+            {
+                PrintWatcher printWatcher = eventHookFactory.GetPrintWatcher();
+                printWatcher.OnPrintEvent += PrinterWatcher;
+                printWatcher.Start();
+            }
         }
+
+        private void PrinterWatcher(object s, PrintEventArgs e)
+        {
+            string StringPrintersSaved = configmanager.ReadSetting("PrintersSaved");
+            List<string> ListPrintersSaved = JsonConvert.DeserializeObject<List<string>>(StringPrintersSaved);
+            PrinterHelper.DEVMODE devMode = PrinterHelper.GetPrinterDevMode(e.EventData.PrinterName);
+            if (ListPrintersSaved.Contains(e.EventData.PrinterName))
+            {
+                //PrintQueue pq = new PrintQueue(new PrintServer(), e.EventData.PrinterName);
+                // pq.Pause();
+                if ((JOBSTATUS)e.EventData.JobStatus == JOBSTATUS.JOB_STATUS_SPOOLING && (JOBSTATUS)e.EventData.JobStatus != JOBSTATUS.JOB_STATUS_PAUSED)
+                {
+                    try
+                    {
+                        Console.WriteLine("ImpresoraActiva");
+
+                        // Console.WriteLine("Printer '{0}' currently printing {1} pages {2} {3} ", e.EventData.PrinterName, (JOBSTATUS)e.EventData.JobInfo.JobStatus, e.EventData.Pages, e.EventData.JobInfo.JobIdentifier);
+                        //Console.WriteLine("Printer '{0}' currently printing {1} pages {2}", e.EventData.PrinterName, e.EventData.Pages, e.EventData.JobId);
+
+                        //PrintJobInfoCollection jobs = pq.GetPrintJobInfoCollection();
+
+                        //foreach (PrintSystemJobInfo psi in _spooler.GetPrintJobInfoCollection())
+                        //{
+                        //    objJobDict[psi.JobIdentifier] = psi.Name;
+                        //}
+
+                        var pDefault = new PrinterApi.PRINTER_DEFAULTS();
+                        IntPtr phPrinter;
+                        if (PrinterApi.OpenPrinter(e.EventData.PrinterName, out phPrinter, pDefault))
+                        {
+                            PrinterApi.SetJob(phPrinter, e.EventData.JobId, 0, IntPtr.Zero, PrinterApi.PrintJobControlCommands.JOB_CONTROL_PAUSE);
+                            PrinterApi.ClosePrinter(phPrinter);
+                        }
+                    }
+                    catch (Exception exception)
+                    {
+                        Console.WriteLine(exception.Message);
+                    }
+                }
+            }
+        }
+
+        // printWatcher.Stop();
+        //  eventHookFactory.Dispose();
 
         private void DataReceived(byte[] serial)
         {
@@ -140,7 +197,7 @@ namespace Forms
             //lblcountdown.Refresh();
         }
 
-        private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void notifyIcon1_MouseDoubleClick(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             this.Show();
         }
@@ -148,7 +205,7 @@ namespace Forms
         public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HT_CAPTION = 0x2;
 
-        private void Form1_MouseDown(object sender, MouseEventArgs e)
+        private void Form1_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {

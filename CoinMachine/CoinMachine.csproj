@@ -74,8 +74,33 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EventHook\ApplicationWatcher.cs" />
+    <Compile Include="EventHook\ClipboardWatcher.cs" />
+    <Compile Include="EventHook\EventHookFactory.cs" />
+    <Compile Include="EventHook\Helpers\AsyncConcurrentQueue.cs" />
+    <Compile Include="EventHook\Helpers\SyncFactory.cs" />
+    <Compile Include="EventHook\Helpers\WindowHelper.cs" />
+    <Compile Include="EventHook\Hooks\ClipBoardHook.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EventHook\Hooks\KeyboardHook.cs" />
+    <Compile Include="EventHook\Hooks\Library\Enum.cs" />
+    <Compile Include="EventHook\Hooks\Library\Msgs.cs" />
+    <Compile Include="EventHook\Hooks\Library\PrintSpoolAPI.cs" />
+    <Compile Include="EventHook\Hooks\Library\Procs.cs" />
+    <Compile Include="EventHook\Hooks\Library\Structs.cs" />
+    <Compile Include="EventHook\Hooks\Library\User32.cs" />
+    <Compile Include="EventHook\Hooks\MouseHook.cs" />
+    <Compile Include="EventHook\Hooks\PrintQueueHook.cs" />
+    <Compile Include="EventHook\Hooks\ShellHook.cs" />
+    <Compile Include="EventHook\Hooks\WindowHook.cs" />
+    <Compile Include="EventHook\Hooks\WindowHookEx.cs" />
+    <Compile Include="EventHook\KeyboardWatcher.cs" />
+    <Compile Include="EventHook\MouseWatcher.cs" />
+    <Compile Include="EventHook\PrintWatcher.cs" />
     <Compile Include="Forms\FormCountDownTimer1.cs">
       <SubType>Form</SubType>
     </Compile>

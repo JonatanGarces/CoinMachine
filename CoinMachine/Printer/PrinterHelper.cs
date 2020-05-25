@@ -236,8 +236,8 @@ namespace Printer
 
         public enum PageDisplayFlags
         {
-            DM_GRAYSCALE  =1 ,
-DM_INTERLACED =2
+            DM_GRAYSCALE = 1,
+            DM_INTERLACED = 2
         }
 
         /// <summary>
@@ -1022,5 +1022,17 @@ DM_INTERLACED =2
         }
 
         #endregion printer method
+
+        public enum PrintJobControlCommands
+        {
+            JOB_CONTROL_SETJOB,
+            JOB_CONTROL_PAUSE,
+            JOB_CONTROL_RESUME,
+            JOB_CONTROL_CANCEL,
+            JOB_CONTROL_RESTART,
+            JOB_CONTROL_DELETE,
+            JOB_CONTROL_SENT_TO_PRINTER,
+            JOB_CONTROL_LAST_PAGE_EJECTED
+        }
     }
 }
