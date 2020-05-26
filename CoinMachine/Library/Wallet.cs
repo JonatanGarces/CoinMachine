@@ -28,9 +28,14 @@ namespace CoinMachine.Library
         // type : greyscale or color
         // pages : quantity of pages
 
-        public Boolean EnoughMoney(PrinterHelper.PageColor PageColor, PrinterHelper.PageDisplayFlags PageDisplayFlags, int? pages, float greyscale_cost, float color_cost)
+        public Boolean EnoughMoney(float printing_cost)
         {
-            return true;
+            Boolean result = false;
+            if (Debit >= printing_cost)
+            {
+                result = true;
+            }
+            return result;
         }
 
         public void SpendMoney(float value)

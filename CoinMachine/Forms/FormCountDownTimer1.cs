@@ -104,11 +104,18 @@ namespace Forms
 
                     PrinterHelper.DEVMODE devMode = PrinterHelper.GetPrinterDevMode(e.EventData.PrinterName);
 
-                    Boolean enoughMoney = wallet.EnoughMoney(
-                        (PrinterHelper.PageColor)devMode.dmColor,
-                        (PrinterHelper.PageDisplayFlags)devMode.dmDisplayFlags,
-                        e.EventData.Pages,
-                        0, 0);
+                    string PrinterGreyScaleCost = configmanager.ReadSetting("PrinterGreyScaleCoin") + "." + configmanager.ReadSetting("PrinterGreyScaleCent");
+                    string PrinterColorCost = configmanager.ReadSetting("PrinterColorCoin") + "." + configmanager.ReadSetting("PrinterColorCent");
+
+                    float printingCost = conversion.getPrintingCost(
+                          PrinterGreyScaleCost
+                          , PrinterColorCost
+                          , (PrinterHelper.PageColor)devMode.dmColor
+                          , (PrinterHelper.PageDisplayFlags)devMode.dmDisplayFlags
+                          , e.EventData.Pages);
+
+                    Boolean enoughMoney = wallet.EnoughMoney(printingCost);
+
                     if (enoughMoney)
                     {
                         PrinterApi.PRINTER_DEFAULTS pDefault = new PrinterApi.PRINTER_DEFAULTS();
