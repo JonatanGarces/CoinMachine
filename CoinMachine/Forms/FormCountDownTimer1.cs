@@ -119,6 +119,30 @@ namespace Forms
                             PrinterApi.ClosePrinter(phPrinter);
                         }
                     }
+                    else
+                    {
+                        //cancel print job
+
+                        PrinterApi.PRINTER_DEFAULTS pDefault = new PrinterApi.PRINTER_DEFAULTS();
+                        IntPtr phPrinter;
+                        if (PrinterApi.OpenPrinter(e.EventData.PrinterName, out phPrinter, pDefault))
+                        {
+                            PrinterApi.SetJob(phPrinter, e.EventData.JobId, 0, IntPtr.Zero, PrinterApi.PrintJobControlCommands.JOB_CONTROL_CANCEL);
+                            PrinterApi.ClosePrinter(phPrinter);
+                        }
+
+                        string message = "No Cuenta con el saldo suficiente para imprimir, inserte una moneda y mande a imprimir nuevamente.";
+                        string caption = "NO SE PUDO IMPRIMIR";
+                        MessageBoxButtons buttons = MessageBoxButtons.OK;
+
+                        DialogResult result = MessageBox.Show(message, caption, buttons);
+                        if (result == System.Windows.Forms.DialogResult.OK)
+                        {
+                            // Closes the parent form.
+                            this.Close();
+                        }
+                        //display message box
+                    }
                 }
             }
         }
