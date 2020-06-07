@@ -230,8 +230,9 @@ namespace Printer
 
         public enum PageColor
         {
-            DMCOLOR_COLOR = 1,
-            DMCOLOR_MONOCHROME = 2
+            DMCOLOR_MONOCHROME = 1
+,
+            DMCOLOR_COLOR = 2
         }
 
         public enum PageDisplayFlags
@@ -449,11 +450,13 @@ namespace Printer
             PRINTER_DEFAULTS pd = new PRINTER_DEFAULTS();
             pd.pDatatype = 0;
             pd.pDevMode = 0;
-            pd.DesiredAccess = PRINTER_ALL_ACCESS;
+            pd.DesiredAccess = PRINTER_ACCESS_USE;
+            ///PRINTER_ALL_ACCESS
             // Michael: some printers (e.g. network printer) do not allow PRINTER_ALL_ACCESS and will cause Access Is Denied error.
             // When this happen, try PRINTER_ACCESS_USE.
 
             IntPtr hPrinter = new System.IntPtr();
+
             if (!OpenPrinterEx(PrinterName, out hPrinter, ref pd))
             {
                 lastError = Marshal.GetLastWin32Error();

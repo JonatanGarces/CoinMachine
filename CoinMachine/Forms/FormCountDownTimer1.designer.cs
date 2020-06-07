@@ -53,7 +53,6 @@
             this.lblcountdown.Name = "lblcountdown";
             this.lblcountdown.Size = new System.Drawing.Size(0, 37);
             this.lblcountdown.TabIndex = 2;
-            this.lblcountdown.Click += new System.EventHandler(this.lblcountdown_Click);
             this.lblcountdown.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
             // 
             // label1
@@ -67,7 +66,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(0, 37);
             this.label1.TabIndex = 3;
-            this.label1.Click += new System.EventHandler(this.label1_Click);
+            this.label1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
             // 
             // FormCountDownTimer1
             // 

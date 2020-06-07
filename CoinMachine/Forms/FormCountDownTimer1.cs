@@ -1,6 +1,7 @@
 ﻿using CoinMachine;
 using CoinMachine.Library;
 using EventHook;
+using Hiz.Interop.Printing;
 using Library;
 using MaSoft.Code;
 using Newtonsoft.Json;
@@ -43,20 +44,19 @@ namespace Forms
         {
             InitializeComponent();
             lblcountdown.Cursor = Cursors.SizeAll;
-            //serial.DataReceived += DataReceived;
-            //wallet.Earned += Earned;
-            // wallet.Spend += Spend;
-            //countdowntimer.Started += Started;
-            //countdowntimer.TimeChanged += TimeChanged;
-            //countdowntimer.CountDownFinished += CountDownFinished;
-            //countdowntimer.Notification += Notification;
-            // countdowntimer.Start();
+            serial.DataReceived += DataReceived;
+            wallet.Earned += Earned;
+            //  wallet.Spend += Spend;
+            countdowntimer.Started += Started;
+            countdowntimer.TimeChanged += TimeChanged;
+            countdowntimer.CountDownFinished += CountDownFinished;
+            countdowntimer.Notification += Notification;
+            countdowntimer.Start();
 
             if (configmanager.ReadSetting("PrinterModuleEnabled") == "true")
             {
                 PrintWatcher printWatcher = eventHookFactory.GetPrintWatcher();
                 printWatcher.OnPrintEvent += PrinterWatcher;
-
                 printWatcher.Start();
             }
         }
@@ -67,96 +67,86 @@ namespace Forms
             List<string> ListPrintersSaved = JsonConvert.DeserializeObject<List<string>>(StringPrintersSaved);
             if (ListPrintersSaved.Contains(e.EventData.PrinterName))
             {
-                //Console.WriteLine(PrintJobStatus.GetValues(e.EventData.JobStatus));
-
                 if ((JOBSTATUS)e.EventData.JobStatus == JOBSTATUS.JOB_STATUS_SPOOLING && (JOBSTATUS)e.EventData.JobStatus != JOBSTATUS.JOB_STATUS_PAUSED)
                 {
-                    try
-                    {
-                        Console.WriteLine("ImpresoraActiva");
-
-                        // Console.WriteLine("Printer '{0}' currently printing {1} pages {2} {3} ", e.EventData.PrinterName, (JOBSTATUS)e.EventData.JobInfo.JobStatus, e.EventData.Pages, e.EventData.JobInfo.JobIdentifier);
-                        Console.WriteLine("Printer '{0}' currently printing {1} pages {2}", e.EventData.PrinterName, e.EventData.Pages, e.EventData.JobId);
-                        //PrintQueue pq = new PrintQueue(new PrintServer(), e.EventData.PrinterName);
-
-                        //PrintJobInfoCollection jobs = pq.GetPrintJobInfoCollection();
-
-                        //foreach (PrintSystemJobInfo psi in _spooler.GetPrintJobInfoCollection())
-                        //{
-                        //    objJobDict[psi.JobIdentifier] = psi.Name;
-                        //}
-                        PrinterApi.PRINTER_DEFAULTS pDefault = new PrinterApi.PRINTER_DEFAULTS();
-                        IntPtr phPrinter;
-                        if (PrinterApi.OpenPrinter(e.EventData.PrinterName, out phPrinter, pDefault))
-                        {
-                            PrinterApi.SetJob(phPrinter, e.EventData.JobId, 0, IntPtr.Zero, PrinterApi.PrintJobControlCommands.JOB_CONTROL_PAUSE);
-                            PrinterApi.ClosePrinter(phPrinter);
-                        }
-                    }
-                    catch (Exception exception)
-                    {
-                        Console.WriteLine(exception.Message);
-                    }
+                    PausePrintJob(e.EventData.PrinterName, e.EventData.JobId);
                 }
                 if ((JOBSTATUS)e.EventData.JobStatus == JOBSTATUS.JOB_STATUS_PAUSED && (JOBSTATUS)e.EventData.JobStatus != JOBSTATUS.JOB_STATUS_SPOOLING)
                 {
-                    /// var jobInfo = new PrinterApi.JOB();
-
                     PrinterHelper.DEVMODE devMode = PrinterHelper.GetPrinterDevMode(e.EventData.PrinterName);
-
                     string PrinterGreyScaleCost = configmanager.ReadSetting("PrinterGreyScaleCoin") + "." + configmanager.ReadSetting("PrinterGreyScaleCent");
                     string PrinterColorCost = configmanager.ReadSetting("PrinterColorCoin") + "." + configmanager.ReadSetting("PrinterColorCent");
-
+                    // PrintSpooler.GetPrinterDevMode(e.EventData.PrinterName);
                     float printingCost = conversion.getPrintingCost(
                           PrinterGreyScaleCost
                           , PrinterColorCost
                           , (PrinterHelper.PageColor)devMode.dmColor
                           , (PrinterHelper.PageDisplayFlags)devMode.dmDisplayFlags
                           , e.EventData.Pages);
-
                     Boolean enoughMoney = wallet.EnoughMoney(printingCost);
-
                     if (enoughMoney)
                     {
-                        PrinterApi.PRINTER_DEFAULTS pDefault = new PrinterApi.PRINTER_DEFAULTS();
-                        IntPtr phPrinter;
-                        if (PrinterApi.OpenPrinter(e.EventData.PrinterName, out phPrinter, pDefault))
-                        {
-                            PrinterApi.SetJob(phPrinter, e.EventData.JobId, 0, IntPtr.Zero, PrinterApi.PrintJobControlCommands.JOB_CONTROL_RESUME);
-                            PrinterApi.ClosePrinter(phPrinter);
-                        }
+                        Console.WriteLine(printingCost);
+                        ResumePrintJob(e.EventData.PrinterName, e.EventData.JobId);
                     }
                     else
                     {
-                        //cancel print job
-
-                        PrinterApi.PRINTER_DEFAULTS pDefault = new PrinterApi.PRINTER_DEFAULTS();
-                        IntPtr phPrinter;
-                        if (PrinterApi.OpenPrinter(e.EventData.PrinterName, out phPrinter, pDefault))
-                        {
-                            PrinterApi.SetJob(phPrinter, e.EventData.JobId, 0, IntPtr.Zero, PrinterApi.PrintJobControlCommands.JOB_CONTROL_CANCEL);
-                            PrinterApi.ClosePrinter(phPrinter);
-                        }
-
+                        CancelPrintJob(e.EventData.PrinterName, e.EventData.JobId);
                         string message = "No Cuenta con el saldo suficiente para imprimir, inserte una moneda y mande a imprimir nuevamente.";
                         string caption = "NO SE PUDO IMPRIMIR";
                         MessageBoxButtons buttons = MessageBoxButtons.OK;
-
                         DialogResult result = MessageBox.Show(message, caption, buttons);
                         if (result == System.Windows.Forms.DialogResult.OK)
                         {
-                            // Closes the parent form.
                             this.Close();
                         }
-                        //display message box
                     }
                 }
             }
         }
 
+        public void PausePrintJob(String PrinterName, int JobId)
+        {
+            try
+            {
+                PrinterApi.PRINTER_DEFAULTS pDefault = new PrinterApi.PRINTER_DEFAULTS();
+                IntPtr phPrinter;
+                if (PrinterApi.OpenPrinter(PrinterName, out phPrinter, pDefault))
+                {
+                    PrinterApi.SetJob(phPrinter, JobId, 0, IntPtr.Zero, PrinterApi.PrintJobControlCommands.JOB_CONTROL_PAUSE);
+                    PrinterApi.ClosePrinter(phPrinter);
+                }
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.Message);
+            }
+        }
+
+        public void ResumePrintJob(String PrinterName, int JobId)
+        {
+            PrinterApi.PRINTER_DEFAULTS pDefault = new PrinterApi.PRINTER_DEFAULTS();
+            IntPtr phPrinter;
+            if (PrinterApi.OpenPrinter(PrinterName, out phPrinter, pDefault))
+            {
+                PrinterApi.SetJob(phPrinter, JobId, 0, IntPtr.Zero, PrinterApi.PrintJobControlCommands.JOB_CONTROL_RESUME);
+                PrinterApi.ClosePrinter(phPrinter);
+            }
+        }
+
+        public void CancelPrintJob(String printername, int jobid)
+        {
+            PrinterApi.PRINTER_DEFAULTS pDefault = new PrinterApi.PRINTER_DEFAULTS();
+            IntPtr phPrinter;
+            if (PrinterApi.OpenPrinter(printername, out phPrinter, pDefault))
+            {
+                PrinterApi.SetJob(phPrinter, jobid, 0, IntPtr.Zero, PrinterApi.PrintJobControlCommands.JOB_CONTROL_CANCEL);
+                PrinterApi.ClosePrinter(phPrinter);
+            }
+        }
+
         // printWatcher.Stop();
         //  eventHookFactory.Dispose();
-
         private void DataReceived(byte[] serial)
         {
             //Console.WriteLine("DataReceived");
@@ -178,7 +168,6 @@ namespace Forms
         private void Started()
         {
             Console.WriteLine("Started");
-
             //HideScreenSaver();
             //keyboard.EnableTaskManager();
             //keyboard.Dispose();
@@ -191,28 +180,21 @@ namespace Forms
         private void TimeChanged()
         {
             Console.WriteLine("TimeChanged");
-
             wallet.Debit = conversion.getMoney(countdowntimer.MinutesLeft);
             this.Invoke((System.Windows.Forms.MethodInvoker)delegate ()
             {
-                setlblcountdown(countdowntimer.TimeLeftStr);
+                setlblcountdown(countdowntimer.TimeLeftStr, countdowntimer.MinutesLeft);
             });
-
-            //  ShowFormCountDownTimer().lblcountdown.Refresh();
-
-            //Console.WriteLine(conversion.getMoney(countdowntimer.MinutesLeft));
-            // formcountdowntimer.label1.Text = conversion.getMoney(countdowntimer.MinutesLeft).ToString("F1");
-            //formcountdowntimer.label1.Refresh();
         }
 
         private void CountDownFinished()
         {
             Console.WriteLine("CountDownFinished");
-            this.Invoke((System.Windows.Forms.MethodInvoker)delegate ()
-            {
-                this.Hide();
-            });
-            Console.WriteLine("formcountdowntimer.Hide");
+            // this.Invoke((System.Windows.Forms.MethodInvoker)delegate ()
+            // {
+            //    this.Hide();
+            // });
+            // Console.WriteLine("formcountdowntimer.Hide");
 
             // ShowScreenSaver();
         }
@@ -244,10 +226,10 @@ namespace Forms
             }
         }
 
-        public void setlblcountdown(String TimeLeftStr)
+        public void setlblcountdown(String TimeLeftStr, double MinutesLeft)
         {
             lblcountdown.Text = TimeLeftStr;
-            //lblcountdown.Refresh();
+            label1.Text = conversion.getMoney(MinutesLeft).ToString("F1");
         }
 
         private void notifyIcon1_MouseDoubleClick(object sender, System.Windows.Forms.MouseEventArgs e)
@@ -268,14 +250,6 @@ namespace Forms
         }
 
         private void FormTimer_Load(object sender, EventArgs e)
-        {
-        }
-
-        private void lblcountdown_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void label1_Click(object sender, EventArgs e)
         {
         }
     }

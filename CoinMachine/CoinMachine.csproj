@@ -58,7 +58,7 @@
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="ObjectDumping, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ObjectDumper.NET.2.5.20033.1\lib\net45\ObjectDumping.dll</HintPath>
+      <HintPath>..\packages\ObjectDumper.NET.2.5.20155.1\lib\net45\ObjectDumping.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -129,6 +129,8 @@
       <DependentUpon>FormConfiguration.cs</DependentUpon>
     </Compile>
     <Compile Include="Library\KeyBoardHook.cs" />
+    <Compile Include="Printer\Error.cs" />
+    <Compile Include="Printer\ExternDll.cs" />
     <Compile Include="Printer\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -136,9 +138,41 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Printer\myPrinterClass.cs" />
+    <Compile Include="Printer\Native\Native.cs" />
+    <Compile Include="Printer\Native\Native.Gdi.DeviceContext.cs" />
+    <Compile Include="Printer\Native\Native.GdiPrint.cs" />
+    <Compile Include="Printer\Native\Native.PrintSpooler.cs" />
+    <Compile Include="Printer\Native\Native.Thunk.cs" />
     <Compile Include="Printer\PrinterApi.cs" />
     <Compile Include="Printer\PrinterHelper.cs" />
     <Compile Include="Printer\PrintQueueMonitor.cs" />
+    <Compile Include="Printer\PrintSpooler.cs" />
+    <Compile Include="Printer\Structures\DevMode.cs" />
+    <Compile Include="Printer\Structures\FormInfo1.cs" />
+    <Compile Include="Printer\Structures\FormInfo2.cs" />
+    <Compile Include="Printer\Structures\FormInfoFlags.cs" />
+    <Compile Include="Printer\Structures\GdiPrint\DcPrintRateUnit.cs" />
+    <Compile Include="Printer\Structures\GdiPrint\DcTrueType.cs" />
+    <Compile Include="Printer\Structures\GdiPrint\PrinterCapabilities.cs" />
+    <Compile Include="Printer\Structures\POINT.cs" />
+    <Compile Include="Printer\Structures\PrinterAttributes.cs" />
+    <Compile Include="Printer\Structures\PrinterDefaults.cs" />
+    <Compile Include="Printer\Structures\PrinterFlags.cs" />
+    <Compile Include="Printer\Structures\PrinterInfo1.cs" />
+    <Compile Include="Printer\Structures\PrinterInfo2.cs" />
+    <Compile Include="Printer\Structures\PrinterInfo3.cs" />
+    <Compile Include="Printer\Structures\PrinterInfo4.cs" />
+    <Compile Include="Printer\Structures\PrinterInfo5.cs" />
+    <Compile Include="Printer\Structures\PrinterInfo6.cs" />
+    <Compile Include="Printer\Structures\PrinterInfo7.cs" />
+    <Compile Include="Printer\Structures\PrinterInfo8.cs" />
+    <Compile Include="Printer\Structures\PrinterInfo9.cs" />
+    <Compile Include="Printer\Structures\PrinterInfos.cs" />
+    <Compile Include="Printer\Structures\PrinterOptions.cs" />
+    <Compile Include="Printer\Structures\PrinterStatus.cs" />
+    <Compile Include="Printer\Structures\RECT.cs" />
+    <Compile Include="Printer\Structures\SIZE.cs" />
+    <Compile Include="Printer\Structures\StandardAccessRights.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Forms\ScreenSaverForm.cs">

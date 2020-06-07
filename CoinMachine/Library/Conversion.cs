@@ -37,7 +37,7 @@ namespace CoinMachine.Library
             int countpages = Pages.GetValueOrDefault();
             float grey = float.Parse(PrinterGreyScaleCost, CultureInfo.InvariantCulture.NumberFormat);
             float color = float.Parse(PrinterColorCost, CultureInfo.InvariantCulture.NumberFormat);
-
+            Console.WriteLine("Color {0}", Color);
             if (Color == PrinterHelper.PageColor.DMCOLOR_MONOCHROME || DisplayFlags == PrinterHelper.PageDisplayFlags.DM_GRAYSCALE)
             {
                 money = countpages * grey;

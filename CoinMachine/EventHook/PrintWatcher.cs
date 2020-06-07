@@ -135,6 +135,8 @@ namespace EventHook
         {
             if ((e.JobStatus & JOBSTATUS.JOB_STATUS_SPOOLING) == JOBSTATUS.JOB_STATUS_SPOOLING
                 && e.JobInfo != null || (e.JobStatus & JOBSTATUS.JOB_STATUS_PAUSED) == JOBSTATUS.JOB_STATUS_PAUSED
+                && e.JobInfo != null || (e.JobStatus & JOBSTATUS.JOB_STATUS_ERROR) == JOBSTATUS.JOB_STATUS_ERROR
+                && e.JobInfo != null || (e.JobStatus & JOBSTATUS.JOB_STATUS_PAPEROUT) == JOBSTATUS.JOB_STATUS_PAPEROUT
                 && e.JobInfo != null)
             {
                 var hWnd = WindowHelper.GetActiveWindowHandle();
